@@ -18,7 +18,7 @@
 			<groupId>org.seleniumhq.selenium</groupId> 
 			<artifactId>selenium-server</artifactId> 
 			<version>3.0.1</version>
-			<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 	</dependencies>
 	<build>
