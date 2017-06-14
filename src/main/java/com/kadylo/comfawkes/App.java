@@ -14,6 +14,10 @@ public class App
 {
     public static void main( String[] args )
     {
+		// TODO
+		// this SHOULD be changed when deploying in container
+		System.setProperty("webdriver.gecko.driver", "~/comfawkes2/geckodriver");
+		
 		// Create a new instance of the Firefox driver
         // Notice that the remainder of the code relies on the interface, 
         // not the implementation.
