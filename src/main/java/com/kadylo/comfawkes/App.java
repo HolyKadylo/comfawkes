@@ -29,7 +29,12 @@ System.setProperty("webdriver.gecko.driver", "geckodriver");
 	DesiredCapabilities cap = DesiredCapabilities.firefox(); 		cap.setBrowserName("firefox"); 	
 	cap.setCapability("marionette", true); 		
 //cap.setPlatform(Platform.WINDOWS); 		
-URL url = new URL("http://localhost:5000/grid/console");
+      URL url = null;
+      try{
+       url = new URL("http://localhost:5000/grid/console");
+      } catch (MalformedURLException e){
+        System.out.println("-->"+e);
+      }
  		WebDriver driver = new RemoteWebDriver(url, cap); 	
 //	driver.get("http://google.com/"); 	
 	//System.out.println("Title is : "+driver.getTitle()); 	
