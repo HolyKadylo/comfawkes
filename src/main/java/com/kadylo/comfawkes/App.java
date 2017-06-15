@@ -1,7 +1,5 @@
 package com.kadylo.comfawkes;
 
-import java.net.URL;
-import java.net.MalformedURLException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,12 +20,8 @@ public class App
 		// Create a new instance of the Firefox driver
         // Notice that the remainder of the code relies on the interface, 
         // not the implementation.
-		WebDriver driver = null;
-		try {
-			driver = new RemoteWebDriver(new URL("https://xx.xx.xx.xx:yyyy"), new DesiredCapabilities().firefox());
-		} catch (MalformedURLException e){
-			System.out.println("-->" + e);
-		}
+        System.setProperty("webdriver.firefox.useExisting", true);
+		WebDriver driver = new FirefoxDriver();
 
         // And now use this to visit Google
         driver.get("http://www.google.com");
