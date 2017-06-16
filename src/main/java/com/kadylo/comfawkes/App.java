@@ -31,10 +31,11 @@ System.setProperty("webdriver.gecko.driver", "geckodriver");
 //cap.setPlatform(Platform.WINDOWS); 		
       URL url = null;
       try{
-       url = new URL("http://localhost:5000/grid/console");
+       url = new URL("localhost:5000/wd/hub");
       } catch (MalformedURLException e){
         System.out.println("-->"+e);
       }
+      System.out.println("-->");
  		WebDriver driver = new RemoteWebDriver(url, cap); 	
 //	driver.get("http://google.com/"); 	
 	//System.out.println("Title is : "+driver.getTitle()); 	
