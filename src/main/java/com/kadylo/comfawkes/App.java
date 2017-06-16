@@ -31,7 +31,7 @@ System.setProperty("webdriver.gecko.driver", "geckodriver");
 //cap.setPlatform(Platform.WINDOWS); 		
       URL url = null;
       try{
-       url = new URL("localhost:5000/wd/hub");
+       url = new URL("http://localhost:5000/wd/hub");
       } catch (MalformedURLException e){
         System.out.println("-->"+e);
       }
