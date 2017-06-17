@@ -128,7 +128,7 @@ public class Node{
 		System.out.println("-->4");
 		element.sendKeys(currentAccount.getEmail());
 		System.out.println("-->5");
-		element = driver.findElement(By.name("index_pass"));
+		element = driver.findElement(By.id("index_pass"));
 		System.out.println("-->6");
 		element.sendKeys(currentAccount.getPassword());
 		System.out.println("-->7");
