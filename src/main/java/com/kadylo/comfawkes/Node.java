@@ -42,14 +42,23 @@ public class Node{
 	// constructor
 	public Node (Account account, String sURL, int id){
 		System.out.println("-->Constructing node");
+		System.out.println("-->1");
 		this.id = id;
+		System.out.println("-->2");
 		System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
+		System.out.println("-->3");
 		cap = DesiredCapabilities.firefox();
+		System.out.println("-->4");
  		cap.setBrowserName("firefox"); 	
+		System.out.println("-->5");
 		cap.setCapability("marionette", true);
+		System.out.println("-->6");
 		currentAccount = account;
+		System.out.println("-->7");
 		state = State.UNUSED;
+		System.out.println("-->8");
 		setURL(sURL);
+		System.out.println("-->9");
 		System.out.println("-->Node " + id + " constructed");
 	}
 	
@@ -86,7 +95,7 @@ public class Node{
 	// sURL is the selenium ip address, the node should 
 	// talk to. Should be like http://xxx.xxx.xxx.xxx:yyyy
 	public void setURL(String sURL){
-		
+		System.out.println("-->10");
 		// meaning that driver needs to quit
 		if (state != State.UNUSED){
 			try{
@@ -99,7 +108,9 @@ public class Node{
 				System.out.println("-->Continuing");
 			}
 		}
+		System.out.println("-->11");
 		try{
+			System.out.println("-->12");
 			url = new URL(sURL + "/wd/hub");
 		} catch (MalformedURLException e){
 			System.out.println(
@@ -110,8 +121,9 @@ public class Node{
 			this.state = State.BROKEN;
 			return;
 		}
+		System.out.println("-->13");
 		driver = new RemoteWebDriver(url, cap); 
-		
+		System.out.println("-->14");
 		// after that browser is opened or reopened
 	}
 	
