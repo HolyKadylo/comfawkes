@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException; 
 import java.net.URL;
- import org.openqa.selenium.Platform; 
+import org.openqa.selenium.Platform; 
 
 /**
  * Hello world!
@@ -21,35 +21,23 @@ public class App
 {
     public static void main( String[] args )
     {		
-		// Create a new instance of the Firefox driver
-        // Notice that the remainder of the code relies on the interface, 
-        // not the implementation.
-     
-System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
-	DesiredCapabilities cap = DesiredCapabilities.firefox(); 		cap.setBrowserName("firefox"); 	
-	cap.setCapability("marionette", true); 		
-//cap.setPlatform(Platform.WINDOWS); 		
-      URL url = null;
-      try{
-       url = new URL("http://localhost:5000/wd/hub");
-      } catch (MalformedURLException e){
-        System.out.println("-->"+e);
-      }
-      System.out.println("-->");
- 		WebDriver driver = new RemoteWebDriver(url, cap); 	
-//	driver.get("http://google.com/"); 	
-	//System.out.println("Title is : "+driver.getTitle()); 	
-//	driver.quit();
-
-
-
-	//	WebDriver driver = new FirefoxDriver();
+		System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
+		DesiredCapabilities cap = DesiredCapabilities.firefox();
+ 		cap.setBrowserName("firefox"); 	
+		cap.setCapability("marionette", true); 			
+		URL url = null;
+		try{
+			url = new URL("http://localhost:5000/wd/hub");
+		} catch (MalformedURLException e){
+			System.out.println("-->" + e);
+		}
+		WebDriver driver = new RemoteWebDriver(url, cap); 	
 
         // And now use this to visit Google
         driver.get("http://www.google.com");
+		
         // Alternatively the same thing can be done like this
         // driver.navigate().to("http://www.google.com");
-
         // Find the text input element by its name
         WebElement element = driver.findElement(By.name("q"));
 
