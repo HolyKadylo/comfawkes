@@ -119,16 +119,16 @@ public class Node{
 		driver.get("https://vk.com");
 		System.out.println("-->2");
 		try{
-			Thread.currentThread().sleep(15000);
+			Thread.currentThread().sleep(5000);
 		} catch (InterruptedException ie){
 			System.out.println("-->Interrupted");
 		}
 		System.out.println("-->3");
-		WebElement element = driver.findElement(By.name("email"));
+		WebElement element = driver.findElement(By.id("index_email"));
 		System.out.println("-->4");
 		element.sendKeys(currentAccount.getEmail());
 		System.out.println("-->5");
-		element = driver.findElement(By.name("pass"));
+		element = driver.findElement(By.name("index_pass"));
 		System.out.println("-->6");
 		element.sendKeys(currentAccount.getPassword());
 		System.out.println("-->7");
