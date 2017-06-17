@@ -119,7 +119,7 @@ public class Node{
 		driver.get("https://vk.com");
 		System.out.println("-->2");
 		try{
-			Thread.currentThread().sleep(5000);
+			Thread.currentThread().sleep(15000);
 		} catch (InterruptedException ie){
 			System.out.println("-->Interrupted");
 		}
