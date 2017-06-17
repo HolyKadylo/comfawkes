@@ -1,5 +1,7 @@
 package com.kadylo.comfawkes;
 
+import java.net.URL;
+
 // this class is used for basic selenium operations.
 // Is parent to Poster and Listener
 public class Node{
@@ -23,7 +25,7 @@ public class Node{
 	
 	// reads something from site
 	public String read(){
-		
+		return null;
 	}
 	
 	

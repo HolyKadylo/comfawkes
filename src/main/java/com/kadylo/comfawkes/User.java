@@ -22,7 +22,7 @@ public class User{
 	
 	public User (String URL, 
 		int id, 
-		HashMap<Publicm, String> nicknames, 
+		HashMap<Public, String> nicknames, 
 		int balance){
 		
 		System.out.println("-->Starting constructing of user");
