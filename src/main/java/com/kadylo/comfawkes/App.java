@@ -21,7 +21,17 @@ public class App
 {
     public static void main( String[] args )
     {		
-		System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
+		/* //(String email, 
+		String password, 
+		String phoneNo, 
+		Node node, 
+		Role role) */
+		Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
+		Node listener = new Listener(account, "https://localhost:5000", 10);
+		account.setNode(listener);
+		
+		listener.start();
+		/* System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
 		DesiredCapabilities cap = DesiredCapabilities.firefox();
  		cap.setBrowserName("firefox"); 	
 		cap.setCapability("marionette", true); 			
@@ -62,6 +72,6 @@ public class App
         System.out.println("Page title is: " + driver.getTitle());
         
         //Close the browser
-        driver.quit();
+        driver.quit(); */
     }
 }

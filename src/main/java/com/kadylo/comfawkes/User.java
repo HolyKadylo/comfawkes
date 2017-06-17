@@ -1,6 +1,6 @@
 package com.kadylo.comfawkes;
 
-import java.util.*;
+import java.util.HashMap;
 
 // represents user of our service
 public class User{
@@ -25,7 +25,7 @@ public class User{
 		HashMap<Public, String> nicknames, 
 		int balance){
 		
-		System.out.println("-->Starting constructing of user");
+		System.out.println("-->Constructing user");
 		this.balance = balance;
 		this.URL = URL;
 		this.id = id;
