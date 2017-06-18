@@ -1,0 +1,1 @@
+sudo docker run -d -p 5000:4444 -P --name node -h node selenium/standalone-firefox

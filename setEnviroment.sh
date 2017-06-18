@@ -4,6 +4,7 @@ sudo apt-get update
 sudo apt-get install docker-io
 sudo apt-get install git
 sudo apt-get install maven
+sudo apt-get install java
 sudo docker pull selenium/standalone-firefox
 wget https://github.com/mozilla/geckodriver/releases/download/v0.17.0/geckodriver-v0.17.0-linux64.tar.gz
 tar -xvf geckodriver-v0.17.0-linux64.tar.gz
