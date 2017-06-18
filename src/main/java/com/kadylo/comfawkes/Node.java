@@ -115,12 +115,12 @@ public class Node{
 	
 	private void login (){
 		System.out.println("-->Logging in");
-		WebElement element;
+		WebElement element = null;
 		try{
 			driver.get("https://vk.com");
 			
 			// countermeasures against popup
-			counterPopup(element);
+			counterPopup();
 			
 			try{
 				Thread.currentThread().sleep(5000);
@@ -177,10 +177,10 @@ public class Node{
 		
 	}
 	
-	private void counterPopup(WebElement element){
+	private void counterPopup(){
 		// countermeasures against popup
 		try{
-			element = driver.findElement(By.xpath("//*[text() = 'Підтвердити']"));
+			WebElement element = driver.findElement(By.xpath("//*[text() = 'Підтвердити']"));
 			element.click();
 		} catch (Exception e){
 			// nothing, no popup
@@ -192,7 +192,7 @@ public class Node{
 	// TODO private?
 	public void subscribe(String target){
 		System.out.println("-->Subscribing to " + target);
-		WebElement element;
+		WebElement element = null;
 		try{
 			driver.get(target);
 			try{
@@ -202,7 +202,7 @@ public class Node{
 			}
 			
 			// countermeasures against popup
-			counterPopup(element);
+			counterPopup();
 			
 			if (driver.findElements( By.id("join_button") ).size() != 0){
 				// means it's a group
