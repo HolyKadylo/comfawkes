@@ -115,14 +115,19 @@ public class Node{
 	
 	private void login (){
 		System.out.println("-->Logging in");
+		WebElement element;
 		try{
 			driver.get("https://vk.com");
+			
+			// countermeasures against popup
+			counterPopup(element);
+			
 			try{
 				Thread.currentThread().sleep(5000);
 			} catch (InterruptedException ie){
 				System.out.println("-->Interrupted");
 			}
-			WebElement element = driver.findElement(By.id("index_email"));
+			element = driver.findElement(By.id("index_email"));
 			element.sendKeys(currentAccount.getEmail());
 			element = driver.findElement(By.id("index_pass"));
 			element.sendKeys(currentAccount.getPassword());
@@ -172,10 +177,22 @@ public class Node{
 		
 	}
 	
+	private void counterPopup(WebElement element){
+		// countermeasures against popup
+		try{
+			element = driver.findElement(By.xpath("//*[text() = 'Підтвердити']"));
+			element.click();
+		} catch (Exception e){
+			// nothing, no popup
+		}
+	}
+	
+	
 	// subscribes to some public
 	// TODO private?
 	public void subscribe(String target){
 		System.out.println("-->Subscribing to " + target);
+		WebElement element;
 		try{
 			driver.get(target);
 			try{
@@ -183,9 +200,13 @@ public class Node{
 			} catch (InterruptedException ie){
 				System.out.println("-->Interrupted");
 			}
+			
+			// countermeasures against popup
+			counterPopup(element);
+			
 			if (driver.findElements( By.id("join_button") ).size() != 0){
 				// means it's a group
-				WebElement element = driver.findElement(By.id("join_button"));
+				element = driver.findElement(By.id("join_button"));
 				element.submit();
 				try{
 					Thread.currentThread().sleep(1000);
@@ -195,7 +216,7 @@ public class Node{
 			}
 			if (driver.findElements( By.id("public_subscribe") ).size() != 0){
 				// means it's a public
-				WebElement element = driver.findElement(By.id("public_subscribe"));
+				element = driver.findElement(By.id("public_subscribe"));
 				element.submit();
 				try{
 					Thread.currentThread().sleep(1000);
@@ -236,15 +257,26 @@ public class Node{
 	}
 	
 	// set privacy to the proper pre-defined state
-	private void setPrivacy(){
+	// set language settings
+	private void setSettings(){
 		
 	}
 	
 	private void logout (){
 		System.out.println("-->Logging out");
 		WebElement element = driver.findElement(By.id("top_profile_link"));
+		try{
+			Thread.currentThread().sleep(1000);
+		} catch (InterruptedException ie){
+			System.out.println("-->Interrupted");
+		}
 		element.click();
 		element = driver.findElement(By.id("top_logout_link"));
+		try{
+			Thread.currentThread().sleep(1000);
+		} catch (InterruptedException ie){
+			System.out.println("-->Interrupted");
+		}
 		element.click();
 		try{
 			Thread.currentThread().sleep(7000);
