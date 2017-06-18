@@ -177,7 +177,7 @@ public class Node{
 	public void subscribe(String target){
 		System.out.println("-->Subscribing to " + target);
 		try{
-			driver.get("target");
+			driver.get(target);
 			try{
 				Thread.currentThread().sleep(5000);
 			} catch (InterruptedException ie){
@@ -243,9 +243,9 @@ public class Node{
 	private void logout (){
 		System.out.println("-->Logging out");
 		WebElement element = driver.findElement(By.id("top_profile_link"));
-		element.submit();
+		element.click();
 		element = driver.findElement(By.id("top_logout_link"));
-		element.submit();
+		element.click();
 		try{
 			Thread.currentThread().sleep(7000);
 		} catch (InterruptedException ie){
