@@ -77,8 +77,8 @@ public class Node{
 	}
 	public void stop(){
 		System.out.println("-->Stopping node " + id);
-		logout();
 		setOwnStatus("-->Is down");
+		logout();
 		state = State.UNUSED;
 		System.out.println("-->Node " + id + " stopped");
 	}
@@ -115,33 +115,27 @@ public class Node{
 	
 	private void login (){
 		System.out.println("-->Logging in");
-		System.out.println("-->1");
-		driver.get("https://vk.com");
-		System.out.println("-->2");
 		try{
-			Thread.currentThread().sleep(5000);
-		} catch (InterruptedException ie){
-			System.out.println("-->Interrupted");
+			driver.get("https://vk.com");
+			try{
+				Thread.currentThread().sleep(5000);
+			} catch (InterruptedException ie){
+				System.out.println("-->Interrupted");
+			}
+			WebElement element = driver.findElement(By.id("index_email"));
+			element.sendKeys(currentAccount.getEmail());
+			element = driver.findElement(By.id("index_pass"));
+			element.sendKeys(currentAccount.getPassword());
+			element.submit();
+		} catch (Exception e){
+			throw new MissingResourceException("","","");
 		}
-		System.out.println("-->3");
-		WebElement element = driver.findElement(By.id("index_email"));
-		System.out.println("-->4");
-		element.sendKeys(currentAccount.getEmail());
-		System.out.println("-->5");
-		element = driver.findElement(By.id("index_pass"));
-		System.out.println("-->6");
-		element.sendKeys(currentAccount.getPassword());
-		System.out.println("-->7");
-		element.submit();
-		System.out.println("-->8");
-		
 		// allowing page to load
 		try{
 			Thread.currentThread().sleep(5000);
 		} catch (InterruptedException ie){
 			System.out.println("-->Interrupted");
 		}
-		System.out.println("-->9");
 		
 		if (driver.findElements( By.id("top_audio_layer_place") ).size() != 0){
 			// means we've found it
@@ -178,8 +172,86 @@ public class Node{
 		
 	}
 	
-	private void logout (){
+	// subscribes to some public
+	// TODO private?
+	public void subscribe(String target){
+		System.out.println("-->Subscribing to " + target);
+		try{
+			driver.get("target");
+			try{
+				Thread.currentThread().sleep(5000);
+			} catch (InterruptedException ie){
+				System.out.println("-->Interrupted");
+			}
+			if (driver.findElements( By.id("join_button") ).size() != 0){
+				// means it's a group
+				WebElement element = driver.findElement(By.id("join_button"));
+				element.submit();
+				try{
+					Thread.currentThread().sleep(1000);
+				} catch (InterruptedException ie){
+					System.out.println("-->Interrupted");
+				}
+			}
+			if (driver.findElements( By.id("public_subscribe") ).size() != 0){
+				// means it's a public
+				WebElement element = driver.findElement(By.id("public_subscribe"));
+				element.submit();
+				try{
+					Thread.currentThread().sleep(1000);
+				} catch (InterruptedException ie){
+					System.out.println("-->Interrupted");
+				}
+			}
+			System.out.println("-->Successfully subscribed to " + target);
+		} catch (Exception e){
+			System.out.println("-->Failed to subscribe to " + target);
+		}
+	}
+	
+	private void unsubscribe(String target){
 		
+	}
+	
+	private void addToFriends(String target){
+		
+	}
+	
+	private void removeFromFriends(String target){
+		
+	}
+	
+	private void hideInFriends(String target){
+		
+	}
+	
+	private void setProfilePicture(String picId){
+	
+		// deleting previous profile picture
+		try{
+			
+		} catch (Exception e){
+			
+		}
+	}
+	
+	// set privacy to the proper pre-defined state
+	private void setPrivacy(){
+		
+	}
+	
+	private void logout (){
+		System.out.println("-->Logging out");
+		WebElement element = driver.findElement(By.id("top_profile_link"));
+		element.submit();
+		element = driver.findElement(By.id("top_logout_link"));
+		element.submit();
+		try{
+			Thread.currentThread().sleep(7000);
+		} catch (InterruptedException ie){
+			System.out.println("-->Interrupted");
+		}
+		System.out.println("-->Logged out");
 	}
 	
 	private void postToOwnWall (String content){

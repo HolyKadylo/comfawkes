@@ -31,6 +31,14 @@ public class App
 		account.setNode(listener);
 		
 		listener.start();
+		listener.subscribe("https://vk.com/biletskiy_swag");
+		try{
+			Thread.currentThread().sleep(15000);
+		} catch (InterruptedException ie){
+			System.out.println("-->Interrupted");
+		}
+		listener.subscribe("https://vk.com/kpop.fanfiki");
+		listener.stop();
 		/* System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
 		DesiredCapabilities cap = DesiredCapabilities.firefox();
  		cap.setBrowserName("firefox"); 	
