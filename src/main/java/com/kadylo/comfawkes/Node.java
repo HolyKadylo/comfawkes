@@ -122,11 +122,7 @@ public class Node{
 			// countermeasures against popup
 			counterPopup();
 			
-			try{
-				Thread.currentThread().sleep(5000);
-			} catch (InterruptedException ie){
-				System.out.println("-->Interrupted");
-			}
+			wait(5000);
 			element = driver.findElement(By.id("index_email"));
 			element.sendKeys(currentAccount.getEmail());
 			element = driver.findElement(By.id("index_pass"));
@@ -136,11 +132,7 @@ public class Node{
 			throw new MissingResourceException("","","");
 		}
 		// allowing page to load
-		try{
-			Thread.currentThread().sleep(5000);
-		} catch (InterruptedException ie){
-			System.out.println("-->Interrupted");
-		}
+		wait(5000);
 		
 		if (driver.findElements( By.id("top_audio_layer_place") ).size() != 0){
 			// means we've found it
@@ -148,11 +140,7 @@ public class Node{
 		} else {
 			for (int i = 1; i <= 15; i++){
 				System.out.println("-->Waiting " + i + " s");
-				try{
-					Thread.currentThread().sleep(1000);
-				} catch (InterruptedException ie){
-					System.out.println("-->Interrupted");
-				}
+				wait(1000);
 			}
 			if (driver.findElements( By.id("top_audio_layer_place") ).size() != 0){
 				// means we've found it
@@ -187,6 +175,16 @@ public class Node{
 		}
 	}
 	
+	// stops execution for a certain amount of ms
+	// TODO variative?
+	private void wait (long i){
+		try{
+			Thread.currentThread().sleep(i);
+		} catch (InterruptedException ie){
+			System.out.println("-->Interrupted");
+		}
+	}
+	
 	
 	// subscribes to some public
 	// TODO private?
@@ -195,39 +193,28 @@ public class Node{
 		WebElement element = null;
 		try{
 			driver.get(target);
-			try{
-				Thread.currentThread().sleep(5000);
-			} catch (InterruptedException ie){
-				System.out.println("-->Interrupted");
-			}
+			wait(5000);
 			
 			// countermeasures against popup
 			counterPopup();
-			
 			if (driver.findElements( By.id("join_button") ).size() != 0){
 				// means it's a group
 				element = driver.findElement(By.id("join_button"));
-				element.submit();
-				try{
-					Thread.currentThread().sleep(1000);
-				} catch (InterruptedException ie){
-					System.out.println("-->Interrupted");
-				}
+				element.click();
+				wait(1000);
 			}
 			if (driver.findElements( By.id("public_subscribe") ).size() != 0){
 				// means it's a public
 				element = driver.findElement(By.id("public_subscribe"));
-				element.submit();
-				try{
-					Thread.currentThread().sleep(1000);
-				} catch (InterruptedException ie){
-					System.out.println("-->Interrupted");
-				}
+				element.click();
+				wait(1000);
 			}
 			System.out.println("-->Successfully subscribed to " + target);
 		} catch (Exception e){
 			System.out.println("-->Failed to subscribe to " + target);
+			e.printStackTrace();
 		}
+		
 	}
 	
 	private void unsubscribe(String target){
@@ -265,24 +252,12 @@ public class Node{
 	private void logout (){
 		System.out.println("-->Logging out");
 		WebElement element = driver.findElement(By.id("top_profile_link"));
-		try{
-			Thread.currentThread().sleep(1000);
-		} catch (InterruptedException ie){
-			System.out.println("-->Interrupted");
-		}
+		wait(1000);
 		element.click();
 		element = driver.findElement(By.id("top_logout_link"));
-		try{
-			Thread.currentThread().sleep(1000);
-		} catch (InterruptedException ie){
-			System.out.println("-->Interrupted");
-		}
+		wait(1000);
 		element.click();
-		try{
-			Thread.currentThread().sleep(7000);
-		} catch (InterruptedException ie){
-			System.out.println("-->Interrupted");
-		}
+		wait(7000);
 		System.out.println("-->Logged out");
 	}
 	
