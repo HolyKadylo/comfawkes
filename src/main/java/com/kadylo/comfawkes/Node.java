@@ -122,7 +122,7 @@ public class Node{
 			// countermeasures against popup
 			counterPopup();
 			
-			wait(5000);
+			sleep(5000);
 			element = driver.findElement(By.id("index_email"));
 			element.sendKeys(currentAccount.getEmail());
 			element = driver.findElement(By.id("index_pass"));
@@ -132,7 +132,7 @@ public class Node{
 			throw new MissingResourceException("","","");
 		}
 		// allowing page to load
-		wait(5000);
+		sleep(5000);
 		
 		if (driver.findElements( By.id("top_audio_layer_place") ).size() != 0){
 			// means we've found it
@@ -140,7 +140,7 @@ public class Node{
 		} else {
 			for (int i = 1; i <= 15; i++){
 				System.out.println("-->Waiting " + i + " s");
-				wait(1000);
+				sleep(1000);
 			}
 			if (driver.findElements( By.id("top_audio_layer_place") ).size() != 0){
 				// means we've found it
@@ -177,7 +177,7 @@ public class Node{
 	
 	// stops execution for a certain amount of ms
 	// TODO variative?
-	private void wait (long i){
+	private void sleep (long i){
 		try{
 			Thread.currentThread().sleep(i);
 		} catch (InterruptedException ie){
@@ -193,7 +193,7 @@ public class Node{
 		WebElement element = null;
 		try{
 			driver.get(target);
-			wait(5000);
+			sleep(5000);
 			
 			// countermeasures against popup
 			counterPopup();
@@ -201,13 +201,13 @@ public class Node{
 				// means it's a group
 				element = driver.findElement(By.id("join_button"));
 				element.click();
-				wait(1000);
+				sleep(1000);
 			}
 			if (driver.findElements( By.id("public_subscribe") ).size() != 0){
 				// means it's a public
 				element = driver.findElement(By.id("public_subscribe"));
 				element.click();
-				wait(1000);
+				sleep(1000);
 			}
 			System.out.println("-->Successfully subscribed to " + target);
 		} catch (Exception e){
@@ -252,12 +252,12 @@ public class Node{
 	private void logout (){
 		System.out.println("-->Logging out");
 		WebElement element = driver.findElement(By.id("top_profile_link"));
-		wait(1000);
+		sleep(1000);
 		element.click();
 		element = driver.findElement(By.id("top_logout_link"));
-		wait(1000);
+		sleep(1000);
 		element.click();
-		wait(7000);
+		sleep(7000);
 		System.out.println("-->Logged out");
 	}
 	
