@@ -169,8 +169,10 @@ public class Node{
 	}
 	
 	// stops execution for a certain amount of ms
-	// TODO variative?
 	private void sleep (long i){
+      
+        // +-40%
+        i = i + 0.4 * i * (Math.random() * 2 - 1);
 		try{
 			Thread.currentThread().sleep(i);
 		} catch (InterruptedException ie){
