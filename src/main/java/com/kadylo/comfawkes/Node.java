@@ -66,15 +66,8 @@ public class Node{
 		setOwnStatus("-->Is up");
 		state = State.ACTIVE;
 		System.out.println("-->Node " + id + " started");
-	
-		// TODO delete
-		try{
-			File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
-			FileUtils.copyFile(scrFile, new File("SUCCESS_" + id + ".png"));
-		} catch (IOException ioe){
-			System.out.println("-->File exception: " + ioe.toString());
-		}
 	}
+  
 	public void stop(){
 		System.out.println("-->Stopping node " + id);
 		setOwnStatus("-->Is down");
