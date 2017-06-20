@@ -158,6 +158,7 @@ public class Node{
 		}
 	}
 	
+	// TODO
 	private void register(){
 		
 	}
@@ -165,7 +166,7 @@ public class Node{
 	private void counterPopup(){
 		// countermeasures against popup
 		try{
-			WebElement element = driver.findElement(By.xpath("//*[text() = 'Підтвердити']"));
+			WebElement element = driver.findElement(By.xpath("//*[text() = 'Confirm']"));
 			element.click();
 		} catch (Exception e){
 			// nothing, no popup
@@ -176,7 +177,7 @@ public class Node{
 	private void sleep (long i){
       
         // +-40%
-        i = i + 0.4 * i * (Math.random() * 2 - 1);
+        i = Math.round(i + 0.4 * i * (Math.random() * 2 - 1));
 		try{
 			Thread.currentThread().sleep(i);
 		} catch (InterruptedException ie){
@@ -216,33 +217,164 @@ public class Node{
 	}
   
     // is node banned on target resource?
-    private boolean isBanned(String target){return false;}
+    private boolean isBanned(String target){
+		driver.get(target);
+		String bantext = "You have been banned from this community.";
+		if (driver.findElements(By.xpath("//*[text() = '" + bantext + "']")).size() != 0){
+			
+			//means we're banned
+			return true;
+		} else {
+			
+			//means we're not
+			return false;
+		}
+	}
   
     // is target a closed group?
-    private boolean isClosedGroup(String target){return false;}
+    private boolean isClosedGroup(String target){
+		driver.get(target);
+		String text = "This is a closed group";
+		if (driver.findElements(By.xpath("//*[text() = '" + text + "']")).size() != 0){
+			
+			//means text is present, group is closed
+			return true;
+		} else {
+			
+			//means we're not
+			return false;
+		}
+	}
   
     // sends request to closed group
-    private void sendRequest(String target){}
+    private void sendRequest(String target){
+		driver.get(target);
+		try{
+			WebElement element = driver.findElement(By.xpath("//*[text() = 'Send a request']"));
+			element.click();
+		} catch (Exception e){
+			// nothing, no popup
+		}
+	}
   
-    // approves invite to closed group
-    peivate void approveInvite(String target){}
+    /* // approves invite to closed group
+    private void approveInvite(String target){
+		
+	} */
+	
+	private boolean isInside(String target){
+		driver.get(target);
+		String grouptext = "You are a member";
+		String publicText = "Following";
+		if (driver.findElements(By.xpath("//*[text() = '" + grouptext + "']")).size() != 0){
+			
+			//means we're in group
+			return true;
+		} else {
+			if (driver.findElements(By.xpath("//*[text() = '" + publicText + "']")).size() != 0){
+				
+				//means we're in public
+				return true;
+			} else {
+				
+				//means we're not
+				return false;
+			}
+		}
+	}
 	
     // public, group
 	private void leaveResource(String target){
-		
+		driver.get(target);
+		String grouptext = "You are a member";
+		String leaveGroup = "Leave community";
+		String leavePublic = "Unfollow";
+		String publicText = "Following";
+		WebElement element = null;
+		if (driver.findElements(By.xpath("//*[text() = '" + grouptext + "']")).size() != 0){
+			
+			//means we're in group
+			element = driver.findElement(By.xpath("//*[text() = '" + grouptext + "']"));
+			element.click();
+			sleep(1000);
+			element = driver.findElement(By.xpath("//*[text() = '" + leaveGroup + "']"));
+			element.click();
+			sleep(1500);
+			try{
+				element = driver.findElement(By.xpath("//*[text() = '" + leaveGroup + "']"));
+				element.click();
+			} catch (Exception e){
+				
+				// do nothing 
+			}
+		} else {
+			if (driver.findElements(By.xpath("//*[text() = '" + publicText + "']")).size() != 0){
+				
+				//means we're in public
+				element = driver.findElement(By.xpath("//*[text() = '" + publicText + "']"));
+				element.click();
+				sleep(1000);
+				element = driver.findElement(By.xpath("//*[text() = '" + leavePublic + "']"));
+				element.click();
+			} else {
+				
+				//TODO Error
+			}
+		}
 	}
 	
-    // send request to target. Incoming requests have autoapprove
+    // send request to target
+	// approve friend
 	private void addToFriends(String target){
-		
+		driver.get(target);
+		try{
+			String addText = "Add to friends";
+			WebElement element = driver.findElement(By.xpath("//*[text() = '" + addText + "']"));
+			element.click();
+			sleep(2000);
+		} catch (Exception e){
+			
+			//TODO error
+		}
 	}
 	
 	private void removeFromFriends(String target){
-		
+		driver.get(target);
+		String removeText = "In your friend list";
+		String totalRemove = "Remove from friends";
+		WebElement element = driver.findElement(By.xpath("//*[text() = '" + removeText + "']"));
+		element.click();
+		sleep(800);
+		element = driver.findElement(By.xpath("//*[text() = '" + totalRemove + "']"));
+		element.click();
 	}
 	
 	private void hideInFriends(String target){
-		
+		driver.get("https://vk.com/feed");
+		sleep(1500);
+		String save = "Save changes";
+		WebElement element = driver.findElement(By.id("top_profile_link"));
+		element.click();
+		sleep(1600);
+		element = driver.findElement(By.id("top_settings_link"));
+		element.click();
+		sleep(1500);
+		element = driver.findElement(By.id("ui_rmenu_privacy"));
+		element.click();
+		sleep(1300);
+		element = driver.findElement(By.id("privacy_friends_hide"));
+		element.click();
+		sleep(1200);
+		element = driver.findElement(By.xpath("//*[text() = '" + getUserName(target) + "']"));
+		element.click();
+		sleep(1000);
+		element = driver.findElement(By.xpath("//*[text() = '" + save + "']"));
+		element.click();
+		sleep(1500);
+	}
+	
+	private String getUserName(String target){
+		return null;
 	}
 	
 	private void setProfilePicture(String picId){
