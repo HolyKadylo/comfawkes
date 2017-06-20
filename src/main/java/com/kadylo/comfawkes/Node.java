@@ -213,13 +213,26 @@ public class Node{
 			System.out.println("-->Failed to subscribe to " + target);
 			e.printStackTrace();
 		}
+	}
+  
+    // is node banned on target resource?
+    private boolean isBanned(String target){return false;}
+  
+    // is target a closed group?
+    private boolean isClosedGroup(String target){return false;}
+  
+    // sends request to closed group
+    private void sendRequest(String target){}
+  
+    // approves invite to closed group
+    peivate void approveInvite(String target){}
+	
+    // public, group
+	private void leaveResource(String target){
 		
 	}
 	
-	private void unsubscribe(String target){
-		
-	}
-	
+    // send request to target. Incoming requests have autoapprove
 	private void addToFriends(String target){
 		
 	}
@@ -244,6 +257,7 @@ public class Node{
 	
 	// set privacy to the proper pre-defined state
 	// set language settings
+    // TODO separate setSets() for listener and poster
 	private void setSettings(){
 		
 	}
