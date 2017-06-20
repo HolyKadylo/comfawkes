@@ -26,7 +26,11 @@ public class Node{
 	
 	// describes the node's state
 	private enum State{
-		BROKEN, ACTIVE, UNUSED
+		BROKEN, // when error forced to stop the logged in or logged out node
+        WORKING, // when logged in node is active (with Nestor and ordinal logic node) in public or page
+        READY, // when logged in node is ready for orders, but currently unused by logic node (i.e. hasn't one). Nestor sees ready nodes
+        INITIALIZING, // when logged in node listens to initialization commands of separate Initialization logic node. Used to prove clients in first time config
+        CREATED // when created and unlogged in
 	}
 	private State state;
 	private Account currentAccount;
@@ -48,7 +52,7 @@ public class Node{
  		cap.setBrowserName("firefox"); 	
 		cap.setCapability("marionette", true);
 		currentAccount = account;
-		state = State.UNUSED;
+		state = State.CREATED;
 		setURL(sURL);
 		System.out.println("-->Node " + id + " constructed");
 	}
@@ -64,7 +68,7 @@ public class Node{
 			return;
 		}
 		setOwnStatus("-->Is up");
-		state = State.ACTIVE;
+		state = State.READY;
 		System.out.println("-->Node " + id + " started");
 	}
   
@@ -72,7 +76,7 @@ public class Node{
 		System.out.println("-->Stopping node " + id);
 		setOwnStatus("-->Is down");
 		logout();
-		state = State.UNUSED;
+		state = State.CREATED;
 		System.out.println("-->Node " + id + " stopped");
 	}
 	
@@ -80,7 +84,7 @@ public class Node{
 	// talk to. Should be like http://xxx.xxx.xxx.xxx:yyyy
 	public void setURL(String sURL){
 		// meaning that driver needs to quit
-		if (state != State.UNUSED){
+		if (state != State.CREATED){
 			try{
 				driver.quit();
 			} catch (Exception e){
