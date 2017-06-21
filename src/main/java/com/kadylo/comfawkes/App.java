@@ -41,7 +41,7 @@ public class App
         System.out.println("-->inside kpf: " + listener.isInside("https://vk.com/kpop.fanfiki"));
        if(listener.isInside("https://vk.com/biletskiy_swag"))
           listener.leaveResource("https://vk.com/biletskiy_swag");
-       if(listener.isInside("https://vk.com/kpop.fanfiki");
+       if(listener.isInside("https://vk.com/kpop.fanfiki"));
           listener.leaveResource("https://vk.com/kpop.fanfiki");
         //listener.leaveResource("https://vk.com/biletskiy_swag");
       //System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
