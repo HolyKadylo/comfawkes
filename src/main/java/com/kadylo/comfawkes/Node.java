@@ -286,6 +286,7 @@ public class Node{
 	
     // public, group
 	public void leaveResource(String target){
+         System.out.println("-->Leaving " + target);
 		driver.get(target);
 		String grouptext = "You are a member";
 		String leaveGroup = "Leave community";
@@ -308,6 +309,7 @@ public class Node{
 				
 				// do nothing 
 			}
+             System.out.println("-->Successfully left " + target);
 		} else {
 			if (driver.findElements(By.xpath("//*[text() = '" + publicText + "']")).size() != 0){
 				
@@ -317,8 +319,9 @@ public class Node{
 				sleep(1000);
 				element = driver.findElement(By.xpath("//*[text() = '" + leavePublic + "']"));
 				element.click();
+                 System.out.println("-->Successfully left " + target);
 			} else {
-				
+				System.out.println("Failed to leave " + target);
 				//TODO Error
 			}
 		}
