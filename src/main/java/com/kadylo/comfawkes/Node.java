@@ -174,8 +174,7 @@ public class Node{
 	}
 	
 	// stops execution for a certain amount of ms
-    // TODO return private
-	public void sleep (long i){
+	private void sleep (long i){
       
         // +-40%
         i = Math.round(i + 0.4 * i * (Math.random() * 2 - 1));
@@ -188,8 +187,7 @@ public class Node{
 	
 	
 	// subscribes to some public
-	// TODO private?
-	public void subscribe(String target){
+	private void subscribe(String target){
 		System.out.println("-->Subscribing to " + target);
 		WebElement element = null;
 		try{
@@ -218,7 +216,7 @@ public class Node{
 	}
   
     // is node banned on target resource?
-    public boolean isBanned(String target){
+    private boolean isBanned(String target){
 		driver.get(target);
 		String bantext = "You have been banned from this community.";
 		if (driver.findElements(By.xpath("//*[text() = '" + bantext + "']")).size() != 0){
@@ -233,7 +231,7 @@ public class Node{
 	}
   
     // is target a closed group?
-    public boolean isClosedGroup(String target){
+    private boolean isClosedGroup(String target){
 		driver.get(target);
 		String text = "This is a closed group";
 		if (driver.findElements(By.xpath("//*[text() = '" + text + "']")).size() != 0){
@@ -248,7 +246,7 @@ public class Node{
 	}
   
     // sends request to closed group
-    public void sendRequest(String target){
+    private void sendRequest(String target){
 		driver.get(target);
 		try{
 			WebElement element = driver.findElement(By.xpath("//*[text() = 'Send a request']"));
@@ -263,7 +261,7 @@ public class Node{
 		
 	} */
 	
-	public boolean isInside(String target){
+	private boolean isInside(String target){
 		driver.get(target);
 		String grouptext = "You are a member";
 		String publicText = "Following";
@@ -285,7 +283,7 @@ public class Node{
 	}
 	
     // public, group
-	public void leaveResource(String target){
+	private void leaveResource(String target){
          System.out.println("-->Leaving " + target);
 		driver.get(target);
 		String grouptext = "You are a member";
@@ -329,7 +327,7 @@ public class Node{
 	
     // send request to target
 	// approve friend
-	public void addToFriends(String target){
+	private void addToFriends(String target){
 		driver.get(target);
 		try{
 			String addText = "Add to friends";
