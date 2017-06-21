@@ -218,7 +218,7 @@ public class Node{
 	}
   
     // is node banned on target resource?
-    private boolean isBanned(String target){
+    public boolean isBanned(String target){
 		driver.get(target);
 		String bantext = "You have been banned from this community.";
 		if (driver.findElements(By.xpath("//*[text() = '" + bantext + "']")).size() != 0){
@@ -233,7 +233,7 @@ public class Node{
 	}
   
     // is target a closed group?
-    private boolean isClosedGroup(String target){
+    public boolean isClosedGroup(String target){
 		driver.get(target);
 		String text = "This is a closed group";
 		if (driver.findElements(By.xpath("//*[text() = '" + text + "']")).size() != 0){
@@ -248,7 +248,7 @@ public class Node{
 	}
   
     // sends request to closed group
-    private void sendRequest(String target){
+    public void sendRequest(String target){
 		driver.get(target);
 		try{
 			WebElement element = driver.findElement(By.xpath("//*[text() = 'Send a request']"));
@@ -263,7 +263,7 @@ public class Node{
 		
 	} */
 	
-	private boolean isInside(String target){
+	public boolean isInside(String target){
 		driver.get(target);
 		String grouptext = "You are a member";
 		String publicText = "Following";
@@ -285,7 +285,7 @@ public class Node{
 	}
 	
     // public, group
-	private void leaveResource(String target){
+	public void leaveResource(String target){
 		driver.get(target);
 		String grouptext = "You are a member";
 		String leaveGroup = "Leave community";
@@ -326,7 +326,7 @@ public class Node{
 	
     // send request to target
 	// approve friend
-	private void addToFriends(String target){
+	public void addToFriends(String target){
 		driver.get(target);
 		try{
 			String addText = "Add to friends";
