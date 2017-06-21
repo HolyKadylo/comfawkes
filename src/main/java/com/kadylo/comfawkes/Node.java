@@ -174,7 +174,8 @@ public class Node{
 	}
 	
 	// stops execution for a certain amount of ms
-	private void sleep (long i){
+    // TODO return private
+	public void sleep (long i){
       
         // +-40%
         i = Math.round(i + 0.4 * i * (Math.random() * 2 - 1));
