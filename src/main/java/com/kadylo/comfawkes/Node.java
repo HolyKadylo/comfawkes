@@ -21,27 +21,27 @@ import java.io.IOException;
 // This is browser endpoint
 public class Node{
 	
-	private WebDriver driver;
-	private DesiredCapabilities cap;
+	protected WebDriver driver;
+	protected DesiredCapabilities cap;
 	
 	// describes the node's state
-	private enum State{
+	protected enum State{
 		BROKEN, // when error forced to stop the logged in or logged out node
         WORKING, // when logged in node is active (with Nestor and ordinal logic node) in public or page
         READY, // when logged in node is ready for orders, but currently unused by logic node (i.e. hasn't one). Nestor sees ready nodes
         INITIALIZING, // when logged in node listens to initialization commands of separate Initialization logic node. Used to prove clients in first time config
         CREATED // when created and unlogged in
 	}
-	private State state;
-	private Account currentAccount;
+	protected State state;
+	protected Account currentAccount;
 	
 	// This is URL the node talks to
 	// in constructor the part /wd/hub is added
 	// to sURL
-	private URL url;
+	protected URL url;
 	
 	// unique identifier
-	private int id;
+	protected int id;
 	
 	// constructor
 	public Node (Account account, String sURL, int id){
@@ -110,7 +110,7 @@ public class Node{
 		// after that browser is opened or reopened
 	}
 	
-	private void login (){
+	protected void login (){
 		System.out.println("-->Logging in");
 		WebElement element = null;
 		try{
@@ -159,11 +159,11 @@ public class Node{
 	}
 	
 	// TODO
-	private void register(){
+	protected void register(){
 		
 	}
 	
-	private void counterPopup(){
+	protected void counterPopup(){
 		// countermeasures against popup
 		try{
 			WebElement element = driver.findElement(By.xpath("//*[text() = 'Confirm']"));
@@ -174,7 +174,7 @@ public class Node{
 	}
 	
 	// stops execution for a certain amount of ms
-	private void sleep (long i){
+	protected void sleep (long i){
       
         // +-40%
         i = Math.round(i + 0.4 * i * (Math.random() * 2 - 1));
@@ -187,7 +187,7 @@ public class Node{
 	
 	
 	// subscribes to some public
-	private void subscribe(String target){
+	protected void subscribe(String target){
 		System.out.println("-->Subscribing to " + target);
 		WebElement element = null;
 		try{
@@ -216,7 +216,7 @@ public class Node{
 	}
   
     // is node banned on target resource?
-    private boolean isBanned(String target){
+    protected boolean isBanned(String target){
 		driver.get(target);
 		String bantext = "You have been banned from this community.";
 		if (driver.findElements(By.xpath("//*[text() = '" + bantext + "']")).size() != 0){
@@ -231,7 +231,7 @@ public class Node{
 	}
   
     // is target a closed group?
-    private boolean isClosedGroup(String target){
+    protected boolean isClosedGroup(String target){
 		driver.get(target);
 		String text = "This is a closed group";
 		if (driver.findElements(By.xpath("//*[text() = '" + text + "']")).size() != 0){
@@ -246,7 +246,7 @@ public class Node{
 	}
   
     // sends request to closed group
-    private void sendRequest(String target){
+    protected void sendRequest(String target){
 		driver.get(target);
 		try{
 			WebElement element = driver.findElement(By.xpath("//*[text() = 'Send a request']"));
@@ -261,7 +261,7 @@ public class Node{
 		
 	} */
 	
-	private boolean isInside(String target){
+	protected boolean isInside(String target){
 		driver.get(target);
 		String grouptext = "You are a member";
 		String publicText = "Following";
@@ -283,7 +283,7 @@ public class Node{
 	}
 	
     // public, group
-	private void leaveResource(String target){
+	protected void leaveResource(String target){
         System.out.println("-->Leaving " + target);
 		driver.get(target);
 		String grouptext = "You are a member";
@@ -327,7 +327,7 @@ public class Node{
 	
     // send request to target
 	// approve friend
-	private void addToFriends(String target){
+	protected void addToFriends(String target){
 		driver.get(target);
 		try{
 			String addText = "Add to friends";
@@ -340,7 +340,7 @@ public class Node{
 		}
 	}
 	
-	private void removeFromFriends(String target){
+	protected void removeFromFriends(String target){
 		driver.get(target);
 		String removeText = "In your friend list";
 		String totalRemove = "Remove from friends";
@@ -351,7 +351,7 @@ public class Node{
 		element.click();
 	}
 	
-	private void hideInFriends(String target){
+	protected void hideInFriends(String target){
 		driver.get("https://vk.com/feed");
 		sleep(1500);
 		String save = "Save changes";
@@ -375,13 +375,13 @@ public class Node{
 		sleep(1500);
 	}
 	
-	private String getUserName(String target){
+	protected String getUserName(String target){
 		driver.get(target);
 		sleep(2090);
 		return driver.getTitle();
 	}
 	
-	private void setProfilePicture(String picId){
+	protected void setProfilePicture(String picId){
 	
 		// deleting previous profile picture
 		try{
@@ -394,11 +394,18 @@ public class Node{
 	// set privacy to the proper pre-defined state
 	// set language settings
     // TODO separate setSets() for listener and poster
-	private void setSettings(){
-		
-	}
+	/* private void setSettings(){
+		driver.get("https://vk.com/feed");
+		sleep(1500);
+		WebElement element = driver.findElement(By.id("top_profile_link"));
+		element.click();
+		sleep(1600);
+		element = driver.findElement(By.id("top_settings_link"));
+		element.click();
+		sleep(1500);
+	} */
 	
-	private void logout (){
+	protected void logout (){
 		System.out.println("-->Logging out");
 		WebElement element = driver.findElement(By.id("top_profile_link"));
 		sleep(1000);
@@ -410,11 +417,11 @@ public class Node{
 		System.out.println("-->Logged out");
 	}
 	
-	private void postToOwnWall (String content){
+	protected void postToOwnWall (String content){
 		System.out.println("-->postToOwnWall( " + content + " )");
 	}
 	
-	private void setOwnStatus (String status){
+	protected void setOwnStatus (String status){
 		System.out.println("-->setOwnStatus( " + status + " )");
 	}
 	
