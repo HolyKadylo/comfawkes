@@ -34,18 +34,18 @@ public class App
 		//listener.subscribe("https://vk.com/biletskiy_swag");
 		//listener.sleep(2000);
         //listener.addToFriends("https://vk.com/holy_kadylo");
-     // listener.sleep(3000);
+		//listener.sleep(3000);
 		//listener.subscribe("https://vk.com/kpop.fanfiki");
-        System.out.println("-->inside bil: " + listener.isInside("https://vk.com/biletskiy_swag"));
-        listener.sleep(3000);
-        System.out.println("-->inside kpf: " + listener.isInside("https://vk.com/kpop.fanfiki"));
-       if(listener.isInside("https://vk.com/biletskiy_swag"))
-          listener.leaveResource("https://vk.com/biletskiy_swag");
-       if(listener.isInside("https://vk.com/kpop.fanfiki"));
-          listener.leaveResource("https://vk.com/kpop.fanfiki");
+        //System.out.println("-->inside bil: " + listener.isInside("https://vk.com/biletskiy_swag"));
+        //listener.sleep(3000);
+        //System.out.println("-->inside kpf: " + listener.isInside("https://vk.com/kpop.fanfiki"));
+        //if(listener.isInside("https://vk.com/biletskiy_swag"))
+		//	listener.leaveResource("https://vk.com/biletskiy_swag");
+        //if(listener.isInside("https://vk.com/kpop.fanfiki"));
+		//	listener.leaveResource("https://vk.com/kpop.fanfiki");
         //listener.leaveResource("https://vk.com/biletskiy_swag");
-      //System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
-      //System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
+		//System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
+		//System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
 		listener.stop();
 		/* System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
 		DesiredCapabilities cap = DesiredCapabilities.firefox();

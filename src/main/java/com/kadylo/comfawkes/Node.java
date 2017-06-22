@@ -284,7 +284,7 @@ public class Node{
 	
     // public, group
 	private void leaveResource(String target){
-         System.out.println("-->Leaving " + target);
+        System.out.println("-->Leaving " + target);
 		driver.get(target);
 		String grouptext = "You are a member";
 		String leaveGroup = "Leave community";
@@ -376,7 +376,9 @@ public class Node{
 	}
 	
 	private String getUserName(String target){
-		return null;
+		driver.get(target);
+		sleep(2090);
+		return driver.getTitle();
 	}
 	
 	private void setProfilePicture(String picId){
