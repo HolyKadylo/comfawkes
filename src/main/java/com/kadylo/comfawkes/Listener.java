@@ -1,7 +1,12 @@
 package com.kadylo.comfawkes;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 // This is browser endpoint
 public class Listener extends Node{
+	
+	private WebElement element;
 	
 	public Listener(Account account, String sURL, int id){
 		super(account, sURL, id);
@@ -20,14 +25,44 @@ public class Listener extends Node{
 		return message;
 	}
 	
+	//is used in next method
+	private void clickElementById(String id){
+		element = driver.findElement(By.id(id));
+		element.click();
+		sleep(5000);	
+	}
+	
+	// listens
+	// messages are open
 	private void setSettings(){
-		/* driver.get("https://vk.com/feed");
-		sleep(1500);
-		WebElement element = driver.findElement(By.id("top_profile_link"));
+		driver.get("https://vk.com/feed");
+		String lang = "English";
+		sleep(5000);
+		clickElementById("top_profile_link");
+		clickElementById("top_settings_link");
+		clickElementById("settings_video_autoplay");
+		clickElementById("settings_gif_autoplay");
+		clickElementById("settings_stickers_hints");
+		clickElementById("chglang");
+	    element = driver.findElement(By.xpath("//*[text() = '" + lang + "']"));
 		element.click();
-		sleep(1600);
-		element = driver.findElement(By.id("top_settings_link"));
-		element.click();
-		sleep(1500); */
+		sleep(5000); 
+		clickElementById("ui_rmenu_privacy");
+		clickElementById("privacy_edit_photos_saved");
+		clickElementById("privacy_item3"); 
+		clickElementById("privacy_edit_groups"); 
+		clickElementById("privacy_item3");
+		clickElementById("privacy_edit_wall_send");
+		clickElementById("privacy_item3"); 
+		clickElementById("privacy_edit_status_replies"); 
+		clickElementById("privacy_item3");
+		clickElementById("privacy_edit_mail_send");
+		clickElementById("privacy_item0");
+		clickElementById("privacy_edit_appscall");
+		clickElementById("privacy_item3"); 
+		clickElementById("privacy_edit_groups_invite"); 
+		clickElementById("privacy_item3");  
+		clickElementById("privacy_edit_apps_invite");
+		clickElementById("privacy_item3");
 	}
 }
