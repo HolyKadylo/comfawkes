@@ -27,7 +27,7 @@ public class App
 		Node node, 
 		Role role) */
 		Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
-		Node poster = new Poster(account, "http://localhost:5000", 10);
+		Poster poster = new Poster(account, "http://localhost:5000", 10);
 		account.setNode(poster);
 		
 		poster.start();
