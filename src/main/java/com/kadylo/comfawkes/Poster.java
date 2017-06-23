@@ -52,6 +52,8 @@ System.out.println("-->u");
 System.out.println("-->i");
 		sleep(5000); 
 		clickElementById("ui_rmenu_privacy");
+      
+      //TODO verify, we are in the right menu. Here and in Listener
 System.out.println("-->o");
 		clickElementById("privacy_edit_photos_saved");
 System.out.println("-->p");
