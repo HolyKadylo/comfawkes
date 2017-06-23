@@ -44,7 +44,7 @@ public class Node{
 	protected int id;
   
     // TODO relocate
-    public WebDdiver getDriver(){
+    public WebDriver getDriver(){
       return driver;
     }
 	
