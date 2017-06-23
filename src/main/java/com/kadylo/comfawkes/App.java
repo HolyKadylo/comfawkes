@@ -8,6 +8,12 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.apache.commons.io.FileUtils;
+import java.io.File;
+import java.io.IOException;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.net.MalformedURLException; 
 import java.net.URL;
@@ -29,7 +35,9 @@ public class App
 		Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
 		Poster poster = new Poster(account, "http://localhost:5000", 10);
 		account.setNode(poster);
-		
+      WebDriver driver = null;
+		try{
+          driver = poster.getDriver();
 		poster.start();
         poster.setSettings();
 		//listener.subscribe("https://vk.com/biletskiy_swag");
@@ -48,6 +56,16 @@ public class App
 		//System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
 		//System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
 		poster.stop();
+        } catch (NoSuchElementException nse){
+           try{
+             File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+             FileUtils.copyFile(scrFile, new File("TESTCASEFAIL.png"));
+           } catch (IOException ioe){
+             System.out.println("-->file exception");
+             ioe.printStackTrace();
+           }
+          nse.printStackTrace();
+        }
 		/* System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
 		DesiredCapabilities cap = DesiredCapabilities.firefox();
  		cap.setBrowserName("firefox"); 	

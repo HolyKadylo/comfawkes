@@ -42,6 +42,11 @@ public class Node{
 	
 	// unique identifier
 	protected int id;
+  
+    // TODO relocate
+    public WebDdiver getDriver(){
+      return driver;
+    }
 	
 	// constructor
 	public Node (Account account, String sURL, int id){
