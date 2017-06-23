@@ -27,10 +27,11 @@ public class App
 		Node node, 
 		Role role) */
 		Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
-		Node listener = new Listener(account, "http://localhost:5000", 10);
-		account.setNode(listener);
+		Node poster = new Poster(account, "http://localhost:5000", 10);
+		account.setNode(poster);
 		
-		listener.start();
+		poster.start();
+        poster.setSettings();
 		//listener.subscribe("https://vk.com/biletskiy_swag");
 		//listener.sleep(2000);
         //listener.addToFriends("https://vk.com/holy_kadylo");
@@ -46,7 +47,7 @@ public class App
         //listener.leaveResource("https://vk.com/biletskiy_swag");
 		//System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
 		//System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
-		listener.stop();
+		poster.stop();
 		/* System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
 		DesiredCapabilities cap = DesiredCapabilities.firefox();
  		cap.setBrowserName("firefox"); 	
