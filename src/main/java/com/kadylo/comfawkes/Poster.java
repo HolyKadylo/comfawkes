@@ -71,6 +71,7 @@ public class Poster extends Node{
 	public void post (String addressee, String content){
 		driver.get(addressee);
 		String leaveAComment = "Leave a comment...";
+		String postAsGroup = "Post as group";
 		sleep(5000);
 		System.out.println("-->1");
 		element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
@@ -86,14 +87,23 @@ public class Poster extends Node{
 		sleep(1540);
 		System.out.println("-->4.5");
 		elementGroup.click();
-		while (!isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
+		System.out.println("-->4.75");
+		sleep(1540);
+		element = driver.findElement(By.xpath("//*[text() = '" + postAsGroup + "']"));
+		System.out.println("-->4.80");
+		sleep(1540);
+		element.click();
+		System.out.println("-->4.95");
+		sleep(5000); 
+		
+		/* while (!isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
 			sleep(1950);
 			System.out.println("-->5");
 			elementGroup.click();
 			System.out.println("-->6");
 			System.out.println("clicked element group");
-		}
-		sleep(1100);
+		} */
+		
 		System.out.println("-->7");
 		element = driver.findElement(By.id(makeReplyButtonId(addressee)));
 		System.out.println("-->8");
