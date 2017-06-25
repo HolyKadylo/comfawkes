@@ -13,6 +13,36 @@ public class Poster extends Node{
 		
 	}
 	
+	// TODO remake in future?
+	// RAG = Reply As Group
+	private String makeRAGId(String s){
+		
+		// this is wall case
+		String r = "reply_as_group-" + s.substring(s.indexOf("-") + 1);
+		
+		// TODO delete
+		System.out.println("-->r = " + r);
+		return r;
+	}
+	
+	//https://stackoverflow.com/questions/20645013/how-can-i-verify-an-attribute-is-present-in-an-element
+	private boolean isAttribtuePresentAndEqual(WebElement element, String attribute, String equal) {
+		boolean result = false;
+		try {
+			String value = element.getAttribute(attribute);
+			if (value != null){
+				if (value.equals(equal)){
+					result = true;
+				}
+			}
+		} catch (Exception e) {
+			
+			//??
+			System.out.println("--> Exception" + e.toString());
+		}
+		return result;
+    }
+	
 	// posts content to the site's wall
 	// addressee is wall address (that should be checked)
 	// content should be checked as well
@@ -22,21 +52,23 @@ public class Poster extends Node{
 		String leaveAComment = "Leave a comment...";
 		sleep(5000);
 		System.out.println("-->1");
-		
-		// TODO add separation by elements
 		element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
 		element.click();
 		sleep(5000); 
 		System.out.println("-->2");
-		sleep(200);
-		System.out.println("-->3");
-		element.click();
-		System.out.println("-->4");
-		sleep(150);
-		System.out.println("-->5");
 		element.sendKeys(content);
-		System.out.println("-->6");
+		System.out.println("-->3");
 		sleep(3000);
+		WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
+		System.out.println("-->4");
+		while (!isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
+			sleep(950);
+			System.out.println("-->5");
+			elementGroup.click();
+			System.out.println("-->6");
+			System.out.println("clicked element group");
+		}
+		sleep(1100);
 		System.out.println("-->7");
 		element.submit();
 		System.out.println("-->8");
