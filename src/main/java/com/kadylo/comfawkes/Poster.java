@@ -13,24 +13,20 @@ public class Poster extends Node{
 		
 	}
 	
-	// TODO remake in future?
-	private String makeAddresseeId(String s){
-		String r = "reply_field-" + s.substring(s.indexOf("-") + 1);
-		
-		// TODO delete
-		System.out.println("-->r = " + r);
-		return r;
-	}
-	
 	// posts content to the site's wall
 	// addressee is wall address (that should be checked)
 	// content should be checked as well
 	// but all in the logic node
 	public void post (String addressee, String content){
 		driver.get(addressee);
-		sleep(3000);
+		String leaveAComment = "Leave a comment...";
+		sleep(5000);
 		System.out.println("-->1");
-		element = driver.findElement(By.id(makeAddresseeId(addressee)));
+		
+		// TODO add separation by elements
+		element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
+		element.click();
+		sleep(5000); 
 		System.out.println("-->2");
 		sleep(200);
 		System.out.println("-->3");
