@@ -51,6 +51,10 @@ System.out.println("-->u");
 		element.click();
 System.out.println("-->i");
 		sleep(5000); 
+System.out.println("-->ii");
+		driver.navigate().refresh();
+		sleep(5000); 
+System.out.println("-->iii");
 		clickElementById("ui_rmenu_privacy");
       
       //TODO verify, we are in the right menu. Here and in Listener
