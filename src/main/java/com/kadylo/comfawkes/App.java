@@ -35,12 +35,15 @@ public class App
 		Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
 		Poster poster = new Poster(account, "http://localhost:5000", 10);
 		account.setNode(poster);
-      WebDriver driver = null;
+        WebDriver driver = null;
 		try{
           driver = poster.getDriver();
 		poster.start();
         //poster.setSettings();
-		poster.post("https://vk.com/wall-144898340_47", "АВТОБОТИ, ТРАНСФОРМУЄМОСЬ!");
+		System.out.println("-->" + System.currentTimeMillis());
+		poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");
+		System.out.println("-->" + System.currentTimeMillis());
+		poster.sleep(10000);
 		//listener.subscribe("https://vk.com/biletskiy_swag");
 		//listener.sleep(2000);
         //listener.addToFriends("https://vk.com/holy_kadylo");

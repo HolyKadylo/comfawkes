@@ -13,36 +13,17 @@ public class Poster extends Node{
 		
 	}
 	
-	// TODO remake in future?
 	// RAG = Reply As Group
 	private String makeRAGId(String s){
-		
-		// this is wall case
 		String r = "reply_as_group-" + s.substring(s.indexOf("-") + 1);
-		
-		// TODO delete
-		System.out.println("-->r = " + r);
 		return r;
 	}
-	
-	//
 	private String makeReplyFieldId(String s){
-		
-		// this is wall case
 		String r = "reply_field-" + s.substring(s.indexOf("-") + 1);
-		
-		// TODO delete
-		System.out.println("-->r = " + r);
 		return r;
 	}
-	
 	private String makeReplyButtonId(String s){
-		
-		// this is wall case
 		String r = "reply_button-" + s.substring(s.indexOf("-") + 1);
-		
-		// TODO delete
-		System.out.println("-->r = " + r);
 		return r;
 	}
 	
@@ -68,49 +49,27 @@ public class Poster extends Node{
 	// addressee is wall address (that should be checked)
 	// content should be checked as well
 	// but all in the logic node
+	// takes WALL-XXXXX-YY that needs to be extracted from user input
 	public void post (String addressee, String content){
 		driver.get(addressee);
 		String leaveAComment = "Leave a comment...";
 		String postAsGroup = "Post as group";
-		sleep(5000);
-		System.out.println("-->1");
+		sleep(3500);
 		element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
 		element.click();
-		sleep(5000); 
+		sleep(500); 
 		WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
-		System.out.println("-->2");
 		commentBox.sendKeys(content);
-		System.out.println("-->3");
-		sleep(3000);
+		sleep(3500);
 		WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
-		System.out.println("-->4");
-		sleep(1540);
-		System.out.println("-->4.5");
 		elementGroup.click();
-		System.out.println("-->4.75");
-		sleep(1540);
+		sleep(400);
 		element = driver.findElement(By.xpath("//*[text() = '" + postAsGroup + "']"));
-		System.out.println("-->4.80");
-		sleep(1540);
 		element.click();
-		System.out.println("-->4.95");
-		sleep(5000); 
-		
-		/* while (!isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
-			sleep(1950);
-			System.out.println("-->5");
-			elementGroup.click();
-			System.out.println("-->6");
-			System.out.println("clicked element group");
-		} */
-		
-		System.out.println("-->7");
+		sleep(400); 
 		element = driver.findElement(By.id(makeReplyButtonId(addressee)));
-		System.out.println("-->8");
-		sleep(1000);
-		System.out.println("-->9");
 		element.click();
-		System.out.println("-->10");
+		sleep(3500);
 	}
 	
 	//is used in next method
