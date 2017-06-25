@@ -83,7 +83,10 @@ public class Poster extends Node{
 		sleep(3000);
 		WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
 		System.out.println("-->4");
-		while (isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
+		sleep(1340);
+		System.out.println("-->4.5");
+		elementGroup.click();
+		while (!isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
 			sleep(950);
 			System.out.println("-->5");
 			elementGroup.click();
