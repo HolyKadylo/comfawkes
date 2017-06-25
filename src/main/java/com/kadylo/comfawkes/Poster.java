@@ -36,6 +36,16 @@ public class Poster extends Node{
 		return r;
 	}
 	
+	private String makeReplyButtonId(String s){
+		
+		// this is wall case
+		String r = "reply_button-" + s.substring(s.indexOf("-") + 1);
+		
+		// TODO delete
+		System.out.println("-->r = " + r);
+		return r;
+	}
+	
 	//https://stackoverflow.com/questions/20645013/how-can-i-verify-an-attribute-is-present-in-an-element
 	private boolean isAttribtuePresentAndEqual(WebElement element, String attribute, String equal) {
 		boolean result = false;
@@ -73,7 +83,7 @@ public class Poster extends Node{
 		sleep(3000);
 		WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
 		System.out.println("-->4");
-		while (!isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
+		while (isAttribtuePresentAndEqual(elementGroup, "aria-checked", "false")){
 			sleep(950);
 			System.out.println("-->5");
 			elementGroup.click();
@@ -82,10 +92,12 @@ public class Poster extends Node{
 		}
 		sleep(1100);
 		System.out.println("-->7");
-		commentBox.submit();
+		element = driver.findElement(By.id(makeReplyButtonId(addressee)));
 		System.out.println("-->8");
 		sleep(1000);
 		System.out.println("-->9");
+		element.click();
+		System.out.println("-->10");
 	}
 	
 	//is used in next method
