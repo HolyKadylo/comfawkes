@@ -40,7 +40,7 @@ public class App
           driver = poster.getDriver();
 		poster.start();
         //poster.setSettings();
-		poster.post("https://vk.com/wall-9761670_39", "ALL HEIL MEGATRON");
+		poster.post("https://vk.com/wall-144898340_47", "АВТОБОТИ, ТРАНСФОРМУЄМОСЬ!");
 		//listener.subscribe("https://vk.com/biletskiy_swag");
 		//listener.sleep(2000);
         //listener.addToFriends("https://vk.com/holy_kadylo");
