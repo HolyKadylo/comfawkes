@@ -13,10 +13,39 @@ public class Poster extends Node{
 		
 	}
 	
+	// TODO remake in future?
+	private String makeAddresseeId(String s){
+		String r = "reply_field-" + s.substring(s.indexOf("-") + 1);
+		
+		// TODO delete
+		System.out.println("-->r = " + r);
+		return r;
+	}
+	
 	// posts content to the site's wall
 	// addressee is wall address (that should be checked)
+	// content should be checked as well
+	// but all in the logic node
 	public void post (String addressee, String content){
-		
+		driver.get(addressee);
+		sleep(3000);
+		System.out.println("-->1");
+		element = driver.findElement(By.id(makeAddresseeId(addressee)));
+		System.out.println("-->2");
+		sleep(200);
+		System.out.println("-->3");
+		element.click();
+		System.out.println("-->4");
+		sleep(150);
+		System.out.println("-->5");
+		element.sendKeys(content);
+		System.out.println("-->6");
+		sleep(3000);
+		System.out.println("-->7");
+		element.submit();
+		System.out.println("-->8");
+		sleep(1000);
+		System.out.println("-->9");
 	}
 	
 	//is used in next method
@@ -31,65 +60,35 @@ public class Poster extends Node{
 	// gifts are open
 	public void setSettings(){
 		driver.get("https://vk.com/feed");
-      System.out.println("-->");
 		String lang = "English";
 		sleep(5000);
 		clickElementById("top_profile_link");
-System.out.println("-->q");
 		clickElementById("top_settings_link");
-System.out.println("-->w");
 		clickElementById("settings_video_autoplay");
-System.out.println("-->e");
 		clickElementById("settings_gif_autoplay");
-System.out.println("-->r");
 		clickElementById("settings_stickers_hints");
-System.out.println("-->t");
 		clickElementById("chglang");
-System.out.println("-->y");
 	    element = driver.findElement(By.xpath("//*[text() = '" + lang + "']"));
-System.out.println("-->u");
 		element.click();
-System.out.println("-->i");
 		sleep(5000); 
-System.out.println("-->ii");
 		driver.navigate().refresh();
 		sleep(5000); 
-System.out.println("-->iii");
 		clickElementById("ui_rmenu_privacy");
-      
-      //TODO verify, we are in the right menu. Here and in Listener
-System.out.println("-->o");
 		clickElementById("privacy_edit_photos_saved");
-System.out.println("-->p");
 		clickElementById("privacy_item3");
- System.out.println("-->a");
 		clickElementById("privacy_edit_groups"); 
-System.out.println("-->s");
 		clickElementById("privacy_item3");
-System.out.println("-->d");
 		clickElementById("privacy_edit_wall_send");
-System.out.println("-->f");
 		clickElementById("privacy_item3"); 
-System.out.println("-->g");
 		clickElementById("privacy_edit_status_replies"); 
-System.out.println("-->h");
 		clickElementById("privacy_item3");
-System.out.println("-->j");
 		clickElementById("privacy_edit_mail_send");
-System.out.println("-->k");
 		clickElementById("privacy_item1");
-System.out.println("-->l");
 		clickElementById("privacy_edit_appscall");
-System.out.println("-->z");
 		clickElementById("privacy_item3"); 
-System.out.println("-->x");
 		clickElementById("privacy_edit_groups_invite"); 
-System.out.println("-->c");
 		clickElementById("privacy_item3");  
-System.out.println("-->v");
 		clickElementById("privacy_edit_apps_invite");
-System.out.println("-->b");
 		clickElementById("privacy_item3");
-System.out.println("-->n");
 	}
 }

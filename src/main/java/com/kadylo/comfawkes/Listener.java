@@ -47,6 +47,8 @@ public class Listener extends Node{
 	    element = driver.findElement(By.xpath("//*[text() = '" + lang + "']"));
 		element.click();
 		sleep(5000); 
+		driver.navigate().refresh();
+		sleep(5000); 
 		clickElementById("ui_rmenu_privacy");
 		clickElementById("privacy_edit_photos_saved");
 		clickElementById("privacy_item3"); 

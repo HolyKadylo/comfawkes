@@ -39,7 +39,8 @@ public class App
 		try{
           driver = poster.getDriver();
 		poster.start();
-        poster.setSettings();
+        //poster.setSettings();
+		poster.post("https://vk.com/wall-9761670_39", "ALL HEIL MEGATRON");
 		//listener.subscribe("https://vk.com/biletskiy_swag");
 		//listener.sleep(2000);
         //listener.addToFriends("https://vk.com/holy_kadylo");
