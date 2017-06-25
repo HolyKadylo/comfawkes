@@ -25,6 +25,17 @@ public class Poster extends Node{
 		return r;
 	}
 	
+	//
+	private String makeReplyFieldId(String s){
+		
+		// this is wall case
+		String r = "reply_field-" + s.substring(s.indexOf("-") + 1);
+		
+		// TODO delete
+		System.out.println("-->r = " + r);
+		return r;
+	}
+	
 	//https://stackoverflow.com/questions/20645013/how-can-i-verify-an-attribute-is-present-in-an-element
 	private boolean isAttribtuePresentAndEqual(WebElement element, String attribute, String equal) {
 		boolean result = false;
@@ -55,8 +66,9 @@ public class Poster extends Node{
 		element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
 		element.click();
 		sleep(5000); 
+		WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
 		System.out.println("-->2");
-		element.sendKeys(content);
+		commentBox.sendKeys(content);
 		System.out.println("-->3");
 		sleep(3000);
 		WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
@@ -70,7 +82,7 @@ public class Poster extends Node{
 		}
 		sleep(1100);
 		System.out.println("-->7");
-		element.submit();
+		commentBox.submit();
 		System.out.println("-->8");
 		sleep(1000);
 		System.out.println("-->9");
