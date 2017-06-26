@@ -24,7 +24,7 @@ System.out.println("-->e");
       System.out.println("-->eee");
         sleep(2000);
 System.out.println("-->ee");
-      driver.ExecuteScript("window.open('HTTPS://Google.com','_blank');");
+      driver.executeScript("window.open('HTTPS://Google.com','_blank');");
 System.out.println("-->r");
         ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
         System.out.println("-->q");
