@@ -21,7 +21,7 @@ public class Listener extends Node{
 System.out.println("-->w");
         String s = Keys.chord(Keys.CONTROL, "t");
 System.out.println("-->e");
-        driver.findElement(By.xpath("//body")).sendKeys(s);
+        driver.findElement(By.xpath("//body")).sendKeys(s);
 System.out.println("-->r");
         writeTab = driver.getWindowHandle();
 System.out.println("-->t");
