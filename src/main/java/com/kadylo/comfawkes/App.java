@@ -37,7 +37,7 @@ public class App
         Listener poster = new Listener(account, "http://localhost:5000", 10);
 		account.setNode(poster);
         WebDriver driver = null;
-          //driver = poster.getDriver();
+        driver = poster.getDriver();
 		poster.start();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());
