@@ -30,6 +30,8 @@ System.out.println("-->r");
 System.out.println("-->t");
         driver.switchTo().window(readTab);
 System.out.println("-->y");
+      System.out.println("-->" + writeTab);
+      System.out.println("-->" + readTab);
 	}
 	
 	// posts message to site user in dialog

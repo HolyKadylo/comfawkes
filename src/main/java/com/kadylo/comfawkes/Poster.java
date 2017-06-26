@@ -6,7 +6,10 @@ import java.util.HashMap;
 
 // This is browser endpoint
 public class Poster extends Node{
-	
+  
+    // 5 mins
+	private static final long TAB_MIN_LIFE = 5 * 60 * 1000;
+  
   //TODO
     // String -- tab handle, Long -- last accessed
     private HashMap<String, Long> openTabs;
