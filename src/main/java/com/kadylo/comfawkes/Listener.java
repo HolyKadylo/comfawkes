@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.CompositeAction;
+import java.util.ArrayList;
 
 // This is browser endpoint
 public class Listener extends Node{
@@ -16,8 +17,6 @@ public class Listener extends Node{
 	
 	public Listener(Account account, String sURL, int id){
 		super(account, sURL, id);
-        System.out.println("-->q");
-        readTab = driver.getWindowHandle();
 System.out.println("-->w");
         String s = Keys.chord(Keys.CONTROL, "t");
 System.out.println("-->e");
@@ -26,7 +25,10 @@ System.out.println("-->e");
 System.out.println("-->ee");
         driver.findElement(By.xpath("//body")).sendKeys(s);
 System.out.println("-->r");
-        writeTab = driver.getWindowHandle();
+        ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
+        System.out.println("-->q");
+        writeTab = handles.get(0);
+        readTab = handles.get(1);
 System.out.println("-->t");
         driver.switchTo().window(readTab);
 System.out.println("-->y");
