@@ -21,8 +21,8 @@ public class Listener extends Node{
 System.out.println("-->w");
         String s = Keys.chord(Keys.CONTROL, "t");
 System.out.println("-->e");
-        driver.get("http://localhost:5000");
-        sleep(100);
+        driver.get("https://google.com");
+        sleep(2000);
 System.out.println("-->ee");
         driver.findElement(By.xpath("//body")).sendKeys(s);
 System.out.println("-->r");
