@@ -38,7 +38,7 @@ public class App
         WebDriver driver = null;
         driver = poster.getDriver();
       try{
-		poster.start();
+		//poster.start();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());
 		//poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");
@@ -59,7 +59,7 @@ public class App
         //listener.leaveResource("https://vk.com/biletskiy_swag");
 		//System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
 		//System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
-		poster.stop();
+		//poster.stop();
         } catch (NoSuchElementException nse){
            try{
              File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
