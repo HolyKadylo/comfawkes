@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.CompositeAction;
 
 // This is browser endpoint
 public class Listener extends Node{
@@ -20,7 +21,8 @@ public class Listener extends Node{
 System.out.println("-->w");
         String s = Keys.chord(Keys.CONTROL, "t");
 System.out.println("-->e");
-        new Actions(driver).sendKeys(s).perform();
+        new CompositeAction().addAction(new Actions(driver).keyDown(Keys.CONTROL)).addAction(new Actions(driver).sendKeys("t")).addAction(new Actions(driver).keyUp(Keys.CONTROL)).perform();
+        //new Actions(driver).sendKeys(s).perform();
 System.out.println("-->r");
         writeTab = driver.getWindowHandle();
 System.out.println("-->t");
