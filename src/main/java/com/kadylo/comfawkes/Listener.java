@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Keys;
+imporr org.openqa.selenium.interactions.Actions;
 
 // This is browser endpoint
 public class Listener extends Node{
@@ -19,7 +20,7 @@ public class Listener extends Node{
 System.out.println("-->w");
         String s = Keys.chord(Keys.CONTROL, "t");
 System.out.println("-->e");
-        driver.findElement(By.linkText("urlLink")).sendKeys(s);
+        new Actions(driver).sendKeys(s).perform();
 System.out.println("-->r");
         writeTab = driver.getWindowHandle();
 System.out.println("-->t");
