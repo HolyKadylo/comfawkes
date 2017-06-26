@@ -2,10 +2,14 @@ package com.kadylo.comfawkes;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import java.util.HashMap;
 
 // This is browser endpoint
 public class Poster extends Node{
 	
+  //TODO
+    // String -- tab handle, Long -- last accessed
+    private HashMap<String, Long> openTabs;
 	private WebElement element;
 	
 	public Poster(Account account, String sURL, int id){
