@@ -2,15 +2,29 @@ package com.kadylo.comfawkes;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Keys;
 
 // This is browser endpoint
 public class Listener extends Node{
 	
 	private WebElement element;
+    private String readTab;
+    private String writeTab;
 	
 	public Listener(Account account, String sURL, int id){
 		super(account, sURL, id);
-		
+        System.out.println("-->q");
+        readTab = driver.getWindowHandle();
+System.out.println("-->w");
+        String s = Keys.chord(Keys.CONTROL, "t");
+System.out.println("-->e");
+        driver.findElement(By.linkText("urlLink")).sendKeys(s);
+System.out.println("-->r");
+        writeTab = driver.getWindowHandle();
+System.out.println("-->t");
+        driver.switchTo().window(readTab);
+System.out.println("-->y");
 	}
 	
 	// posts message to site user in dialog
