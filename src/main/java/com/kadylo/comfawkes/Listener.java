@@ -1,5 +1,7 @@
 package com.kadylo.comfawkes;
 
+//TODO clarify
+import org.openqa.selenium.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +26,7 @@ System.out.println("-->e");
       System.out.println("-->eee");
         sleep(2000);
 System.out.println("-->ee");
-      driver.executeScript("window.open('HTTPS://Google.com','_blank');");
+      ((JavascriptExecutor)driver).executeScript("window.open('HTTPS://Google.com','_blank');");
 System.out.println("-->r");
         ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
         System.out.println("-->q");
