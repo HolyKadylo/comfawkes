@@ -19,24 +19,14 @@ public class Listener extends Node{
 	
 	public Listener(Account account, String sURL, int id){
 		super(account, sURL, id);
-System.out.println("-->w");
         String s = Keys.chord(Keys.CONTROL, "t");
-System.out.println("-->e");
         driver.get("https://google.com");
-      System.out.println("-->eee");
         sleep(2000);
-System.out.println("-->ee");
-      ((JavascriptExecutor)driver).executeScript("window.open('HTTPS://Google.com','_blank');");
-System.out.println("-->r");
+        ((JavascriptExecutor)driver).executeScript("window.open('HTTPS://Google.com','_blank');");
         ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
-        System.out.println("-->q");
         writeTab = handles.get(0);
         readTab = handles.get(1);
-System.out.println("-->t");
         driver.switchTo().window(readTab);
-System.out.println("-->y");
-      System.out.println("-->" + writeTab);
-      System.out.println("-->" + readTab);
 	}
 	
 	// posts message to site user in dialog
@@ -47,6 +37,7 @@ System.out.println("-->y");
 	// reads something from site
 	public String read(){
 		String message = null;
+		driver.switchTo().window(readTab);
 		
 		return message;
 	}
@@ -58,6 +49,7 @@ System.out.println("-->y");
 		sleep(5000);	
 	}
 	
+	//TODO switch to new messages
 	// listens
 	// messages are open
 	private void setSettings(){

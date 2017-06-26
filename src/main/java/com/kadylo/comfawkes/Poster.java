@@ -10,7 +10,7 @@ public class Poster extends Node{
     // 5 mins
 	private static final long TAB_MIN_LIFE = 5 * 60 * 1000;
   
-  //TODO
+    // TODO
     // String -- tab handle, Long -- last accessed
     private HashMap<String, Long> openTabs;
 	private WebElement element;
