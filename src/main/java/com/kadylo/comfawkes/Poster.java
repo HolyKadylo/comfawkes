@@ -3,12 +3,13 @@ package com.kadylo.comfawkes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 // This is browser endpoint
 public class Poster extends Node{
   
-    // 5 mins
-	private static final long TAB_MIN_LIFE = 5 * 60 * 1000;
+    // around 5 mins
+	private static final long TAB_MIN_LIFE = 5 * 62 * 1190;
   
     // TODO
     // String -- tab handle, Long -- last accessed
@@ -17,7 +18,7 @@ public class Poster extends Node{
 	
 	public Poster(Account account, String sURL, int id){
 		super(account, sURL, id);
-		
+		openTabs = new HashMap<>();
 	}
 	
 	// RAG = Reply As Group
@@ -58,7 +59,35 @@ public class Poster extends Node{
 	// but all in the logic node
 	// takes WALL-XXXXX-YY that needs to be extracted from user input
 	public void post (String addressee, String content){
-		driver.get(addressee);
+      
+        // TODO separate method for this and removeFromOpenTabs() at the end of post()
+        boolean isThereOpenTab = false;
+        for (String tab : openTabs){
+         driver.switchTo().window(tab);
+         sleep(150);
+         if(driver.getCurrentUrl().equals(addressee)){
+           
+           // means it is already open
+           isThereOpenTab = true;
+           
+           // renewing time
+           openTabs.put(tab, System.currentTimeMillis());
+           break;
+         }
+        }
+        if (!isThereOpenTab){
+          
+          // means we neead a new one
+((JavascriptExecutor)driver).executeScript("window.open('"+addressee+"','_blank');");
+          sleep(2500);
+        ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
+          for (String handle : handles){
+            if(openTabs.containsKey(handle))
+              continue;
+            else
+              openTabs.put(handle, System.currentTimeMillis());
+          }
+        }
 		String leaveAComment = "Leave a comment...";
 		String postAsGroup = "Post as group";
 		sleep(3500);
