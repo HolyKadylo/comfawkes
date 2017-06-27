@@ -62,7 +62,7 @@ public class Poster extends Node{
       
         // TODO separate method for this and removeFromOpenTabs() at the end of post()
         boolean isThereOpenTab = false;
-        for (String tab : openTabs){
+        for (String tab : openTabs.keySet()){
          driver.switchTo().window(tab);
          sleep(150);
          if(driver.getCurrentUrl().equals(addressee)){
@@ -106,6 +106,15 @@ public class Poster extends Node{
 		element = driver.findElement(By.id(makeReplyButtonId(addressee)));
 		element.click();
 		sleep(3500);
+      
+        // removing from opentabs
+       for (String tab : openTabs.keySet()){
+         if (openTabs.get(tab) + TAB_MIN_LIFE >= System.currentTimeMillis()){
+           driver.switchTo().window(tab);
+           openTabs.remove(tab);
+           driver.close();
+         }
+       }
 	}
 	
 	//is used in next method
