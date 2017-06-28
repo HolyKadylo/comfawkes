@@ -8,12 +8,16 @@ import java.util.ArrayList;
 
 // This is browser endpoint
 public class Poster extends Node{
+	*****ет нод логаут tried to
+	-->Logging out on node ...
+	tried to run command without establishing a connection
   
     // around 5 mins
 	private static final long TAB_MIN_LIFE = 5 * 62 * 119;
   
     // String -- tab handle, Long -- last accessed
     private volatile HashMap<String, Long> openTabs;
+	****конкурент модіфікейшен експепшн ет клозАнюзедТабс
 	private WebElement element;
 	
 	public Poster(Account account, String sURL, int id){
@@ -70,6 +74,7 @@ public class Poster extends Node{
 				// renewing time
 				openTabs.put(tab, System.currentTimeMillis());
 				System.out.println("-->Tab " + tab + " is open. It's address is " + driver.getCurrentUrl());
+				****** воно бачить не той таб, у якому є відкрита ця адреса. бачить перший
 				break;
 			}
         }
@@ -79,6 +84,7 @@ public class Poster extends Node{
 			((JavascriptExecutor)driver).executeScript("window.open('" + address + "', '" + address + "');");
 			sleep(1500);
 			System.out.println("-->> 1) We've opened the window and it's address is " + driver.getCurrentUrl());
+			**********не відкривається потрібна адреса, її треба підгружати
 			driver.get(address);
 			System.out.println("-->> 2) We've opened the window and it's address is " + driver.getCurrentUrl());
 			sleep(1500);
