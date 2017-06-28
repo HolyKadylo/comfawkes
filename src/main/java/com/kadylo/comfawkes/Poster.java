@@ -76,7 +76,7 @@ public class Poster extends Node{
           
 			// means we neead a new one
 			((JavascriptExecutor)driver).executeScript("window.open('" + address + "','_blank');");
-			sleep(5000);
+			sleep(2500);
 			ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
 			for (String handle : handles){
 				if(openTabs.containsKey(handle))
@@ -84,6 +84,7 @@ public class Poster extends Node{
 				else{
 					openTabs.put(handle, System.currentTimeMillis());
 					System.out.println("-->Created new tab " + handle);
+					break;
 				}
 			}
         }
