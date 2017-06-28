@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Poster extends Node{
   
     // around 5 mins
-	private static final long TAB_MIN_LIFE = 5 * 62 * 1190;
+	private static final long TAB_MIN_LIFE = 5 * 62 * 119;
   
     // String -- tab handle, Long -- last accessed
     private HashMap<String, Long> openTabs;
