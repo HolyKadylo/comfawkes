@@ -1,5 +1,6 @@
 package com.kadylo.comfawkes;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class Poster extends Node{
 	
 	public Poster(Account account, String sURL, int id){
 		super(account, sURL, id);
-		openTabs = new HashMap<>();
+		openTabs = new HashMap<String, Long>();
 	}
 	
 	// RAG = Reply As Group
@@ -63,30 +64,30 @@ public class Poster extends Node{
         // TODO separate method for this and removeFromOpenTabs() at the end of post()
         boolean isThereOpenTab = false;
         for (String tab : openTabs.keySet()){
-         driver.switchTo().window(tab);
-         sleep(150);
-         if(driver.getCurrentUrl().equals(addressee)){
-           
-           // means it is already open
-           isThereOpenTab = true;
-           
-           // renewing time
-           openTabs.put(tab, System.currentTimeMillis());
-           break;
-         }
+			driver.switchTo().window(tab);
+			sleep(150);
+			if(driver.getCurrentUrl().equals(addressee)){
+
+			// means it is already open
+			isThereOpenTab = true;
+
+			// renewing time
+			openTabs.put(tab, System.currentTimeMillis());
+			break;
+			}
         }
         if (!isThereOpenTab){
           
           // means we neead a new one
-((JavascriptExecutor)driver).executeScript("window.open('"+addressee+"','_blank');");
+		  ((JavascriptExecutor)driver).executeScript("window.open('" + addressee + "','_blank');");
           sleep(2500);
-        ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
+		  ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
           for (String handle : handles){
             if(openTabs.containsKey(handle))
-              continue;
+				continue;
             else
-              openTabs.put(handle, System.currentTimeMillis());
-          }
+				openTabs.put(handle, System.currentTimeMillis());
+			}
         }
 		String leaveAComment = "Leave a comment...";
 		String postAsGroup = "Post as group";
@@ -107,14 +108,14 @@ public class Poster extends Node{
 		element.click();
 		sleep(3500);
       
-        // removing from opentabs
-       for (String tab : openTabs.keySet()){
-         if (openTabs.get(tab) + TAB_MIN_LIFE >= System.currentTimeMillis()){
-           driver.switchTo().window(tab);
-           openTabs.remove(tab);
-           driver.close();
-         }
-       }
+		// removing from opentabs
+		for (String tab : openTabs.keySet()){
+			if (openTabs.get(tab) + TAB_MIN_LIFE >= System.currentTimeMillis()){
+				driver.switchTo().window(tab);
+				openTabs.remove(tab);
+				driver.close();
+			}
+		}
 	}
 	
 	//is used in next method
