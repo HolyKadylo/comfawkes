@@ -13,7 +13,7 @@ public class Poster extends Node{
 	private static final long TAB_MIN_LIFE = 5 * 62 * 119;
   
     // String -- tab handle, Long -- last accessed
-    private HashMap<String, Long> openTabs;
+    private volatile HashMap<String, Long> openTabs;
 	private WebElement element;
 	
 	public Poster(Account account, String sURL, int id){
@@ -76,8 +76,8 @@ public class Poster extends Node{
         if (!isThereOpenTab){
           
 			// means we neead a new one
-			((JavascriptExecutor)driver).executeScript("window.open('" + address + "');");
-			sleep(1000);
+			((JavascriptExecutor)driver).executeScript("window.open('" + address + "', '" + address + "');");
+			sleep(1500);
 			System.out.println("-->> 1) We've opened the window and it's address is " + driver.getCurrentUrl());
 			driver.get(address);
 			System.out.println("-->> 2) We've opened the window and it's address is " + driver.getCurrentUrl());
