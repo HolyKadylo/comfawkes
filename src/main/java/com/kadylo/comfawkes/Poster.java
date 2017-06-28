@@ -12,7 +12,6 @@ public class Poster extends Node{
     // around 5 mins
 	private static final long TAB_MIN_LIFE = 5 * 62 * 1190;
   
-    // TODO
     // String -- tab handle, Long -- last accessed
     private HashMap<String, Long> openTabs;
 	private WebElement element;
@@ -54,41 +53,59 @@ public class Poster extends Node{
 		return result;
     }
 	
-	// posts content to the site's wall
-	// addressee is wall address (that should be checked)
-	// content should be checked as well
-	// but all in the logic node
-	// takes WALL-XXXXX-YY that needs to be extracted from user input
-	public void post (String addressee, String content){
-      
-        // TODO separate method for this and removeFromOpenTabs() at the end of post()
-        boolean isThereOpenTab = false;
+	// used in the next method
+	// opens tab or creates a new one
+	// renews time if used tab is accessed
+	private void openTab(String address){
+		boolean isThereOpenTab = false;
         for (String tab : openTabs.keySet()){
 			driver.switchTo().window(tab);
 			sleep(150);
-			if(driver.getCurrentUrl().equals(addressee)){
+			if(driver.getCurrentUrl().equals(address)){
 
-			// means it is already open
-			isThereOpenTab = true;
+				// means it is already open
+				isThereOpenTab = true;
 
-			// renewing time
-			openTabs.put(tab, System.currentTimeMillis());
-			break;
+				// renewing time
+				openTabs.put(tab, System.currentTimeMillis());
+				break;
 			}
         }
         if (!isThereOpenTab){
           
-          // means we neead a new one
-		  ((JavascriptExecutor)driver).executeScript("window.open('" + addressee + "','_blank');");
-          sleep(2500);
-		  ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
-          for (String handle : handles){
+			// means we neead a new one
+			((JavascriptExecutor)driver).executeScript("window.open('" + address + "','_blank');");
+			sleep(2500);
+			ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
+			for (String handle : handles){
             if(openTabs.containsKey(handle))
 				continue;
             else
 				openTabs.put(handle, System.currentTimeMillis());
 			}
         }
+	}
+	
+	// used in the next method
+	private void closeUnusedTabs(){
+		
+		// removing from opentabs
+		for (String tab : openTabs.keySet()){
+			if (openTabs.get(tab) + TAB_MIN_LIFE >= System.currentTimeMillis()){
+				driver.switchTo().window(tab);
+				openTabs.remove(tab);
+				driver.close();
+			}
+		}
+	}
+	
+	// posts content to the site's wall
+	// addressee is wall address (that should be checked)
+	// content should be checked as well
+	// but all in the logic node
+	// takes WALL-XXXXX-YY that needs to be extracted from user input
+	public void post (String addressee, String content){
+        openTab(addressee);
 		String leaveAComment = "Leave a comment...";
 		String postAsGroup = "Post as group";
 		sleep(3500);
@@ -107,15 +124,9 @@ public class Poster extends Node{
 		element = driver.findElement(By.id(makeReplyButtonId(addressee)));
 		element.click();
 		sleep(3500);
-      
-		// removing from opentabs
-		for (String tab : openTabs.keySet()){
-			if (openTabs.get(tab) + TAB_MIN_LIFE >= System.currentTimeMillis()){
-				driver.switchTo().window(tab);
-				openTabs.remove(tab);
-				driver.close();
-			}
-		}
+		
+		// closing tabs that live longer than 5 mins
+		closeUnusedTabs();
 	}
 	
 	//is used in next method
