@@ -33,12 +33,33 @@ public class App
 		Node node, 
 		Role role) */
 		Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
-        Listener poster = new Listener(account, "http://localhost:5000", 10);
+        Poster poster = new Poster(account, "http://localhost:5000", 10);
 		account.setNode(poster);
         WebDriver driver = null;
         driver = poster.getDriver();
       try{
-		//poster.start();
+		poster.start();
+		poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
+		poster.sleep(60000);
+		poster.post("https://vk.com/wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_26", "AVE CAESAR");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_26", "NO! HEIL CENATE");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_26", "SPQR FOR CAESAR");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_26", "[stabbing Caesar to death]");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_26", "et tu, Brutus?");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_26", "et [fataliity]");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_26", "AVE CAESAR");
+		poster.sleep(10000 * 6);
+		poster.post("https://vk.com/wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
+		poster.sleep(60000);
+		poster.stop();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());
 		//poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");

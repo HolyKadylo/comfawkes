@@ -12,6 +12,12 @@ import java.util.ArrayList;
 // This is browser endpoint
 public class Listener extends Node{
 	
+	// users that we ignore for a while or forever
+	// this list is renewed in each message
+	// from logic node.
+	// if user is ignored, then messages from him
+	// are not opened at all
+	private ArrayList<User> ignoredUsers;
 	private WebElement element;
     private String readTab;
     private String writeTab;
@@ -27,7 +33,18 @@ public class Listener extends Node{
         writeTab = handles.get(0);
         readTab = handles.get(1);
         driver.switchTo().window(readTab);
+		ignoredUsers = new ArrayList<User>();
 		System.out.println("-->Listener " + id + " was created");
+	}
+	
+	// will be invoked internally
+	private void setIgnoredUsers(ArrayList<User> list){
+		ignoredUsers = list;
+	}
+	
+	// will be invoked ??
+	private ArrayList<User> getIgnoredUsers(){
+		return ignoredUsers;
 	}
 	
 	// posts message to site user in dialog
