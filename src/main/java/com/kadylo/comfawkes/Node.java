@@ -431,10 +431,10 @@ public class Node{
 	protected void logout (){
 		System.out.println("-->Logging out on node " + id);
 		WebElement element = driver.findElement(By.id("top_profile_link"));
-		sleep(1000);
+		sleep(2500);
 		element.click();
 		element = driver.findElement(By.id("top_logout_link"));
-		sleep(1000);
+		sleep(2500);
 		element.click();
 		sleep(7000);
 		System.out.println("-->Logged out");

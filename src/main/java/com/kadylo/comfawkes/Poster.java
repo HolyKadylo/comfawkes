@@ -57,6 +57,7 @@ public class Poster extends Node{
 	// opens tab or creates a new one
 	// renews time if used tab is accessed
 	private void openTab(String address){
+		System.out.println("-->Opening tab with address " + address);
 		boolean isThereOpenTab = false;
         for (String tab : openTabs.keySet()){
 			driver.switchTo().window(tab);
@@ -68,7 +69,7 @@ public class Poster extends Node{
 
 				// renewing time
 				openTabs.put(tab, System.currentTimeMillis());
-				System.out.println("-->Opening tab " + tab);
+				System.out.println("-->Opening tab " + tab );
 				break;
 			}
         }
