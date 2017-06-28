@@ -97,7 +97,7 @@ public class Poster extends Node{
 		
 		// removing from opentabs
 		for (String tab : openTabs.keySet()){
-			if (openTabs.get(tab) + TAB_MIN_LIFE >= System.currentTimeMillis()){
+			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
 				driver.switchTo().window(tab);
 				openTabs.remove(tab);
 				driver.close();
