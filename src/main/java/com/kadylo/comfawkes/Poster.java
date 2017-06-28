@@ -61,7 +61,7 @@ public class Poster extends Node{
 		boolean isThereOpenTab = false;
         for (String tab : openTabs.keySet()){
 			driver.switchTo().window(tab);
-			sleep(1500);
+			sleep(350);
 			if(driver.getCurrentUrl().equals(address)){
 
 				// means it is already open
@@ -76,9 +76,11 @@ public class Poster extends Node{
         if (!isThereOpenTab){
           
 			// means we neead a new one
-			((JavascriptExecutor)driver).executeScript("window.open('" + address + "','_blank');");
+			((JavascriptExecutor)driver).executeScript("window.open('" + address + "');");
 			sleep(1000);
+			System.out.println("-->> 1) We've opened the window and it's address is " + driver.getCurrentUrl());
 			driver.get(address);
+			System.out.println("-->> 2) We've opened the window and it's address is " + driver.getCurrentUrl());
 			sleep(1500);
 			ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
 			for (String handle : handles){
