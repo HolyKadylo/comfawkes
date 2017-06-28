@@ -68,6 +68,7 @@ public class Poster extends Node{
 
 				// renewing time
 				openTabs.put(tab, System.currentTimeMillis());
+				System.out.println("-->Opening tab " + tab);
 				break;
 			}
         }
@@ -78,10 +79,12 @@ public class Poster extends Node{
 			sleep(2500);
 			ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
 			for (String handle : handles){
-            if(openTabs.containsKey(handle))
-				continue;
-            else
-				openTabs.put(handle, System.currentTimeMillis());
+				if(openTabs.containsKey(handle))
+					continue;
+				else{
+					openTabs.put(handle, System.currentTimeMillis());
+					System.out.println("-->Created new tab " + handle);
+				}
 			}
         }
 	}
@@ -95,6 +98,7 @@ public class Poster extends Node{
 				driver.switchTo().window(tab);
 				openTabs.remove(tab);
 				driver.close();
+				System.out.println("-->Closed tab " + tab);
 			}
 		}
 	}
