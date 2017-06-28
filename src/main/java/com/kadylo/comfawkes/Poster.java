@@ -61,7 +61,7 @@ public class Poster extends Node{
 		boolean isThereOpenTab = false;
         for (String tab : openTabs.keySet()){
 			driver.switchTo().window(tab);
-			sleep(150);
+			sleep(350);
 			if(driver.getCurrentUrl().equals(address)){
 
 				// means it is already open
@@ -69,7 +69,7 @@ public class Poster extends Node{
 
 				// renewing time
 				openTabs.put(tab, System.currentTimeMillis());
-				System.out.println("-->Opening tab " + tab );
+				System.out.println("-->Tab " + tab + " is open. It's address is " + driver.getCurrentUrl());
 				break;
 			}
         }
