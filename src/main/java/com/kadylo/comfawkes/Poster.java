@@ -9,8 +9,8 @@ import java.util.ArrayList;
 // This is browser endpoint
 public class Poster extends Node{
 	//*****ет нод логаут tried to
-	-->Logging out on node ...
-	tried to run command without establishing a connection
+	//-->Logging out on node ...
+	//tried to run command without establishing a connection
   
     // around 5 mins
       //TODO restore
