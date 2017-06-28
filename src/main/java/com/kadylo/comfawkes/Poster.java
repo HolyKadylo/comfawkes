@@ -109,28 +109,35 @@ public class Poster extends Node{
 	// but all in the logic node
 	// takes WALL-XXXXX-YY that needs to be extracted from user input
 	public void post (String addressee, String content){
-        openTab(addressee);
-		String leaveAComment = "Leave a comment...";
-		String postAsGroup = "Post as group";
-		sleep(3500);
-		element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
-		element.click();
-		sleep(500); 
-		WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
-		commentBox.sendKeys(content);
-		sleep(3500);
-		WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
-		elementGroup.click();
-		sleep(400);
-		element = driver.findElement(By.xpath("//*[text() = '" + postAsGroup + "']"));
-		element.click();
-		sleep(400); 
-		element = driver.findElement(By.id(makeReplyButtonId(addressee)));
-		element.click();
-		sleep(3500);
-		
-		// closing tabs that live longer than 5 mins
-		closeUnusedTabs();
+		System.out.println("-->Poster " + id + " is posting to " + addressee);
+        try{
+			openTab(addressee);
+			String leaveAComment = "Leave a comment...";
+			String postAsGroup = "Post as group";
+			sleep(3500);
+			element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
+			element.click();
+			sleep(500); 
+			WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
+			commentBox.sendKeys(content);
+			sleep(3500);
+			WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
+			elementGroup.click();
+			sleep(400);
+			element = driver.findElement(By.xpath("//*[text() = '" + postAsGroup + "']"));
+			element.click();
+			sleep(400); 
+			element = driver.findElement(By.id(makeReplyButtonId(addressee)));
+			element.click();
+			sleep(3500);
+			
+			// closing tabs that live longer than 5 mins
+			closeUnusedTabs();
+			System.out.println("-->Poster " + id + " successfully posted");
+		} catch (Exception e){
+			System.out.println("-->Error while posting");
+			e.printStackTrace();
+		}
 	}
 	
 	//is used in next method
@@ -144,36 +151,43 @@ public class Poster extends Node{
 	// all's closed
 	// gifts are open
 	public void setSettings(){
-		driver.get("https://vk.com/feed");
-		String lang = "English";
-		sleep(5000);
-		clickElementById("top_profile_link");
-		clickElementById("top_settings_link");
-		clickElementById("settings_video_autoplay");
-		clickElementById("settings_gif_autoplay");
-		clickElementById("settings_stickers_hints");
-		clickElementById("chglang");
-	    element = driver.findElement(By.xpath("//*[text() = '" + lang + "']"));
-		element.click();
-		sleep(5000); 
-		driver.navigate().refresh();
-		sleep(5000); 
-		clickElementById("ui_rmenu_privacy");
-		clickElementById("privacy_edit_photos_saved");
-		clickElementById("privacy_item3");
-		clickElementById("privacy_edit_groups"); 
-		clickElementById("privacy_item3");
-		clickElementById("privacy_edit_wall_send");
-		clickElementById("privacy_item3"); 
-		clickElementById("privacy_edit_status_replies"); 
-		clickElementById("privacy_item3");
-		clickElementById("privacy_edit_mail_send");
-		clickElementById("privacy_item1");
-		clickElementById("privacy_edit_appscall");
-		clickElementById("privacy_item3"); 
-		clickElementById("privacy_edit_groups_invite"); 
-		clickElementById("privacy_item3");  
-		clickElementById("privacy_edit_apps_invite");
-		clickElementById("privacy_item3");
+		System.out.println("-->Setting settings on Poster" + id);
+		try{
+			driver.get("https://vk.com/feed");
+			String lang = "English";
+			sleep(5000);
+			clickElementById("top_profile_link");
+			clickElementById("top_settings_link");
+			clickElementById("settings_video_autoplay");
+			clickElementById("settings_gif_autoplay");
+			clickElementById("settings_stickers_hints");
+			clickElementById("chglang");
+			element = driver.findElement(By.xpath("//*[text() = '" + lang + "']"));
+			element.click();
+			sleep(5000); 
+			driver.navigate().refresh();
+			sleep(5000); 
+			clickElementById("ui_rmenu_privacy");
+			clickElementById("privacy_edit_photos_saved");
+			clickElementById("privacy_item3");
+			clickElementById("privacy_edit_groups"); 
+			clickElementById("privacy_item3");
+			clickElementById("privacy_edit_wall_send");
+			clickElementById("privacy_item3"); 
+			clickElementById("privacy_edit_status_replies"); 
+			clickElementById("privacy_item3");
+			clickElementById("privacy_edit_mail_send");
+			clickElementById("privacy_item1");
+			clickElementById("privacy_edit_appscall");
+			clickElementById("privacy_item3"); 
+			clickElementById("privacy_edit_groups_invite"); 
+			clickElementById("privacy_item3");  
+			clickElementById("privacy_edit_apps_invite");
+			clickElementById("privacy_item3");
+			System.out.println("-->Successfully set settings on Poster " + id);
+		} catch (Exception e){
+			System.out.println("-->Error while setting settings on Poster");
+			e.printStackTrace();
+		}
 	}
 }

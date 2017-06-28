@@ -18,6 +18,7 @@ public class Listener extends Node{
 	
 	public Listener(Account account, String sURL, int id){
 		super(account, sURL, id);
+		System.out.println("-->Continuing creation of Listener " + id);
         String s = Keys.chord(Keys.CONTROL, "t");
         driver.get("https://google.com");
         sleep(2000);
@@ -26,6 +27,7 @@ public class Listener extends Node{
         writeTab = handles.get(0);
         readTab = handles.get(1);
         driver.switchTo().window(readTab);
+		System.out.println("-->Listener " + id + " was created");
 	}
 	
 	// posts message to site user in dialog
@@ -52,36 +54,43 @@ public class Listener extends Node{
 	// listens
 	// messages are open
 	private void setSettings(){
-		driver.get("https://vk.com/feed");
-		String lang = "English";
-		sleep(5000);
-		clickElementById("top_profile_link");
-		clickElementById("top_settings_link");
-		clickElementById("settings_video_autoplay");
-		clickElementById("settings_gif_autoplay");
-		clickElementById("settings_stickers_hints");
-		clickElementById("chglang");
-	    element = driver.findElement(By.xpath("//*[text() = '" + lang + "']"));
-		element.click();
-		sleep(5000); 
-		driver.navigate().refresh();
-		sleep(5000); 
-		clickElementById("ui_rmenu_privacy");
-		clickElementById("privacy_edit_photos_saved");
-		clickElementById("privacy_item3"); 
-		clickElementById("privacy_edit_groups"); 
-		clickElementById("privacy_item3");
-		clickElementById("privacy_edit_wall_send");
-		clickElementById("privacy_item3"); 
-		clickElementById("privacy_edit_status_replies"); 
-		clickElementById("privacy_item3");
-		clickElementById("privacy_edit_mail_send");
-		clickElementById("privacy_item0");
-		clickElementById("privacy_edit_appscall");
-		clickElementById("privacy_item3"); 
-		clickElementById("privacy_edit_groups_invite"); 
-		clickElementById("privacy_item3");  
-		clickElementById("privacy_edit_apps_invite");
-		clickElementById("privacy_item3");
+		System.out.println("-->Setting settings on Listener " + id);
+		try{
+			driver.get("https://vk.com/feed");
+			String lang = "English";
+			sleep(5000);
+			clickElementById("top_profile_link");
+			clickElementById("top_settings_link");
+			clickElementById("settings_video_autoplay");
+			clickElementById("settings_gif_autoplay");
+			clickElementById("settings_stickers_hints");
+			clickElementById("chglang");
+			element = driver.findElement(By.xpath("//*[text() = '" + lang + "']"));
+			element.click();
+			sleep(5000); 
+			driver.navigate().refresh();
+			sleep(5000); 
+			clickElementById("ui_rmenu_privacy");
+			clickElementById("privacy_edit_photos_saved");
+			clickElementById("privacy_item3"); 
+			clickElementById("privacy_edit_groups"); 
+			clickElementById("privacy_item3");
+			clickElementById("privacy_edit_wall_send");
+			clickElementById("privacy_item3"); 
+			clickElementById("privacy_edit_status_replies"); 
+			clickElementById("privacy_item3");
+			clickElementById("privacy_edit_mail_send");
+			clickElementById("privacy_item0");
+			clickElementById("privacy_edit_appscall");
+			clickElementById("privacy_item3"); 
+			clickElementById("privacy_edit_groups_invite"); 
+			clickElementById("privacy_item3");  
+			clickElementById("privacy_edit_apps_invite");
+			clickElementById("privacy_item3");
+			System.out.println("-->Settings on Listener " + id +" were successfully set");
+		} catch (Exception e){
+			System.out.println("-->Error while setting settings");
+			e.printStackTrace();
+		}
 	}
 }
