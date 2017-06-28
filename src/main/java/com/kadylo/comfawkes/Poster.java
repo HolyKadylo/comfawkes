@@ -76,7 +76,7 @@ public class Poster extends Node{
           
 			// means we neead a new one
 			((JavascriptExecutor)driver).executeScript("window.open('" + address + "','_blank');");
-			sleep(2500);
+			sleep(5000);
 			ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
 			for (String handle : handles){
 				if(openTabs.containsKey(handle))
