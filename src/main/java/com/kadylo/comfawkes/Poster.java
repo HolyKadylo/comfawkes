@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // This is browser endpoint
 public class Poster extends Node{
