@@ -118,7 +118,7 @@ System.out.println("-->Tab exists");
           System.out.println("3");
           //TODO rethink names & formatting
           String keyToRemove = null;
-          Syatem.out.println("4");
+          System.out.println("4");
           try{
             System.out.println("5");
            keyToRemove = tab.next();
