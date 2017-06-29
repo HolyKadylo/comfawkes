@@ -72,7 +72,7 @@ public class Poster extends Node{
           System.out.println("++++after switch "+driver.getCurrentUrl());
 			sleep(350);
 			if(driver.getCurrentUrl().equals(address)){
-
+System.out.println("-->Tab exists");
 				// means it is already open
 				isThereOpenTab = true;
 
@@ -82,7 +82,7 @@ public class Poster extends Node{
 			}
         }
         if (!isThereOpenTab){
-          
+          System.out.println("-->Tab not exists");
 			// means we neead a new one
 			((JavascriptExecutor)driver).executeScript("window.open('" + address + "', '" + address + "');");
 			sleep(5000);
