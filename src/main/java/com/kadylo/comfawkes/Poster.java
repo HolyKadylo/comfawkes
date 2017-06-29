@@ -107,12 +107,13 @@ public class Poster extends Node{
 		Iterator<String> tab = openTabs.keySet().iterator();
 		// removing from opentabs
 		while (tab.hasNext()){
-            tab.next();
+          //TODO rethink names & formatting
+           String keyToRemove = tab.next();
 			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
               long l = System.currentTimeMillis() - openTabs.get(tab) - TAB_MIN_LIFE;
               System.out.println("-->Closing tab " + tab + " overlived for " + l);
-				driver.switchTo().window(tab);
-				openTabs.remove(tab);
+				driver.switchTo().window(keyToRemove);
+				openTabs.remove(keyToRemove);
 				driver.close();
 				System.out.println("-->Closed tab " + tab);
 			}
