@@ -71,7 +71,13 @@ public class Poster extends Node{
 			driver.switchTo().window(tab);
           System.out.println("++++after switch "+driver.getCurrentUrl());
 			sleep(350);
-			if(driver.getCurrentUrl().equals(address)){
+          //TODO variables names
+          boolean b = false;
+          if (driver.getCurrentUrl().contains("?"))
+            b = driver.getCurrentUrl().substring(0, driver.getCurrentUrl().indexOf("?")).equals(address);
+            else
+              b = driver.getCurrentUrl().equals(address);
+			if(b){
 System.out.println("-->Tab exists");
 				// means it is already open
 				isThereOpenTab = true;
