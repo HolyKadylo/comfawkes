@@ -108,7 +108,11 @@ System.out.println("-->Tab exists");
 		// removing from opentabs
 		while (tab.hasNext()){
           //TODO rethink names & formatting
+          try{
            String keyToRemove = tab.next();
+          } catch (NullPointerException npe){
+            continue;
+          }
 			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
               long l = System.currentTimeMillis() - openTabs.get(tab) - TAB_MIN_LIFE;
               System.out.println("-->Closing tab " + tab + " overlived for " + l);
