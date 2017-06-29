@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 
 // This is browser endpoint
@@ -92,7 +93,7 @@ System.out.println("-->Tab exists");
 			// means we neead a new one
 			((JavascriptExecutor)driver).executeScript("window.open('" + address + "', '" + address + "');");
 			sleep(5000);
-			ArrayList<String> handles = new ArrayList <String> (driver.getWindowHandles());
+			List<String> handles = new ArrayList <String> (driver.getWindowHandles());
 			for (String handle : handles){
 				if(openTabs.containsKey(handle))
 					continue;
