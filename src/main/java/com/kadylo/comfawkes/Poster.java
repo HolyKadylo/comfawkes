@@ -91,6 +91,7 @@ public class Poster extends Node{
 					continue;
 				else{
 					driver.switchTo().window(handle);
+                    driver.get(address);
                     sleep(3500);
 					openTabs.put(handle, System.currentTimeMillis());
 					System.out.println("-->Created new tab " + handle);
@@ -102,10 +103,13 @@ public class Poster extends Node{
 	
 	// used in the next method
 	private void closeUnusedTabs(){
-		
+		Iterator<String> tab = openTabs.keySet().iterator();
 		// removing from opentabs
-		for (String tab : openTabs.keySet()){
+		while (tab.hasNext()){
+            tab.next();
 			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
+              long l = System.currentTimeMillis() - openTabs.get(tab) - TAB_MIN_LIFE;
+              System.out.println("-->Closing tab " + tab + " overlived for " + l);
 				driver.switchTo().window(tab);
 				openTabs.remove(tab);
 				driver.close();
