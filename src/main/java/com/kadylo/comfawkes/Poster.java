@@ -91,6 +91,7 @@ public class Poster extends Node{
 					continue;
 				else{
 					driver.switchTo().window(handle);
+                    sleep(3500);
 					openTabs.put(handle, System.currentTimeMillis());
 					System.out.println("-->Created new tab " + handle);
 					break;
