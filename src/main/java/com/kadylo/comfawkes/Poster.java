@@ -108,8 +108,9 @@ System.out.println("-->Tab exists");
 		// removing from opentabs
 		while (tab.hasNext()){
           //TODO rethink names & formatting
+          String keyToRemove = null;
           try{
-           String keyToRemove = tab.next();
+           keyToRemove = tab.next();
           } catch (NullPointerException npe){
             continue;
           }
