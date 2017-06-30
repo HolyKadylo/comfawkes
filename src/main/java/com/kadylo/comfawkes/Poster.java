@@ -15,7 +15,7 @@ public class Poster extends Node{
 	//tried to run command without establishing a connection
   
     // around 5 mins
-      //TODO restore
+    //TODO restore
 	private static final long TAB_MIN_LIFE = 5 * 62 * 119;
   
     // String -- tab handle, Long -- last accessed
@@ -67,19 +67,19 @@ public class Poster extends Node{
 		System.out.println("-->Opening tab with address " + address);
 		boolean isThereOpenTab = false;
         for (String tab : driver.getWindowHandles()){
-            //TODO remove
-          System.out.println("+++before switch "+driver.getCurrentUrl());
+			//TODO remove
+			System.out.println("+++before switch "+driver.getCurrentUrl());
 			driver.switchTo().window(tab);
-          System.out.println("++++after switch "+driver.getCurrentUrl());
+			System.out.println("++++after switch "+driver.getCurrentUrl());
 			sleep(350);
-          //TODO variables names
-          boolean b = false;
-          if (driver.getCurrentUrl().contains("?"))
-            b = driver.getCurrentUrl().substring(0, driver.getCurrentUrl().indexOf("?")).equals(address);
-            else
-              b = driver.getCurrentUrl().equals(address);
+			//TODO variables names
+			boolean b = false;
+			if (driver.getCurrentUrl().contains("?"))
+				b = driver.getCurrentUrl().substring(0, driver.getCurrentUrl().indexOf("?")).equals(address);
+			else
+				b = driver.getCurrentUrl().equals(address);
 			if(b){
-System.out.println("-->Tab exists");
+				System.out.println("-->Tab exists");
 				// means it is already open
 				isThereOpenTab = true;
 
@@ -129,6 +129,10 @@ System.out.println("-->Tab exists");
             continue;
           }
           System.out.println("8");
+		  System.out.println(tab);
+		  System.out.println(openTabs);
+		  System.out.println(openTabs.isEmpty());
+		  System.out.println(openTabs.get(tab));
 			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
               System.out.println("9");
               long l = System.currentTimeMillis() - openTabs.get(tab) - TAB_MIN_LIFE;
