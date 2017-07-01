@@ -67,7 +67,7 @@ public class Poster extends Node{
 		System.out.println("-->Opening tab with address " + address);
 		boolean isThereOpenTab = false;
 		System.out.println("-->a");
-		ArrayList<String> a = driver.getWindowHandles();
+		Set<String> a = driver.getWindowHandles();
 		System.out.println("-->b");
 		System.out.println("-->" + a.isEmpty());
         for (String tab : driver.getWindowHandles()){
