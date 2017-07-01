@@ -119,26 +119,19 @@ public class Poster extends Node{
           System.out.println("3");
           //TODO rethink names & formatting
           String keyToRemove = null;
-          System.out.println("4");
-          try{
             System.out.println("5");
            keyToRemove = tab.next();
-            System.out.println("6");
-          } catch (NullPointerException npe){
-            System.out.println("7");
-            continue;
-          }
           System.out.println("8");
-		  if (openTabs.get(tab) == null)
+		  if (openTabs.get(keyToRemove) == null)
 			  continue;
-		  long ii = openTabs.get(tab) + TAB_MIN_LIFE;
+		  long ii = openTabs.get(keyToRemove) + TAB_MIN_LIFE;
 		  long iii = ii - System.currentTimeMillis();
 		  System.out.println("-->TIME:" + iii);
-			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
+			if (openTabs.get(keyToRemove) + TAB_MIN_LIFE <= System.currentTimeMillis()){
               System.out.println("9");
-              long l = System.currentTimeMillis() - openTabs.get(tab) - TAB_MIN_LIFE;
+              long l = System.currentTimeMillis() - openTabs.get(keyToRemove) - TAB_MIN_LIFE;
               System.out.println("10");
-              System.out.println("-->Closing tab " + tab + " overlived for " + l);
+              System.out.println("-->Closing tab " + keyToRemove + " overlived for " + l);
               System.out.println("11");
 				driver.switchTo().window(keyToRemove);
               System.out.println("12");
@@ -146,7 +139,7 @@ public class Poster extends Node{
               System.out.println("13");
 				driver.close();
               System.out.println("14");
-				System.out.println("-->Closed tab " + tab);
+				System.out.println("-->Closed tab " + keyToRemove);
               System.out.println("15");
 			}
 		}
