@@ -1,6 +1,7 @@
 package com.kadylo.comfawkes;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.HashMap;
@@ -11,17 +12,16 @@ import java.util.Set;
 
 // This is browser endpoint
 public class Poster extends Node{
-	//*****ет нод логаут tried to
-	//-->Logging out on node ...
-	//tried to run command without establishing a connection
+	
+	private final int MAX_ERRORS_COUNT = 5;
+	private int errorCount = 0;
   
     // around 5 mins
-    //TODO restore
-	private static final long TAB_MIN_LIFE = 5 * 30 * 119;
+    //TODO Math.rand()
+	private static final long TAB_MIN_LIFE = 5 * 59 * 1190;
   
-    // String -- tab handle, Long -- last accessed
+    // String -- tab handle, Long -- last accessed ms
     private volatile HashMap<String, Long> openTabs;
-	//****конкурент модіфікейшен експепшн ет клозАнюзедТабс
 	private WebElement element;
 	
 	public Poster(Account account, String sURL, int id){
@@ -67,24 +67,19 @@ public class Poster extends Node{
 	private void openTab(String address){
 		System.out.println("-->Opening tab with address " + address);
 		boolean isThereOpenTab = false;
-		System.out.println("-->a");
-		Set<String> a = driver.getWindowHandles();
-		System.out.println("-->b");
-		System.out.println("-->" + a.isEmpty());
         for (String tab : driver.getWindowHandles()){
-			//TODO remove
-			System.out.println("+++before switch none");// + driver.getCurrentUrl());
 			driver.switchTo().window(tab);
-			System.out.println("++++after switch " + driver.getCurrentUrl());
 			sleep(350);
 			//TODO variables names
-			boolean b = false;
+			boolean tabIsOpen = false;
+			
+			// here we're countering "?" difference
 			if (driver.getCurrentUrl().contains("?"))
-				b = driver.getCurrentUrl().substring(0, driver.getCurrentUrl().indexOf("?")).equals(address);
+				tabIsOpen = driver.getCurrentUrl().substring(0, driver.getCurrentUrl().indexOf("?")).equals(address);
 			else
-				b = driver.getCurrentUrl().equals(address);
-			if(b){
-				System.out.println("-->Tab exists");
+				tabIsOpen = driver.getCurrentUrl().equals(address);
+			if(tabIsOpen){
+
 				// means it is already open
 				isThereOpenTab = true;
 
@@ -94,7 +89,7 @@ public class Poster extends Node{
 			}
         }
         if (!isThereOpenTab){
-          System.out.println("-->Tab not exists");
+
 			// means we neead a new one
 			((JavascriptExecutor)driver).executeScript("window.open('" + address + "', '" + address + "');");
 			sleep(5000);
@@ -107,7 +102,6 @@ public class Poster extends Node{
                     driver.get(address);
                     sleep(3500);
 					openTabs.put(handle, System.currentTimeMillis());
-					System.out.println("-->Created new tab " + handle);
 					break;
 				}
 			}
@@ -116,37 +110,20 @@ public class Poster extends Node{
 	
 	// used in the next method
 	private void closeUnusedTabs(){
-      System.out.println("1");
 		Iterator<String> tab = openTabs.keySet().iterator();
-      System.out.println("2");
+		
 		// removing from opentabs
 		while (tab.hasNext()){
-          System.out.println("3");
-          //TODO rethink names & formatting
-          String keyToRemove = null;
-            System.out.println("5");
-           keyToRemove = tab.next();
-          System.out.println("8");
-		  if (openTabs.get(keyToRemove) == null)
-			  continue;
-		  long ii = openTabs.get(keyToRemove) + TAB_MIN_LIFE;
-		  long iii = ii - System.currentTimeMillis();
-		  System.out.println("-->TIME:" + iii);
+			String keyToRemove = null;
+			keyToRemove = tab.next();
+			if (openTabs.get(keyToRemove) == null)
+				continue;
 			if (openTabs.get(keyToRemove) + TAB_MIN_LIFE <= System.currentTimeMillis()){
-              System.out.println("9");
-              long l = System.currentTimeMillis() - openTabs.get(keyToRemove) - TAB_MIN_LIFE;
-              System.out.println("10");
-              System.out.println("-->Closing tab " + keyToRemove + " overlived for " + l);
-              System.out.println("11");
 				driver.switchTo().window(keyToRemove);
-              System.out.println("12");
-			  tab.remove();
+				tab.remove();
 				openTabs.remove(keyToRemove);
-              System.out.println("13");
 				driver.close();
-              System.out.println("14");
-				System.out.println("-->Closed tab " + keyToRemove);
-              System.out.println("15");
+				System.out.println("-->Removed outlived tab " + keyToRemove);
 			}
 		}
 	}
