@@ -126,6 +126,11 @@ public class Poster extends Node{
 	
 	// used in the next method
 	private void closeUnusedTabs(){
+		
+		//not closing if it is the only tab
+		if (driver.getWindowHandles().size() <= 1)
+			return;
+		
 		Iterator<String> tab = openTabs.keySet().iterator();
 		
 		// removing from opentabs
