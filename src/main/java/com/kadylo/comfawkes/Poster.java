@@ -170,12 +170,19 @@ public class Poster extends Node{
 			WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
 			commentBox.sendKeys(content);
 			sleep(3500);
-			WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
-			elementGroup.click();
-			sleep(400);
-			element = driver.findElement(By.xpath("//*[text() = '" + postAsGroup + "']"));
-			element.click();
-			sleep(400); 
+			
+			boolean groupActive = false;
+			while (!groupActive){
+				WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
+				elementGroup.click();
+				sleep(400);
+				element = driver.findElement(By.xpath("//*[text() = '" + postAsGroup + "']"));
+				element.click();
+				sleep(400);
+				if (isAttribtuePresentAndEqual(elementGroup, "aria-checked", "true"))
+					groupActive = true;
+			}
+			
 			element = driver.findElement(By.id(makeReplyButtonId(addressee)));
 			element.click();
 			sleep(3500);
