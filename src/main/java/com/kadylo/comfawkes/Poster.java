@@ -103,6 +103,9 @@ public class Poster extends Node{
 		} catch (WebDriverException wde){
 				System.out.println("-->13");
 			// do nothing 
+		} catch (Exception e){
+			e.printStackTrace();
+			// do nothing
 		}
         if (!isThereOpenTab){
 
