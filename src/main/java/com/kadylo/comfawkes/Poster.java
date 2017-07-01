@@ -160,8 +160,14 @@ public class Poster extends Node{
 			closeUnusedTabs();
 			System.out.println("-->Poster " + id + " successfully posted");
 		} catch (Exception e){
-			System.out.println("-->Error while posting");
-			e.printStackTrace();
+			errorCount++;
+			if (errorCount <= MAX_ERRORS_COUNT){
+				counterPopup();
+				post();
+			} else {
+				System.out.println("-->Error while posting");
+				e.printStackTrace();
+			}
 		}
 	}
 	
