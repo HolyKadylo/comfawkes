@@ -177,14 +177,7 @@ public class Poster extends Node{
 				sleep(900);
 				if (isAttribtuePresentAndEqual(elementGroup, "aria-checked", "true"))
 					groupActive = true;
-				System.out.println("-->here");
-			}
-				/* element = driver.findElement(By.xpath("//*[text() = '" + postAsGroup + "']"));
-				element.click();
-				sleep(900); */
-			
-			
-			
+			}			
 			element = driver.findElement(By.id(makeReplyButtonId(addressee)));
 			element.click();
 			sleep(3500);
