@@ -163,7 +163,7 @@ public class Poster extends Node{
 			errorCount++;
 			if (errorCount <= MAX_ERRORS_COUNT){
 				counterPopup();
-				post();
+				post(addressee, content);
 			} else {
 				System.out.println("-->Error while posting");
 				e.printStackTrace();
