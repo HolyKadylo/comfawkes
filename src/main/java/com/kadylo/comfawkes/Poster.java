@@ -133,6 +133,8 @@ public class Poster extends Node{
 		  System.out.println(openTabs);
 		  System.out.println(openTabs.isEmpty());
 		  System.out.println(openTabs.get(tab));
+		  if (openTabs.get(tab) == null)
+			  continue;
 			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
               System.out.println("9");
               long l = System.currentTimeMillis() - openTabs.get(tab) - TAB_MIN_LIFE;
