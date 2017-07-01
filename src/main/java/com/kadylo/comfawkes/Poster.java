@@ -135,6 +135,7 @@ public class Poster extends Node{
               System.out.println("11");
 				driver.switchTo().window(keyToRemove);
               System.out.println("12");
+			  tab.remove();
 				openTabs.remove(keyToRemove);
               System.out.println("13");
 				driver.close();
