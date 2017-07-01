@@ -68,8 +68,9 @@ public class Poster extends Node{
 	private void openTab(String address){
 		System.out.println("-->Opening tab with address " + address);
 		boolean isThereOpenTab = false;
-        for (String tab : driver.getWindowHandles()){
-			try{
+		System.out.println("-->0");
+		try{
+			for (String tab : driver.getWindowHandles()){		
 				System.out.println("-->1");
 				driver.switchTo().window(tab);
 				System.out.println("-->2");
@@ -98,11 +99,11 @@ public class Poster extends Node{
 					System.out.println("-->12");
 					break;
 				}
-			} catch (WebDriverException wde){
-				
-				// do nothing 
 			}
-        }
+		} catch (WebDriverException wde){
+				System.out.println("-->13");
+			// do nothing 
+		}
         if (!isThereOpenTab){
 
 			// means we neead a new one
