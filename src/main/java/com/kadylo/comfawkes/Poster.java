@@ -16,7 +16,7 @@ public class Poster extends Node{
   
     // around 5 mins
     //TODO restore
-	private static final long TAB_MIN_LIFE = 5 * 62 * 119;
+	private static final long TAB_MIN_LIFE = 5 * 30 * 119;
   
     // String -- tab handle, Long -- last accessed
     private volatile HashMap<String, Long> openTabs;
@@ -129,12 +129,11 @@ public class Poster extends Node{
             continue;
           }
           System.out.println("8");
-		  System.out.println(tab);
-		  System.out.println(openTabs);
-		  System.out.println(openTabs.isEmpty());
-		  System.out.println(openTabs.get(tab));
 		  if (openTabs.get(tab) == null)
 			  continue;
+		  long ii = openTabs.get(tab) + TAB_MIN_LIFE;
+		  long iii = ii - System.currentTimeMillis();
+		  System.out.println("-->TIME:" + iii);
 			if (openTabs.get(tab) + TAB_MIN_LIFE <= System.currentTimeMillis()){
               System.out.println("9");
               long l = System.currentTimeMillis() - openTabs.get(tab) - TAB_MIN_LIFE;
