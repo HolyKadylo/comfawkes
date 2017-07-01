@@ -66,11 +66,15 @@ public class Poster extends Node{
 	private void openTab(String address){
 		System.out.println("-->Opening tab with address " + address);
 		boolean isThereOpenTab = false;
+		System.out.println("-->a");
+		ArrayList<String> a = driver.getWindowHandles();
+		System.out.println("-->b");
+		System.out.println("-->" + a.isEmpty());
         for (String tab : driver.getWindowHandles()){
 			//TODO remove
-			System.out.println("+++before switch "+driver.getCurrentUrl());
+			System.out.println("+++before switch none");// + driver.getCurrentUrl());
 			driver.switchTo().window(tab);
-			System.out.println("++++after switch "+driver.getCurrentUrl());
+			System.out.println("++++after switch " + driver.getCurrentUrl());
 			sleep(350);
 			//TODO variables names
 			boolean b = false;
