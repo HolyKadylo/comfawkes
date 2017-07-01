@@ -2,6 +2,7 @@ package com.kadylo.comfawkes;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.HashMap;
@@ -68,24 +69,38 @@ public class Poster extends Node{
 		System.out.println("-->Opening tab with address " + address);
 		boolean isThereOpenTab = false;
         for (String tab : driver.getWindowHandles()){
-			driver.switchTo().window(tab);
-			sleep(350);
-			//TODO variables names
-			boolean tabIsOpen = false;
-			
-			// here we're countering "?" difference
-			if (driver.getCurrentUrl().contains("?"))
-				tabIsOpen = driver.getCurrentUrl().substring(0, driver.getCurrentUrl().indexOf("?")).equals(address);
-			else
-				tabIsOpen = driver.getCurrentUrl().equals(address);
-			if(tabIsOpen){
-
-				// means it is already open
-				isThereOpenTab = true;
-
-				// renewing time
-				openTabs.put(tab, System.currentTimeMillis());
-				break;
+			try{
+				System.out.println("-->1");
+				driver.switchTo().window(tab);
+				System.out.println("-->2");
+				sleep(350);
+				System.out.println("-->3");
+				boolean tabIsOpen = false;
+				System.out.println("-->4");
+				// here we're countering "?" difference
+				if (driver.getCurrentUrl().contains("?")){
+					System.out.println("-->5");
+					tabIsOpen = driver.getCurrentUrl().substring(0, driver.getCurrentUrl().indexOf("?")).equals(address);
+					System.out.println("-->6");
+				} else {
+					System.out.println("-->7");
+					tabIsOpen = driver.getCurrentUrl().equals(address);
+					System.out.println("-->8");
+				}
+				System.out.println("-->9");
+				if(tabIsOpen){
+					System.out.println("-->10");
+					// means it is already open
+					isThereOpenTab = true;
+					System.out.println("-->11");
+					// renewing time
+					openTabs.put(tab, System.currentTimeMillis());
+					System.out.println("-->12");
+					break;
+				}
+			} catch (WebDriverException wde){
+				
+				// do nothing 
 			}
         }
         if (!isThereOpenTab){
@@ -162,6 +177,7 @@ public class Poster extends Node{
 		} catch (Exception e){
 			errorCount++;
 			if (errorCount <= MAX_ERRORS_COUNT){
+				System.out.println("-->Error occured, retrying...");
 				counterPopup();
 				post(addressee, content);
 			} else {
