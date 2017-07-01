@@ -18,7 +18,7 @@ public class Poster extends Node{
   
     // around 5 mins
     //TODO Math.rand()
-	private static final long TAB_MIN_LIFE = 5 * 59 * 1190;
+	private static final long TAB_MIN_LIFE = 10000;
   
     // String -- tab handle, Long -- last accessed ms
     private volatile HashMap<String, Long> openTabs;
