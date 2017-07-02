@@ -1,6 +1,7 @@
 package com.kadylo.comfawkes;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
@@ -66,8 +67,7 @@ public class Listener extends Node{
 		element.click();
 		sleep(5000);	
 	}
-	
-	//TODO switch to new messages
+
 	// listens
 	// messages are open
 	private void setSettings(){
@@ -104,6 +104,23 @@ public class Listener extends Node{
 			clickElementById("privacy_item3");  
 			clickElementById("privacy_edit_apps_invite");
 			clickElementById("privacy_item3");
+			
+			// veryfying that we are in old messages
+			String oldMessagesMark1 = "Unread";
+			String oldMessagesMark2 = "Starred messages";
+			String switchTo = "Switch to new interface";
+			try{
+			driver.get("https://vk.com/im");
+			sleep(4000);
+			element = driver.findElement(By.xpath("//*[text() = '" + oldMessagesMark1 + "']"));
+			element = driver.findElement(By.xpath("//*[text() = '" + oldMessagesMark2 + "']"));
+			} catch (NoSuchElementException nsee){
+				return;
+				//means we are in new messages already
+			}
+			element = driver.findElement(By.xpath("//*[text() = '" + switchTo + "']"));
+			element.click();
+			sleep(3900);
 			System.out.println("-->Settings on Listener " + id +" were successfully set");
 		} catch (Exception e){
 			System.out.println("-->Error while setting settings");
