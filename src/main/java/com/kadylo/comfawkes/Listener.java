@@ -51,6 +51,20 @@ public class Listener extends Node{
 	// posts message to site user in dialog
 	public void post (User addressee, String content){
 		
+		// verify that we are in dialogs
+		try{
+			driver...
+		} catch (Exception e){
+			driver.get("https://vk.com/im");
+			sleep(5000);
+		}
+		
+		try{
+			element = driver.findElement(By.xpath("//*[text() = '" + addressee.getName() + "']"));
+		} catch (NoSuchElementException nsee){
+			
+			//means that there is no this user in close
+		}
 	}
 	
 	// reads something from site
