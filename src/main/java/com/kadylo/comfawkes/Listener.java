@@ -50,17 +50,32 @@ public class Listener extends Node{
 	
 	// posts message to site user in dialog
 	public void post (User addressee, String content){
+		String convTitle = "Conversations";
+		
 		
 		// verify that we are in dialogs
 		try{
-			driver...
+			
+			// if we are in the right place, then nothing
+			if (!driver.getTitle().equals(convTitle)){
+				
+				// means that we're somewhere else
+				// getting back
+				driver.get("https://vk.com/im");
+				sleep(5000);
+			}
 		} catch (Exception e){
 			driver.get("https://vk.com/im");
 			sleep(5000);
 		}
 		
 		try{
-			element = driver.findElement(By.xpath("//*[text() = '" + addressee.getName() + "']"));
+			element = driver.findElement(By.id("im_dialogs_search"));
+			element.click();
+			sleep(300);
+			element.sendKeys(addressee.getName());
+			element.submit();
+			sleep(1000);....
 		} catch (NoSuchElementException nsee){
 			
 			//means that there is no this user in close
