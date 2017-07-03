@@ -23,7 +23,10 @@ public class Node{
 	
 	protected WebDriver driver;
 	protected DesiredCapabilities cap;
-	
+  
+    // this is the public, the Node talks to
+	protected Public pub;
+  
 	// describes the node's state
 	protected enum State{
 		BROKEN, // when error forced to stop the logged in or logged out node
@@ -63,7 +66,7 @@ public class Node{
 	}
 	
 	// starters & stoppers
-	public void start(){
+	public void start(Public pub){
 		System.out.println("-->Starting node " + id);
 		try{
 			login();
@@ -73,6 +76,7 @@ public class Node{
 			return;
 		}
 		setOwnStatus("-->Is up");
+        this.pub = pub;
 		state = State.READY;
 		System.out.println("-->Node " + id + " started");
 	}

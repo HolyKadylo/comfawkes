@@ -37,8 +37,11 @@ public class App
 		account.setNode(poster);
         WebDriver driver = null;
         driver = poster.getDriver();
+      
+        //TODO fix
+        Public pub = new Public();
       try{
-		poster.start();
+		poster.start(pub);
 		poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
 		poster.sleep(6000);
 		poster.post("https://vk.com/wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
