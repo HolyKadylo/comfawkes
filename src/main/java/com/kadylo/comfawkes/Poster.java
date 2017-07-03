@@ -141,6 +141,16 @@ public class Poster extends Node{
 		}
 	}
 	
+    //post with media
+    private void post (String addressee, String content, Public pub, String mediaURI){
+      
+      //TODO add media to message
+      
+      //ordinal posting
+      post(addressee, content);
+    }
+  
+  
 	// posts content to the site's wall
 	// addressee is wall address (that should be checked)
 	// content should be checked as well
