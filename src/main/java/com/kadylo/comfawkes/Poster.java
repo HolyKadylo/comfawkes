@@ -142,7 +142,7 @@ public class Poster extends Node{
 	}
 	
     //post with media
-    private void post (String addressee, String content, Public pub, String mediaURI){
+    private void post (String addressee, String content, String mediaURI){
       
       //TODO add media to message
       
@@ -156,6 +156,8 @@ public class Poster extends Node{
 	// content should be checked as well
 	// but all in the logic node
 	// takes WALL-XXXXX-YY that needs to be extracted from user input
+	
+	// does not depend on public
 	public void post (String addressee, String content){
 		System.out.println("-->Poster " + id + " is posting to " + addressee);
         try{

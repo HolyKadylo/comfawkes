@@ -75,7 +75,7 @@ public class Listener extends Node{
 			sleep(300);
 			element.sendKeys(addressee.getName());
 			element.submit();
-			sleep(1000);....
+			sleep(1000);//....
 		} catch (NoSuchElementException nsee){
 			
 			//means that there is no this user in close

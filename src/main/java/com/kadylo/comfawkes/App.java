@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import org.openqa.selenium.TakesScreenshot;
+import java.util.HashMap;
 
 import java.net.MalformedURLException; 
 import java.net.URL;
@@ -37,11 +38,14 @@ public class App
 		account.setNode(poster);
         WebDriver driver = null;
         driver = poster.getDriver();
-      
-        //TODO fix
-        Public pub = new Public();
+		
+		User me = new User ("https://vk.com/holy_kadylo", 11, null, "Illya Piven", 150);
+		HashMap <Public.Media, Boolean> allowed = new HashMap<Public.Media, Boolean>();
+		HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
+        Public pub1 = new Public("https://vk.com/the_god_machine_sect", me, null, 250, 17, Public.ListenerRole.ADMIN, allowed, storage);
+		
       try{
-		poster.start(pub);
+		poster.start(pub1);
 		poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
 		poster.sleep(6000);
 		poster.post("https://vk.com/wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");

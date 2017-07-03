@@ -14,12 +14,17 @@ public class Public{
 	private String address;
 	
 	// who is our listener in this public?
-	private enum listenerRole{
+	// TODO private?
+	public enum ListenerRole{
 		STANDALONE, ADMIN
 	}
+	
+	// actual role
+	private ListenerRole role;
   
     // Media types in public
-    private enum Media{
+	// TODO private?
+    public enum Media{
          PICTURE, VIDEO, AUDIO, GIF
     }
   
@@ -44,4 +49,26 @@ public class Public{
 	
 	private User chiefAdmin;
 	private ArrayList<User> secondaryAdmins;
+	
+	// constructing public
+	public Public (String address, 
+		User chief, 
+		ArrayList<User> secondaryAdmins, 
+		int balance, 
+		int id, 
+		ListenerRole role, 
+		HashMap<Media, Boolean> allowed, 
+		HashMap<Media, String> storage){
+		
+		System.out.println("-->Starting constructing public " + id);
+		this.address = address;
+		this.chiefAdmin = chief;
+		this.secondaryAdmins = secondaryAdmins;
+		this.balance = balance;
+		this.id = id;
+		this.role = role;
+		this.allowedMedia = allowed;
+		this.mediaStorages = storage;
+		System.out.println("-->Public " + id + " constructed");
+	}
 }
