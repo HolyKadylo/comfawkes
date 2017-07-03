@@ -25,7 +25,7 @@ public class Public{
     // Media types in public
 	// TODO private?
     public enum Media{
-         PICTURE, VIDEO, AUDIO, GIF
+         PICTURE, VIDEO, AUDIO // CANNOT ADD GIF
     }
   
     // media, where to store

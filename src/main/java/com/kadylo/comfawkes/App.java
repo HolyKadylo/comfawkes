@@ -40,16 +40,18 @@ public class App
         driver = poster.getDriver();
 		
 		User me = new User ("https://vk.com/holy_kadylo", 11, null, "Illya Piven", 150);
-		HashMap <Public.Media, Boolean> allowed = new HashMap<Public.Media, Boolean>();
 		
 		// everything allowed
-		PICTURE, VIDEO, AUDIO, GIF
-		allowed.put(Public.Media.PICTURE, true);
-		allowed.put(Public.Media.VIDEO, true);
-		allowed.put(Public.Media.AUDIO, true);
-		allowed.put(Public.Media.GIF, true);
 		HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
-        Public pub1 = new Public("https://vk.com/the_god_machine_sect", me, null, 250, 17, Public.ListenerRole.ADMIN, allowed, storage);
+		
+		//
+		storage.put(Public.Media.PICTURE, "https://vk.com/album-9761670_245646104");
+		//
+		storage.put(Public.Media.VIDEO, "https://vk.com/videos-9761670?section=album_1");
+		//
+		storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
+		//
+        Public pub1 = new Public("https://vk.com/the_god_machine_sect", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
 		
       try{
 		poster.start(pub1);

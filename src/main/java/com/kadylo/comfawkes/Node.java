@@ -65,6 +65,7 @@ public class Node{
 		System.out.println("-->Node " + id + " constructed");
 	}
 	
+	// TODO add setups
 	// starters & stoppers
 	public void start(Public pub){
 		System.out.println("-->Starting node " + id);
@@ -87,6 +88,19 @@ public class Node{
 		logout();
 		state = State.CREATED;
 		System.out.println("-->Node " + id + " stopped");
+	}
+	
+	// initialize inside the public
+	// (++????)
+	// Create album
+	// create playlist
+	// create video album
+	public void initialize (Public pub){
+		state = State.INITIALIZING;
+		
+		// TODO
+		
+		state = State.WORKING;
 	}
 	
 	// sURL is the selenium ip address, the node should 
@@ -408,6 +422,7 @@ public class Node{
 		return driver.getTitle();
 	}
 	
+	// TODO
 	protected void setProfilePicture(String picId){
 	
 		// deleting previous profile picture
@@ -417,20 +432,6 @@ public class Node{
 			
 		}
 	}
-	
-	// set privacy to the proper pre-defined state
-	// set language settings
-    // TODO separate setSets() for listener and poster
-	/* private void setSettings(){
-		driver.get("https://vk.com/feed");
-		sleep(1500);
-		WebElement element = driver.findElement(By.id("top_profile_link"));
-		element.click();
-		sleep(1600);
-		element = driver.findElement(By.id("top_settings_link"));
-		element.click();
-		sleep(1500);
-	} */
 	
 	protected void logout (){
 		System.out.println("-->Logging out on node " + id);
@@ -444,10 +445,12 @@ public class Node{
 		System.out.println("-->Logged out");
 	}
 	
+	// TODO
 	protected void postToOwnWall (String content){
 		System.out.println("-->postToOwnWall( " + content + " )");
 	}
 	
+	// TODO
 	protected void setOwnStatus (String status){
 		System.out.println("-->setOwnStatus( " + status + " )");
 	}
