@@ -17,6 +17,18 @@ public class Public{
 	private enum listenerRole{
 		STANDALONE, ADMIN
 	}
+  
+    // Media types in public
+    private enum Media{
+         PICTURE, VIDEO, AUDIO, GIF
+    }
+  
+    // media, allowed-not allowed
+    private HashMap<Media, Boolean> allowedMedia;
+  
+    // media, where to store
+    // is either account's storage or a public's one
+    private HashMap<Media, String> mediaStorages;
 	
 	// represents banned users and the date
 	// to which they are banned
