@@ -41,6 +41,13 @@ public class App
 		
 		User me = new User ("https://vk.com/holy_kadylo", 11, null, "Illya Piven", 150);
 		HashMap <Public.Media, Boolean> allowed = new HashMap<Public.Media, Boolean>();
+		
+		// everything allowed
+		PICTURE, VIDEO, AUDIO, GIF
+		allowed.put(Public.Media.PICTURE, true);
+		allowed.put(Public.Media.VIDEO, true);
+		allowed.put(Public.Media.AUDIO, true);
+		allowed.put(Public.Media.GIF, true);
 		HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
         Public pub1 = new Public("https://vk.com/the_god_machine_sect", me, null, 250, 17, Public.ListenerRole.ADMIN, allowed, storage);
 		
