@@ -40,7 +40,54 @@ public class Public{
 	
 	private User chiefAdmin;
 	private ArrayList<User> secondaryAdmins;
-	
+  
+    public void setChief(User chief){
+      chiefAdmin = cbief;
+    }
+    public User getChief(){
+      return chiefAdmin;
+    }
+    public void addSecondaryAdmin(User sec){
+      secondaryAdmins.add(sec);
+    }
+    public void removeSecondaryAdmin(User sec)
+      secondaryAdmins.remove(sec);
+    }
+    public void changeBalanceBy(int amount){
+      balance += amount;
+    }
+
+    // date should be processed in Logic node
+    public void banUser(User user, Date date){
+      if(user.equals(chiefAdmin))
+        System.out.println("-->Trying to ban chief admin");
+      //TODO USER EQUALS & HASHCODE
+      for(User usr : secondaryAdmins){
+        if(usr.equals(user)){
+          
+          //making him not admin
+          removeSecondaryAdmin(usr);
+          bannedUsers(usr, date);
+        }
+      }
+    }
+
+    // invokes periodically
+    public void unbanPeriod(){
+      Date now = new Date();
+      for(User u : bannedUsers.keySet()){
+        
+        // todo proper method instead of earlier
+        if(bannedUsers.get(u).earlier(now))
+          bannedUsers.remove(u);
+      }
+    }
+      
+    // invokes by demand
+    public void unbanUser(User u){
+      bannedUsers.remove(u);
+    }
+
 	// constructing public
 	public Public (String address, 
 		User chief, 
@@ -58,6 +105,7 @@ public class Public{
 		this.id = id;
 		this.role = role;
 		this.mediaStorages = storage;
+        bannedUsers = new HashMap<User, Date>();
 		System.out.println("-->Public " + id + " constructed");
 	}
 }
