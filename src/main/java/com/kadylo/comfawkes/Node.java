@@ -21,6 +21,10 @@ import java.io.IOException;
 // This is browser endpoint
 public class Node{
 	
+	protected static final String ALBUM_NAME = "Fawkes album";
+	protected static final String PLAYLIST_NAME = "Fawkes playlist";
+	protected static final String VIDEO_ALBUM_NAME = "Fawkes album";
+	
 	protected WebDriver driver;
 	protected DesiredCapabilities cap;
   
@@ -95,10 +99,11 @@ public class Node{
 	// Create album
 	// create playlist
 	// create video album
+	// should be called on Listener
 	public void initialize (Public pub){
 		state = State.INITIALIZING;
-		
-		// TODO
+		driver.get(pub.getAddress());
+		sleep(1500);
 		
 		state = State.WORKING;
 	}
