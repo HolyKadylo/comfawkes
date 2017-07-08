@@ -126,6 +126,7 @@ public class Node{
 			System.out.println("-->9");
 		} catch (NumberFormatException nfe){
 			System.out.println("-->Failed to set ID of public while initializing");
+			e.printStackTrace();
 		}
 		System.out.println("-->10");
 		// crating picture album
@@ -161,6 +162,7 @@ public class Node{
 			System.out.println("-->25");
 		} catch (Exception e){
 			System.out.println("-->Failed to create picture album while initializing");
+			e.printStackTrace();
 		}
 		System.out.println("-->26");
 		// creating playlist
@@ -200,6 +202,7 @@ public class Node{
 			System.out.println("-->43");
 		} catch (Exception e){
 			System.out.println("-->Failed to create playlist while initializing");
+			e.printStackTrace();
 		}
 		System.out.println("-->44");
 		// creating video album
@@ -233,6 +236,7 @@ public class Node{
 			System.out.println("-->58");
 		} catch (Exception e){
 			System.out.println("-->Failed to create video album while initializing");
+			e.printStackTrace();
 		}
 		System.out.println("-->59");
 		state = State.WORKING;
