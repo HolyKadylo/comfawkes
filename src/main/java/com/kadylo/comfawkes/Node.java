@@ -202,7 +202,9 @@ public class Node{
 			System.out.println("-->38");
 			sleep(6000);
 			System.out.println("-->39");
-			element = driver.findElement(By.xpath("//*[text() = '" + PLAYLIST_TITLE_ID + "']"));
+			driver.get("https://vk.com/audios-" + String.valueOf(id) + "?section=playlists");
+			sleep(3000);
+			element = driver.findElement(By.xpath("//*[text() = '" + PLAYLIST_NAME + "']"));
 			System.out.println("-->40");
 			element.click();
 			System.out.println("-->41");

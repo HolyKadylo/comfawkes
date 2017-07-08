@@ -57,6 +57,10 @@ public class App
 		poster.start(pub1);
 		poster.sleep(1500);
 		poster.initialize(pub1);
+		System.out.println("-->\n-->\n-->");
+		System.out.println("-->AUDIO " + pub1.getMediaStorage(Public.Media.AUDIO));
+		System.out.println("-->VIDEO " + pub1.getMediaStorage(Public.Media.VIDEO));
+		System.out.println("-->PICTURE " + pub1.getMediaStorage(Public.Media.PICTURE));
 		poster.sleep(1500);
 		/* poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
 		poster.sleep(6000);
