@@ -23,7 +23,6 @@ public class Poster extends Node{
   
     // String -- tab handle, Long -- last accessed ms
     private volatile HashMap<String, Long> openTabs;
-	private WebElement element;
 	
 	public Poster(Account account, String sURL, int id){
 		super(account, sURL, id);

@@ -19,7 +19,6 @@ public class Listener extends Node{
 	// if user is ignored, then messages from him
 	// are not opened at all
 	private ArrayList<User> ignoredUsers;
-	private WebElement element;
     private String readTab;
     private String writeTab;
 	

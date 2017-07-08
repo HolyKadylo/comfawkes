@@ -24,9 +24,13 @@ public class Node{
 	protected static final String ALBUM_NAME = "Fawkes album";
 	protected static final String PLAYLIST_NAME = "Fawkes playlist";
 	protected static final String VIDEO_ALBUM_NAME = "Fawkes album";
+	protected static final String CLASS_WITH_PUBLIC_ID = "ui_thumb_x_button";
+	protected static final String CLASS_TO_CREATE_PLAYLIST = "audio_page__main_tabs_btn audio_page__add_playlist_btn";
+	protected static final String PLAYLIST_TITLE_ID = "ape_pl_name";
 	
 	protected WebDriver driver;
 	protected DesiredCapabilities cap;
+	protected WebElement element;
   
     // this is the public, the Node talks to
 	protected Public pub;
@@ -100,12 +104,85 @@ public class Node{
 	// create playlist
 	// create video album
 	// should be called on Listener
-	public void initialize (Public pub){
+	// returns integer public id
+	public int initialize (Public pub){
+		
+		// this is vk's id, not our node's
+		int id = 0;
 		state = State.INITIALIZING;
 		driver.get(pub.getAddress());
 		sleep(1500);
+		element = driver.findElement(By.className(CLASS_WITH_PUBLIC_ID));
+		String value = element.getAttribute("onclick");
+		try{
+			id = Integer.parseInt(value.substring(value.indexOf("-") + 1, value.indexOf(",")));
+		} catch (NumberFormatException nfe){
+			System.out.println("-->Failed to set ID of public while initializing");
+		}
 		
+		// crating picture album
+		try{
+			driver.get("https://vk.com/albums-" + String.valueOf(id));
+			sleep(1500);
+			element.findElement(By.id("photos_add_album_btn"));
+			element.click();
+			sleep(1500);
+			element.findElement(By.id("new_album_title"));
+			element.click();
+			element.sendKeys(ALBUM_NAME);
+			element.findElement(By.id("album_only_check"));
+			element.click();
+			element = driver.findElement(By.xpath("//*[text() = 'Create album']"));
+			element.click();
+			sleep(6000);
+			pub.setMediaStorage(Public.Media.PICTURE, driver.getCurrentUrl());
+		} catch (Exception e){
+			System.out.println("-->Failed to create picture album while initializing");
+		}
+		
+		// creating playlist
+		try{
+			driver.get(pub.getAddress());
+			sleep(1500);
+			driver.get("https://vk.com/audios-" + String.valueOf(id));
+			sleep(1500);
+			element = driver.findElement(By.className(CLASS_TO_CREATE_PLAYLIST));
+			element.click();
+			sleep(1500);
+			element = driver.findElement(By.id(PLAYLIST_TITLE_ID));
+			element.sendKeys(PLAYLIST_NAME);
+			element = driver.findElement(By.xpath("//*[text() = 'Save']"));
+			element.click();
+			sleep(6000);
+			element = driver.findElement(By.xpath("//*[text() = '" + PLAYLIST_TITLE_ID + "']"));
+			element.click();
+			sleep(5000);
+			pub.setMediaStorage(Public.Media.AUDIO, driver.getCurrentUrl());
+		} catch (Exception e){
+			System.out.println("-->Failed to create playlist while initializing");
+		}
+		
+		// creating video album
+		try{
+			driver.get(pub.getAddress());
+			sleep(2000);
+			driver.get("https://vk.com/videos-" + String.valueOf(id));
+			sleep(1500);
+			element = driver.findElement(By.id("video_add_album_btn"));
+			element.click();
+			sleep(3500);
+			element = driver.findElement(By.id("video_album_edit_title"));
+			element.sendKeys(VIDEO_ALBUM_NAME);
+			element = driver.findElement(By.xpath("//*[text() = 'Save']"));
+			element.click();
+			sleep(8000);
+			pub.setMediaStorage(Public.Media.VIDEO, driver.getCurrentUrl());
+		} catch (Exception e){
+			System.out.println("-->Failed to create video album while initializing");
+		}
 		state = State.WORKING;
+		pub.setId(id);
+		return id;
 	}
 	
 	// sURL is the selenium ip address, the node should 

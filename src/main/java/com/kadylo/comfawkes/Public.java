@@ -25,13 +25,21 @@ public class Public{
     // Media types in public
 	// TODO private?
     public enum Media{
-         PICTURE, VIDEO, AUDIO // CANNOT ADD GIF
+		PICTURE, VIDEO, AUDIO // CANNOT ADD GIF
     }
   
     // media, where to store
     // is either account's storage or a public's one
 	// if null then not allowed
+	// no, everything is allowed
     private HashMap<Media, String> mediaStorages;
+	
+	public void setMediaStorage(Media media, String address){
+		mediaStorages.put(media, address);
+	}
+	public String getMediaStorage(Media media){
+		return mediaStorages.get(media);
+	}
 	
 	// represents banned users and the date
 	// to which they are banned
@@ -40,6 +48,14 @@ public class Public{
 	
 	private User chiefAdmin;
 	private ArrayList<User> secondaryAdmins;
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public int getId(){
+		return id;
+	}
   
 	public String getAddress(){
 		return address;
