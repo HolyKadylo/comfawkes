@@ -106,6 +106,9 @@ public class Node{
 	// create video album
 	// should be called on Listener
 	// returns integer public id
+	
+	// TODO slightly different approach for PUBLIC
+	...
 	public int initialize (Public pub){
 		System.out.println("-->1");
 		// this is vk's id, not our node's
