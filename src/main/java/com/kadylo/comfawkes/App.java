@@ -51,7 +51,7 @@ public class App
 		//
 		//storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
-        Public pub1 = new Public("https://vk.com/the_god_machine_sect", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
+        Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
 		
       try{
 		poster.start(pub1);
