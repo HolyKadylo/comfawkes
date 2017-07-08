@@ -58,7 +58,7 @@ public class App
 		poster.sleep(1500);
 		poster.initialize(pub1);
 		poster.sleep(1500);
-		poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
+		/* poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
 		poster.sleep(6000);
 		poster.post("https://vk.com/wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
 		poster.sleep(1000);
@@ -85,7 +85,7 @@ public class App
 		poster.post("https://vk.com/wall-144898340_46", "Москалів на ножі, на ножі");
 		poster.sleep(1000);
 		poster.post("https://vk.com/wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
-		poster.sleep(6000);
+		poster.sleep(6000); */
 		poster.stop();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());

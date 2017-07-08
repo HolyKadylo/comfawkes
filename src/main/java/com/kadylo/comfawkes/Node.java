@@ -133,7 +133,7 @@ public class Node{
 			System.out.println("-->11");
 			driver.get("https://vk.com/albums-" + String.valueOf(id));
 			System.out.println("-->12");
-			sleep(1500);
+			sleep(5000);
 			System.out.println("-->13");
 			element.findElement(By.id("photos_add_album_btn"));
 			System.out.println("-->14");
@@ -172,7 +172,7 @@ public class Node{
 			System.out.println("-->29");
 			driver.get("https://vk.com/audios-" + String.valueOf(id));
 			System.out.println("-->30");
-			sleep(1500);
+			sleep(5000);
 			System.out.println("-->31");
 			element = driver.findElement(By.className(CLASS_TO_CREATE_PLAYLIST));
 			System.out.println("-->32");
