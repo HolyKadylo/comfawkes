@@ -126,13 +126,14 @@ public class Node{
 			System.out.println("-->9");
 		} catch (NumberFormatException nfe){
 			System.out.println("-->Failed to set ID of public while initializing");
-			e.printStackTrace();
+			nfe.printStackTrace();
 		}
 		System.out.println("-->10");
 		// crating picture album
 		try{
 			System.out.println("-->11");
 			driver.get("https://vk.com/albums-" + String.valueOf(id));
+			System.out.println("-->" + id);
 			System.out.println("-->12");
 			sleep(5000);
 			System.out.println("-->13");
@@ -163,6 +164,13 @@ public class Node{
 		} catch (Exception e){
 			System.out.println("-->Failed to create picture album while initializing");
 			e.printStackTrace();
+			try{
+				File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+				FileUtils.copyFile(scrFile, new File("picture.png"));
+			} catch (IOException ioe){
+				System.out.println("-->file exception");
+				ioe.printStackTrace();
+			}
 		}
 		System.out.println("-->26");
 		// creating playlist
@@ -203,6 +211,13 @@ public class Node{
 		} catch (Exception e){
 			System.out.println("-->Failed to create playlist while initializing");
 			e.printStackTrace();
+			try{
+				File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+				FileUtils.copyFile(scrFile, new File("audio.png"));
+			} catch (IOException ioe){
+				System.out.println("-->file exception");
+				ioe.printStackTrace();
+			}
 		}
 		System.out.println("-->44");
 		// creating video album
@@ -237,6 +252,13 @@ public class Node{
 		} catch (Exception e){
 			System.out.println("-->Failed to create video album while initializing");
 			e.printStackTrace();
+			try{
+				File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+				FileUtils.copyFile(scrFile, new File("video.png"));
+			} catch (IOException ioe){
+				System.out.println("-->file exception");
+				ioe.printStackTrace();
+			}
 		}
 		System.out.println("-->59");
 		state = State.WORKING;

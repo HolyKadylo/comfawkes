@@ -109,14 +109,14 @@ public class App
 		//System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
 		//poster.stop();
         } catch (NoSuchElementException nse){
-           try{
-             File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
-             FileUtils.copyFile(scrFile, new File("TESTCASEFAIL.png"));
-           } catch (IOException ioe){
-             System.out.println("-->file exception");
-             ioe.printStackTrace();
-           }
-          nse.printStackTrace();
+			try{
+				File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+				FileUtils.copyFile(scrFile, new File("TESTCASEFAIL.png"));
+			} catch (IOException ioe){
+				System.out.println("-->file exception");
+				ioe.printStackTrace();
+			}
+			nse.printStackTrace();
         }
 		/* System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
 		DesiredCapabilities cap = DesiredCapabilities.firefox();
