@@ -1,6 +1,7 @@
 package com.kadylo.comfawkes;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import java.net.MalformedURLException; 
 import java.net.URL;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -137,19 +138,19 @@ public class Node{
 			System.out.println("-->12");
 			sleep(5000);
 			System.out.println("-->13");
-			element.findElement(By.id("photos_add_album_btn"));
+			element = driver.findElement(By.id("photos_add_album_btn"));
 			System.out.println("-->14");
 			element.click();
 			System.out.println("-->15");
 			sleep(1500);
 			System.out.println("-->16");
-			element.findElement(By.id("new_album_title"));
+			element = driver.findElement(By.id("new_album_title"));
 			System.out.println("-->17");
 			element.click();
 			System.out.println("-->18");
 			element.sendKeys(ALBUM_NAME);
 			System.out.println("-->19");
-			element.findElement(By.id("album_only_check"));
+			element = driver.findElement(By.id("album_only_check"));
 			System.out.println("-->20");
 			element.click();
 			System.out.println("-->21");
@@ -184,9 +185,10 @@ public class Node{
 			System.out.println("-->30");
 			sleep(5000);
 			System.out.println("-->31");
-			element = driver.findElement(By.className(CLASS_TO_CREATE_PLAYLIST));
+			/* element = driver.findElement(By.className(CLASS_TO_CREATE_PLAYLIST));
 			System.out.println("-->32");
-			element.click();
+			element.click(); */
+			((JavascriptExecutor) driver).executeScript("AudioPage.editPlaylist(-" + String.valueOf(id) + ");");
 			System.out.println("-->33");
 			sleep(1500);
 			System.out.println("-->34");
