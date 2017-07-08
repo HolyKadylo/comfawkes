@@ -106,82 +106,139 @@ public class Node{
 	// should be called on Listener
 	// returns integer public id
 	public int initialize (Public pub){
-		
+		System.out.println("-->1");
 		// this is vk's id, not our node's
 		int id = 0;
+		System.out.println("-->2");
 		state = State.INITIALIZING;
+		System.out.println("-->3");
 		driver.get(pub.getAddress());
+		System.out.println("-->4");
 		sleep(1500);
+		System.out.println("-->5");
 		element = driver.findElement(By.className(CLASS_WITH_PUBLIC_ID));
+		System.out.println("-->6");
 		String value = element.getAttribute("onclick");
+		System.out.println("-->7");
 		try{
+			System.out.println("-->8");
 			id = Integer.parseInt(value.substring(value.indexOf("-") + 1, value.indexOf(",")));
+			System.out.println("-->9");
 		} catch (NumberFormatException nfe){
 			System.out.println("-->Failed to set ID of public while initializing");
 		}
-		
+		System.out.println("-->10");
 		// crating picture album
 		try{
+			System.out.println("-->11");
 			driver.get("https://vk.com/albums-" + String.valueOf(id));
+			System.out.println("-->12");
 			sleep(1500);
+			System.out.println("-->13");
 			element.findElement(By.id("photos_add_album_btn"));
+			System.out.println("-->14");
 			element.click();
+			System.out.println("-->15");
 			sleep(1500);
+			System.out.println("-->16");
 			element.findElement(By.id("new_album_title"));
+			System.out.println("-->17");
 			element.click();
+			System.out.println("-->18");
 			element.sendKeys(ALBUM_NAME);
+			System.out.println("-->19");
 			element.findElement(By.id("album_only_check"));
+			System.out.println("-->20");
 			element.click();
+			System.out.println("-->21");
 			element = driver.findElement(By.xpath("//*[text() = 'Create album']"));
+			System.out.println("-->22");
 			element.click();
+			System.out.println("-->23");
 			sleep(6000);
+			System.out.println("-->24");
 			pub.setMediaStorage(Public.Media.PICTURE, driver.getCurrentUrl());
+			System.out.println("-->25");
 		} catch (Exception e){
 			System.out.println("-->Failed to create picture album while initializing");
 		}
-		
+		System.out.println("-->26");
 		// creating playlist
 		try{
+			System.out.println("-->27");
 			driver.get(pub.getAddress());
+			System.out.println("-->28");
 			sleep(1500);
+			System.out.println("-->29");
 			driver.get("https://vk.com/audios-" + String.valueOf(id));
+			System.out.println("-->30");
 			sleep(1500);
+			System.out.println("-->31");
 			element = driver.findElement(By.className(CLASS_TO_CREATE_PLAYLIST));
+			System.out.println("-->32");
 			element.click();
+			System.out.println("-->33");
 			sleep(1500);
+			System.out.println("-->34");
 			element = driver.findElement(By.id(PLAYLIST_TITLE_ID));
+			System.out.println("-->35");
 			element.sendKeys(PLAYLIST_NAME);
+			System.out.println("-->36");
 			element = driver.findElement(By.xpath("//*[text() = 'Save']"));
+			System.out.println("-->37");
 			element.click();
+			System.out.println("-->38");
 			sleep(6000);
+			System.out.println("-->39");
 			element = driver.findElement(By.xpath("//*[text() = '" + PLAYLIST_TITLE_ID + "']"));
+			System.out.println("-->40");
 			element.click();
+			System.out.println("-->41");
 			sleep(5000);
+			System.out.println("-->42");
 			pub.setMediaStorage(Public.Media.AUDIO, driver.getCurrentUrl());
+			System.out.println("-->43");
 		} catch (Exception e){
 			System.out.println("-->Failed to create playlist while initializing");
 		}
-		
+		System.out.println("-->44");
 		// creating video album
 		try{
+			System.out.println("-->45");
 			driver.get(pub.getAddress());
+			System.out.println("-->46");
 			sleep(2000);
+			System.out.println("-->47");
 			driver.get("https://vk.com/videos-" + String.valueOf(id));
+			System.out.println("-->48");
 			sleep(1500);
+			System.out.println("-->49");
 			element = driver.findElement(By.id("video_add_album_btn"));
+			System.out.println("-->50");
 			element.click();
+			System.out.println("-->51");
 			sleep(3500);
+			System.out.println("-->52");
 			element = driver.findElement(By.id("video_album_edit_title"));
+			System.out.println("-->53");
 			element.sendKeys(VIDEO_ALBUM_NAME);
+			System.out.println("-->54");
 			element = driver.findElement(By.xpath("//*[text() = 'Save']"));
+			System.out.println("-->55");
 			element.click();
+			System.out.println("-->56");
 			sleep(8000);
+			System.out.println("-->57");
 			pub.setMediaStorage(Public.Media.VIDEO, driver.getCurrentUrl());
+			System.out.println("-->58");
 		} catch (Exception e){
 			System.out.println("-->Failed to create video album while initializing");
 		}
+		System.out.println("-->59");
 		state = State.WORKING;
+		System.out.println("-->60");
 		pub.setId(id);
+		System.out.println("-->61");
 		return id;
 	}
 	

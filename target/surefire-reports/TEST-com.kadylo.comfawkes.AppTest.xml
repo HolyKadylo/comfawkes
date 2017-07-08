@@ -48,7 +48,7 @@
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="uk"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
-    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.8.0_66"/>
     <property name="java.ext.dirs" value="D:\Program Files\Java\jdk1.8.0_66\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
     <property name="sun.boot.class.path" value="D:\Program Files\Java\jdk1.8.0_66\jre\lib\resources.jar;D:\Program Files\Java\jdk1.8.0_66\jre\lib\rt.jar;D:\Program Files\Java\jdk1.8.0_66\jre\lib\sunrsasign.jar;D:\Program Files\Java\jdk1.8.0_66\jre\lib\jsse.jar;D:\Program Files\Java\jdk1.8.0_66\jre\lib\jce.jar;D:\Program Files\Java\jdk1.8.0_66\jre\lib\charsets.jar;D:\Program Files\Java\jdk1.8.0_66\jre\lib\jfr.jar;D:\Program Files\Java\jdk1.8.0_66\jre\classes"/>
