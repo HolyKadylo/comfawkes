@@ -179,26 +179,46 @@ public class Poster extends Node{
 	public void post (String addressee, String content){
 		System.out.println("-->Poster " + id + " is posting to " + addressee);
         try{
+			System.out.println("-->1");
 			openTab(addressee);
+			System.out.println("-->2");
 			String leaveAComment = "Leave a comment...";
+			System.out.println("-->3");
 			String postAsGroup = "Post as group";
+			System.out.println("-->4");
 			sleep(3500);
+			System.out.println("-->5");
 			element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
+			System.out.println("-->6");
 			element.click();
+			System.out.println("-->7");
 			sleep(500); 
+			System.out.println("-->8");
 			WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
+			System.out.println("-->9");
 			commentBox.sendKeys(content);
+			System.out.println("-->10");
 			sleep(3500);
+			System.out.println("-->11");
 			boolean groupActive = false;
+			System.out.println("-->12");
 			while (!groupActive){
+				System.out.println("-->13");
 				WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
+				System.out.println("-->14");
 				elementGroup.click();
+				System.out.println("-->15");
 				sleep(900);
+				System.out.println("-->16");
 				if (isAttribtuePresentAndEqual(elementGroup, "aria-checked", "true"))
 					groupActive = true;
+				System.out.println("-->17");
 			}			
+			System.out.println("-->18");
 			element = driver.findElement(By.id(makeReplyButtonId(addressee)));
+			System.out.println("-->19");
 			element.click();
+			System.out.println("-->20");
 			sleep(3500);
 			
 			// closing tabs that live longer than 5 mins
