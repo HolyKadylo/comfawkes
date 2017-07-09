@@ -160,9 +160,9 @@ public class Poster extends Node{
 				System.out.println("-->7");
 				element.click();
 				System.out.println("-->8");
-				sleep(500); 
+				sleep(1000); 
 				System.out.println("-->9");
-				element = driver.findElement(By.className("ms_item.ms_item_photo._type_photo"));
+				element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
 				System.out.println("-->10");
 				element.click();
 				System.out.println("-->11");
