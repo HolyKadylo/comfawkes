@@ -56,8 +56,8 @@ public class App
 		Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
       try{
-		/* poster.start(pub1);
-		poster.sleep(1500);
+		poster.start(pub1);
+		/* poster.sleep(1500);
 		poster.initialize(pub1);
 		System.out.println("-->\n-->\n-->");
 		System.out.println("-->AUDIO " + pub1.getMediaStorage(Public.Media.AUDIO));
@@ -66,7 +66,7 @@ public class App
 		poster.sleep(1500);
 		poster.stop(); */
 		
-		poster.start(pub2);
+		/* poster.start(pub2);
 		poster.sleep(1500);
 		poster.subscribe("https://vk.com/groundhog_day_for_every_day");
 		poster.sleep(120000);
@@ -77,37 +77,36 @@ public class App
 		System.out.println("-->VIDEO " + pub2.getMediaStorage(Public.Media.VIDEO));
 		System.out.println("-->PICTURE " + pub2.getMediaStorage(Public.Media.PICTURE));
 		poster.sleep(1500);
-		poster.stop();
-		
-		/* poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
+		poster.stop(); */
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
 		poster.sleep(6000);
-		poster.post("https://vk.com/wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_26", "AVE CAESAR");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "AVE CAESAR");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_26", "NO! HEIL CENATE");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "NO! HEIL CENATE");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_26", "SPQR FOR CAESAR");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "SPQR FOR CAESAR");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_26", "[stabbing Caesar to death]");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "[stabbing Caesar to death]");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_26", "et tu, Brutus?");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "et tu, Brutus?");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_26", "et [fataliity]");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "et [fataliity]");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_26", "AVE CAESAR");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "AVE CAESAR");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-144898340_46", "Батько Бандера знов до нас прийде");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Батько Бандера знов до нас прийде");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-144898340_46", "І за Україну в бій нас поведе");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "І за Україну в бій нас поведе");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-144898340_46", "Буде Україна сильна, буде ненька самостійна");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Буде Україна сильна, буде ненька самостійна");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-144898340_46", "Москалів на ножі, на ножі");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Москалів на ножі, на ножі");
 		poster.sleep(1000);
-		poster.post("https://vk.com/wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
-		poster.sleep(6000); */
-																							//poster.stop();
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
+		poster.sleep(6000);
+		poster.stop();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());
 		//poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");

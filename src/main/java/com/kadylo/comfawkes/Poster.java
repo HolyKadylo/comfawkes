@@ -140,21 +140,40 @@ public class Poster extends Node{
 		}
 	}
 	
-    //post with media
-    private void post (String addressee, String content, String mediaURI){
-      
-      //TODO add media to message
-      
-      //ordinal posting
-      post(addressee, content);
-    }
+	//post with media
+	private void post (String addressee, String content, Public.Media media, String mediaURI){
+		String leaveAComment = "Leave a comment...";
+		String postAsGroup = "Post as group";
+	
+		// adding media to the post
+		switch (media){
+			case PICTURE:  
+				openTab(addressee);
+				element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
+				element.click();
+				sleep(500); 
+				element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
+				element.click();
+				sleep(1500);
+				break;
+			case AUDIO:
+				break;
+			case VIDEO:
+				break;
+			default:
+				break;
+		}
+
+		//ordinal posting
+		post(addressee, content);
+	}
   
   
 	// posts content to the site's wall
 	// addressee is wall address (that should be checked)
 	// content should be checked as well
 	// but all in the logic node
-	// takes WALL-XXXXX-YY that needs to be extracted from user input
+	// takes address?w=WALL-XXXXX-YY that needs to be extracted from user input!!!!!
 	
 	// does not depend on public
 	public void post (String addressee, String content){

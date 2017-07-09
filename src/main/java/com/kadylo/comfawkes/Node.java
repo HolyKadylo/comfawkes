@@ -108,7 +108,8 @@ public class Node{
 	// should be called on Listener
 	// returns integer public id
 	public int initialize (Public pub){
-
+		System.out.println("-->Node " + this.id + " is starting initialization of storages in " + pub.getAddress());
+		
 		// this is vk's id, not our node's
 		int id = 0;
 		state = State.INITIALIZING;
