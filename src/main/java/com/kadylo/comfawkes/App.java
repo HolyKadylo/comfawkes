@@ -46,16 +46,16 @@ public class App
 		HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
 		HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
 		
+		
+		storage0.put(Public.Media.PICTURE, "https://vk.com/album-9761670_245781876");
 		//
-		//storage.put(Public.Media.PICTURE, "https://vk.com/album-9761670_245646104");
+		// storage.put(Public.Media.VIDEO, "https://vk.com/videos-9761670?section=album_1");
 		//
-		//storage.put(Public.Media.VIDEO, "https://vk.com/videos-9761670?section=album_1");
-		//
-		//storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
+		// storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
 		Public pub0 = new Public ("https://vk.com/the_god_machine_sect", me, null, 249, 16, Public.ListenerRole.ADMIN, storage0);
-        Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
-		Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
+        // Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
+		// Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
       try{
 		poster.start(pub0);
@@ -80,9 +80,9 @@ public class App
 		System.out.println("-->PICTURE " + pub2.getMediaStorage(Public.Media.PICTURE));
 		poster.sleep(1500);
 		poster.stop(); */
-		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
+		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "ALL HEIL OPTIMUS PRIME!", Public.Media.PICTURE, "9761670_456239022");
 		poster.sleep(6000);
-		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
+		/* poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
 		poster.sleep(1000);
 		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "AVE CAESAR");
 		poster.sleep(1000);
@@ -97,17 +97,17 @@ public class App
 		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "et [fataliity]");
 		poster.sleep(1000);
 		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "AVE CAESAR");
-		poster.sleep(1000);
-		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Батько Бандера знов до нас прийде");
+		poster.sleep(1000); */
+		/* poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Батько Бандера знов до нас прийде");
 		poster.sleep(1000);
 		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "І за Україну в бій нас поведе");
 		poster.sleep(1000);
 		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Буде Україна сильна, буде ненька самостійна");
 		poster.sleep(1000);
 		poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Москалів на ножі, на ножі");
-		poster.sleep(1000);
-		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
-		poster.sleep(6000);
+		poster.sleep(1000); */
+		//poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
+		//poster.sleep(6000);
 		poster.stop();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());

@@ -141,20 +141,48 @@ public class Poster extends Node{
 	}
 	
 	//post with media
-	private void post (String addressee, String content, Public.Media media, String mediaURI){
+	// TODO private?
+	public void post (String addressee, String content, Public.Media media, String mediaURI){
+		System.out.println("-->1");
 		String leaveAComment = "Leave a comment...";
+		System.out.println("-->2");
 		String postAsGroup = "Post as group";
+		System.out.println("-->3");
 	
 		// adding media to the post
+		System.out.println("-->4");
 		switch (media){
 			case PICTURE:  
+				System.out.println("-->5");
 				openTab(addressee);
-				element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
+				System.out.println("-->6");
+				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
+				System.out.println("-->7");
 				element.click();
+				System.out.println("-->8");
 				sleep(500); 
+				System.out.println("-->9");
 				element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
+				System.out.println("-->10");
 				element.click();
-				sleep(1500);
+				System.out.println("-->11");
+				sleep(2500);
+				System.out.println("-->12");
+				((JavascriptExecutor)driver).executeScript("cur.photosChooseSwitch(this);");
+				System.out.println("-->13");
+				sleep(500);
+				System.out.println("-->14");
+				((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('-" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
+				System.out.println("-->15");
+				sleep(1000);
+				System.out.println("-->16");
+				element = driver.findElement(By.id("photos_choose_row-" + mediaURI + "_-" + pub.getMediaStorage(Public.Media.PICTURE).substring(20)));
+				System.out.println("-->17");
+				// <a id="photos_choose_row-9761670_456239024_-9761670_245781876" href="photo-9761670_456239024" 
+				element.click();
+				System.out.println("-->18");
+				sleep(500);
+				System.out.println("-->19");
 				break;
 			case AUDIO:
 				break;
@@ -169,7 +197,9 @@ public class Poster extends Node{
 	}
 
 	private String extractWallId(String address){
-		//https://vk.com/the_god_machine_sect?w=wall-9761670_39
+		
+		// for example
+		// https://vk.com/the_god_machine_sect?w=wall-9761670_39
 		String result = address.substring(address.indexOf("?w=wall-")+1, address.length());
 		String res2 = result.substring(result.indexOf("-")+1);
 		System.out.println("-->result of extractWallId: " + res2);
@@ -186,47 +216,27 @@ public class Poster extends Node{
 	public void post (String addressee, String content){
 		System.out.println("-->Poster " + id + " is posting to " + addressee);
         try{
-			System.out.println("-->1");
 			openTab(addressee);
-			System.out.println("-->2");
 			String leaveAComment = "Leave a comment...";
-			System.out.println("-->3");
 			String postAsGroup = "Post as group";
-			System.out.println("-->4");
 			sleep(3500);
-			System.out.println("-->5");
 			element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
 			//element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
-			System.out.println("-->6");
 			element.click();
-			System.out.println("-->7");
 			sleep(500); 
-			System.out.println("-->8");
 			WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
-			System.out.println("-->9");
 			commentBox.sendKeys(content);
-			System.out.println("-->10");
 			sleep(3500);
-			System.out.println("-->11");
 			boolean groupActive = false;
-			System.out.println("-->12");
 			while (!groupActive){
-				System.out.println("-->13");
 				WebElement elementGroup = driver.findElement(By.id(makeRAGId(addressee)));
-				System.out.println("-->14");
 				elementGroup.click();
-				System.out.println("-->15");
 				sleep(900);
-				System.out.println("-->16");
 				if (isAttribtuePresentAndEqual(elementGroup, "aria-label", "post as community"))
 					groupActive = true;
-				System.out.println("-->17");
 			}			
-			System.out.println("-->18");
 			element = driver.findElement(By.id(makeReplyButtonId(addressee)));
-			System.out.println("-->19");
 			element.click();
-			System.out.println("-->20");
 			sleep(3500);
 			
 			// closing tabs that live longer than 5 mins
