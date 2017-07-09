@@ -56,7 +56,7 @@ public class App
 		Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
       try{
-		poster.start(pub1);
+		/* poster.start(pub1);
 		poster.sleep(1500);
 		poster.initialize(pub1);
 		System.out.println("-->\n-->\n-->");
@@ -64,14 +64,14 @@ public class App
 		System.out.println("-->VIDEO " + pub1.getMediaStorage(Public.Media.VIDEO));
 		System.out.println("-->PICTURE " + pub1.getMediaStorage(Public.Media.PICTURE));
 		poster.sleep(1500);
-		poster.stop();
+		poster.stop(); */
 		
 		poster.start(pub2);
 		poster.sleep(1500);
 		poster.subscribe("https://vk.com/groundhog_day_for_every_day");
 		poster.sleep(120000);
 		poster.sleep(1500);
-		poster.initialize(pub1);
+		poster.initialize(pub2);
 		System.out.println("-->\n-->\n-->");
 		System.out.println("-->AUDIO " + pub2.getMediaStorage(Public.Media.AUDIO));
 		System.out.println("-->VIDEO " + pub2.getMediaStorage(Public.Media.VIDEO));
