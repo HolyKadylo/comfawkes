@@ -172,8 +172,8 @@ public class Poster extends Node{
 		String result = null;
 		//https://vk.com/the_god_machine_sect?w=wall-9761670_39
 		result = address.substring(address.indexOf("?w=wall-")+1, address.length());
-		System.out.println("-->result of extractWallId: " + result);
-		return result;
+		System.out.println("-->result of extractWallId: " + result.substring(result.indexOf("-"), address.length()));
+		return result.substring(result.indexOf("-"), address.length());
 	}
 
 	// posts content to the site's wall
