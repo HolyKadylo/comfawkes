@@ -167,8 +167,15 @@ public class Poster extends Node{
 		//ordinal posting
 		post(addressee, content);
 	}
-  
-  
+
+	private String extractWallId(String address){
+		String result = null;
+		//https://vk.com/the_god_machine_sect?w=wall-9761670_39
+		result = address.substring(address.indexOf("?w=wall-")+1, address.length());
+		System.out.println("-->result of extractWallId: " + result);
+		return result;
+	}
+
 	// posts content to the site's wall
 	// addressee is wall address (that should be checked)
 	// content should be checked as well
@@ -188,7 +195,8 @@ public class Poster extends Node{
 			System.out.println("-->4");
 			sleep(3500);
 			System.out.println("-->5");
-			element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
+			element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
+			//element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
 			System.out.println("-->6");
 			element.click();
 			System.out.println("-->7");
