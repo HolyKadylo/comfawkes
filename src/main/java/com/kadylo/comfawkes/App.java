@@ -42,6 +42,7 @@ public class App
 		User me = new User ("https://vk.com/holy_kadylo", 11, null, "Illya Piven", 150);
 		
 		// everything allowed
+		HashMap <Public.Media, String> storage0 = new HashMap<Public.Media, String>();
 		HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
 		HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
 		
@@ -52,11 +53,12 @@ public class App
 		//
 		//storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
+		Public pub0 = new Public ("https://vk.com/the_god_machine_sect", me, null, 249, 16, Public.ListenerRole.ADMIN, storage0);
         Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
 		Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
       try{
-		poster.start(pub1);
+		poster.start(pub0);
 		/* poster.sleep(1500);
 		poster.initialize(pub1);
 		System.out.println("-->\n-->\n-->");
