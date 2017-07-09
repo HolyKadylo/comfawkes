@@ -169,9 +169,8 @@ public class Poster extends Node{
 	}
 
 	private String extractWallId(String address){
-		String result = null;
 		//https://vk.com/the_god_machine_sect?w=wall-9761670_39
-		result = address.substring(address.indexOf("?w=wall-")+1, address.length());
+		String result = address.substring(address.indexOf("?w=wall-")+1, address.length());
 		String res2 = result.substring(result.indexOf("-")+1);
 		System.out.println("-->result of extractWallId: " + res2);
 		return res2;
@@ -219,7 +218,7 @@ public class Poster extends Node{
 				System.out.println("-->15");
 				sleep(900);
 				System.out.println("-->16");
-				if (isAttribtuePresentAndEqual(elementGroup, "aria-checked", "true"))
+				if (isAttribtuePresentAndEqual(elementGroup, "aria-label", "post as community"))
 					groupActive = true;
 				System.out.println("-->17");
 			}			
