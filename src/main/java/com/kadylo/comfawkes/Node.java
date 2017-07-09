@@ -25,7 +25,8 @@ public class Node{
 	protected static final String ALBUM_NAME = "Fawkes album";
 	protected static final String PLAYLIST_NAME = "Fawkes playlist";
 	protected static final String VIDEO_ALBUM_NAME = "Fawkes album";
-	protected static final String CLASS_WITH_PUBLIC_ID = "ui_thumb_x_button";
+	protected static final String CLASS_WITH_PUBLIC_ID_1 = "ui_thumb_x_button";
+	protected static final String CLASS_WITH_PUBLIC_ID_2 = "page_cover_image";
 	protected static final String CLASS_TO_CREATE_PLAYLIST = "audio_page__main_tabs_btn audio_page__add_playlist_btn";
 	protected static final String PLAYLIST_TITLE_ID = "ape_pl_name";
 	
@@ -106,9 +107,6 @@ public class Node{
 	// create video album
 	// should be called on Listener
 	// returns integer public id
-	
-	// TODO slightly different approach for PUBLIC
-	...
 	public int initialize (Public pub){
 		System.out.println("-->1");
 		// this is vk's id, not our node's
@@ -120,17 +118,36 @@ public class Node{
 		System.out.println("-->4");
 		sleep(1500);
 		System.out.println("-->5");
-		element = driver.findElement(By.className(CLASS_WITH_PUBLIC_ID));
-		System.out.println("-->6");
-		String value = element.getAttribute("onclick");
-		System.out.println("-->7");
+		
+		// finding public numerical id using few 
+		// classes in HTML in cascade
+		// depending on do we have image or not
 		try{
-			System.out.println("-->8");
-			id = Integer.parseInt(value.substring(value.indexOf("-") + 1, value.indexOf(",")));
-			System.out.println("-->9");
-		} catch (NumberFormatException nfe){
-			System.out.println("-->Failed to set ID of public while initializing");
-			nfe.printStackTrace();
+			element = driver.findElement(By.className(CLASS_WITH_PUBLIC_ID_1));
+			System.out.println("-->6");
+			String value = element.getAttribute("onclick");
+			System.out.println("-->7");
+			try{
+				System.out.println("-->8");
+				id = Integer.parseInt(value.substring(value.indexOf("-") + 1, value.indexOf(",")));
+				System.out.println("-->9");
+			} catch (NumberFormatException nfe){
+				System.out.println("-->Failed to set ID of public while initializing");
+				nfe.printStackTrace();
+			}
+		} catch (Exception e){
+			element = driver.findElement(By.className(CLASS_WITH_PUBLIC_ID_2));
+			System.out.println("-->6");
+			String value = element.getAttribute("href");
+			System.out.println("-->7");
+			try{
+				System.out.println("-->8");
+				id = Integer.parseInt(value.substring(value.indexOf("-") + 1, value.indexOf("_")));
+				System.out.println("-->9");
+			} catch (NumberFormatException nfe){
+				System.out.println("-->Failed to set ID of public while initializing");
+				nfe.printStackTrace();
+			}
 		}
 		System.out.println("-->10");
 		// crating picture album

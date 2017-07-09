@@ -43,6 +43,7 @@ public class App
 		
 		// everything allowed
 		HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
+		HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
 		
 		//
 		//storage.put(Public.Media.PICTURE, "https://vk.com/album-9761670_245646104");
@@ -52,6 +53,7 @@ public class App
 		//storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
         Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
+		Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
       try{
 		poster.start(pub1);
@@ -62,6 +64,21 @@ public class App
 		System.out.println("-->VIDEO " + pub1.getMediaStorage(Public.Media.VIDEO));
 		System.out.println("-->PICTURE " + pub1.getMediaStorage(Public.Media.PICTURE));
 		poster.sleep(1500);
+		poster.stop();
+		
+		poster.start(pub2);
+		poster.sleep(1500);
+		poster.subscribe("https://vk.com/groundhog_day_for_every_day");
+		poster.sleep(120000);
+		poster.sleep(1500);
+		poster.initialize(pub1);
+		System.out.println("-->\n-->\n-->");
+		System.out.println("-->AUDIO " + pub2.getMediaStorage(Public.Media.AUDIO));
+		System.out.println("-->VIDEO " + pub2.getMediaStorage(Public.Media.VIDEO));
+		System.out.println("-->PICTURE " + pub2.getMediaStorage(Public.Media.PICTURE));
+		poster.sleep(1500);
+		poster.stop();
+		
 		/* poster.post("https://vk.com/wall-9761670_39", "ALL HEIL OPTIMUS PRIME!");
 		poster.sleep(6000);
 		poster.post("https://vk.com/wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
@@ -90,7 +107,7 @@ public class App
 		poster.sleep(1000);
 		poster.post("https://vk.com/wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
 		poster.sleep(6000); */
-		poster.stop();
+																							//poster.stop();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());
 		//poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");
