@@ -169,13 +169,15 @@ public class Poster extends Node{
 				System.out.println("-->11");
 				sleep(2500);
 				System.out.println("-->12");
-				((JavascriptExecutor)driver).executeScript("cur.photosChooseSwitch(this);");
+				element = driver.findElement(By.xpath("//*[text() = 'Choose from community photos']"));
+				System.out.println("-->12.1");
+				element.click();
 				System.out.println("-->13");
-				sleep(500);
+				sleep(1000);
 				System.out.println("-->14");
 				((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('-" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
 				System.out.println("-->15");
-				sleep(1000);
+				sleep(1500);
 				System.out.println("-->16");
 				element = driver.findElement(By.id("photos_choose_row-" + mediaURI + "_-" + pub.getMediaStorage(Public.Media.PICTURE).substring(20)));
 				System.out.println("-->17");
