@@ -162,8 +162,9 @@ public class Poster extends Node{
 				System.out.println("-->8");
 				sleep(1000); 
 				System.out.println("-->9");
-				element = driver.findElement(By.cssSelector("a._type_photo"));
+				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
 				//element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
+				element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
 				System.out.println("-->10");
 				element.click();
 				System.out.println("-->11");
