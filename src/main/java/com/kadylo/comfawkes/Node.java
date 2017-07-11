@@ -329,6 +329,20 @@ public class Node{
 		}
 	}
 	
+  //debug method
+  // todo format
+  protected void takeScreenshot(String name){
+    try{
+      File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+      FileUtils.copyFile(scrFile, new File(name + ".png"));
+    } catch (IOException ioe){
+      System.out.println("-->Screenshot error");
+      ioe.printStackTrace();
+    }
+  }
+  
+  
+  
 	// stops execution for a certain amount of ms
 	protected void sleep (long i){
       
