@@ -195,7 +195,7 @@ public class Poster extends Node{
 				System.out.println("-->" + pub.getMediaStorage(Public.Media.PICTURE).substring(20));
 				element = driver.findElement(By.xpath("//a[@data-href='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']"));
 				// ((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
-				element.click().
+				element.click();
 				System.out.println("-->15");
 				sleep(2500);
 				System.out.println("-->16");
