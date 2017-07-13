@@ -26,7 +26,40 @@ public class User{
 	public String getName(){
 		return name;
 	}
-	
+    public int getId(){
+      return id;
+    }
+  public String getURL(){
+    return URL;
+  }
+  public int getBalance(){
+    return balance;
+  }
+  public HashMap<Public, String> getNicknames(){
+    return nicknames;
+  }
+  
+  
+	@Override
+  // TODO import
+  public boolean equals (Object obj){
+    if(obj = this)
+      return true;
+    if ( obj instanceof User){
+      User other = (User) obj;
+      EqualsBuilder builder = new EqualsBuilder()
+        .append(getId(), other.getId())
+        .append(getName(), other.getName())
+        .append(getURL(), other.getURL())
+        .append(getBalance(), other.getBalance())
+        .append(getNicknames(), other.getNicknames());
+      return builder.isEquals();
+    }
+    return false;
+  }
+      
+  
+  
 	//TODO generate id?
 	public User (String URL, 
 		int id, 
