@@ -193,7 +193,7 @@ public class Poster extends Node{
 				sleep(1000);
 				System.out.println("-->14");
 				System.out.println("-->" + pub.getMediaStorage(Public.Media.PICTURE).substring(20));
-				((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('-" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
+				((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
 				System.out.println("-->15");
 				sleep(2500);
 				System.out.println("-->16");
