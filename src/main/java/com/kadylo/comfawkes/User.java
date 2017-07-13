@@ -1,6 +1,8 @@
 package com.kadylo.comfawkes;
 
 import java.util.HashMap;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 // represents user of our service
 public class User{
@@ -29,44 +31,43 @@ public class User{
     public int getId(){
       return id;
     }
-  public String getURL(){
-    return URL;
-  }
-  public int getBalance(){
-    return balance;
-  }
-  public HashMap<Public, String> getNicknames(){
-    return nicknames;
-  }
-  
-  @Override
-  public int hashCode(){
-    HashCodeBuilder builder = new HashCodeBuilder()
-      .append(getId())
-      .append(getName())
-      .append(getBalance())
-      .append(getURL())
-      .append(getNicknames());
-    return builder.toHashCode();
-  }
-  
+	public String getURL(){
+		return URL;
+	}
+	public int getBalance(){
+		return balance;
+	}
+	public HashMap<Public, String> getNicknames(){
+		return nicknames;
+	}
+
 	@Override
-  // TODO import
-  public boolean equals (Object obj){
-    if(obj = this)
-      return true;
-    if ( obj instanceof User){
-      User other = (User) obj;
-      EqualsBuilder builder = new EqualsBuilder()
-        .append(getId(), other.getId())
-        .append(getName(), other.getName())
-        .append(getURL(), other.getURL())
-        .append(getBalance(), other.getBalance())
-        .append(getNicknames(), other.getNicknames());
-      return builder.isEquals();
-    }
-    return false;
-  }
+	public int hashCode(){
+		HashCodeBuilder builder = new HashCodeBuilder()
+			.append(getId())
+			.append(getName())
+			.append(getBalance())
+			.append(getURL())
+			.append(getNicknames());
+		return builder.toHashCode();
+	}
+
+	@Override
+	public boolean equals (Object obj){
+		/* if(obj = (Object) this)
+			return true; */
+		if ( obj instanceof User){
+			User other = (User) obj;
+			EqualsBuilder builder = new EqualsBuilder()
+				.append(getId(), other.getId())
+				.append(getName(), other.getName())
+				.append(getURL(), other.getURL())
+				.append(getBalance(), other.getBalance())
+				.append(getNicknames(), other.getNicknames());
+			return builder.isEquals();
+		}
+		return false;
+	}
       
   
   

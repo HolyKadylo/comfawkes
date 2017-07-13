@@ -3,6 +3,8 @@ package com.kadylo.comfawkes;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Date;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Public{
 	
@@ -71,21 +73,21 @@ public class Public{
 	public User getChief(){
 		return chiefAdmin;
 	}
-  public ListenerRole getRole(){
-    return role;
-  }
-  public HashMap<Media, String> getMediaStorages(){
-    return mediaStorages;
-  }
-  public int getBalance(){
-    return balance;
-  }
-  public HashMap<User, Date> getBannedUsers(){
-    return bannedUsers;
-  }
-  public ArrayList<User> getSecondaryAdmins(){
-    return secondaryAdmins;
-  }
+	public ListenerRole getRole(){
+		return role;
+	}
+	public HashMap<Media, String> getMediaStorages(){
+		return mediaStorages;
+	}
+	public int getBalance(){
+		return balance;
+	}
+	public HashMap<User, Date> getBannedUsers(){
+		return bannedUsers;
+	}
+	public ArrayList<User> getSecondaryAdmins(){
+		return secondaryAdmins;
+	}
 
 	public void addSecondaryAdmin(User sec){
 		secondaryAdmins.add(sec);
@@ -129,25 +131,39 @@ public class Public{
 		bannedUsers.remove(u);
 	}
 
-  @Override
-  public boolean equals(Object obj){
-    if (obj == this)
-      return true;
-    if (obj instanceof Public){
-      Public other = (Public) obj;
-      EqualsBuilder builder = new EqualsBuilder ()
-        .append(getSecondaryAdmins(), other.getSecondaryAdmins())
-        .append(getBannedUsers(), other.getBannedUsers())
-        .append(getBalance(), other.getBalance())
-        .append(getMediaStorages(), other.getMediaStorages())
-        .append(getRole(), other.getRole())
-        .append(getChief(), other.getChief())
-        .append(getAddress(), other.getAddress())
-        .append(getId(), other.getId());
-      return builder.isEquals();
-    }
-    return false;
-  }
+	@Override
+	public boolean equals(Object obj){
+		/* if (obj == this)
+			return true; */
+		if (obj instanceof Public){
+			Public other = (Public) obj;
+			EqualsBuilder builder = new EqualsBuilder ()
+				.append(getSecondaryAdmins(), other.getSecondaryAdmins())
+				.append(getBannedUsers(), other.getBannedUsers())
+				.append(getBalance(), other.getBalance())
+				.append(getMediaStorages(), other.getMediaStorages())
+				.append(getRole(), other.getRole())
+				.append(getChief(), other.getChief())
+				.append(getAddress(), other.getAddress())
+				.append(getId(), other.getId());
+			return builder.isEquals();
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode(){
+		HashCodeBuilder builder = new HashCodeBuilder()
+			.append(getSecondaryAdmins())
+			.append(getBannedUsers())
+			.append(getBalance())
+			.append(getMediaStorages())
+			.append(getRole())
+			.append(getChief())
+			.append(getAddress())
+			.append(getId());
+		return builder.toHashCode();
+	}
       
   
 	// constructing public
