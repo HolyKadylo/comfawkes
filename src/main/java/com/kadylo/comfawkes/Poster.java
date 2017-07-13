@@ -168,10 +168,11 @@ public class Poster extends Node{
 				System.out.println("-->9");
 				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
 				//element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
-            System.out.println("-->bf: "+element);
-				element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
+            System.out.println("-->bf: " + element);
+				element = driver.findElement(By.xpath("//div[@id='reply_add_media_-" + extractWallId(addressee) + "']//a[@class='ms_item ms_item_photo _type_photo']"));
+				//element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
             takeScreenshot("9");
-            System.out.println("-->af: "+element);
+            System.out.println("-->af: " + element);
 				System.out.println("-->10");
 				element.click();
             sleep(500);
@@ -181,7 +182,9 @@ public class Poster extends Node{
 				sleep(2500);
             takeScreenshot("11");
 				System.out.println("-->12");
+				
 				element = driver.findElement(By.xpath("//*[text() = 'Choose from community photos']"));
+				
             takeScreenshot("12");
 				System.out.println("-->12.1");
 				element.click();
