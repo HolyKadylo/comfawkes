@@ -39,6 +39,16 @@ public class User{
     return nicknames;
   }
   
+  @Override
+  public int hashCode(){
+    HashCodeBuilder builder = new HashCodeBuilder()
+      .append(getId())
+      .append(getName())
+      .append(getBalance())
+      .append(getURL())
+      .append(getNicknames());
+    return builder.toHashCode();
+  }
   
 	@Override
   // TODO import
