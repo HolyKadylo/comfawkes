@@ -71,6 +71,22 @@ public class Public{
 	public User getChief(){
 		return chiefAdmin;
 	}
+  public ListenerRole getRole(){
+    return role;
+  }
+  public HashMap<Media, String> getMediaStorages(){
+    return mediaStorages;
+  }
+  public int getBalance(){
+    return balance;
+  }
+  public HashMap<User, Date> getBannedUsers(){
+    return bannedUsers;
+  }
+  public ArrayList<User> getSecondaryAdmins(){
+    return secondaryAdmins;
+  }
+
 	public void addSecondaryAdmin(User sec){
 		secondaryAdmins.add(sec);
 	}
@@ -113,6 +129,27 @@ public class Public{
 		bannedUsers.remove(u);
 	}
 
+  @Override
+  public boolean equals(Object obj){
+    if (obj == this)
+      return true;
+    if (obj instanceof Public){
+      Public other = (Public) obj;
+      EqualsBuilder builder = new EqualsBuilder ()
+        .append(getSecondaryAdmins(), other.getSecondaryAdmins())
+        .append(getBannedUsers(), other.getBannedUsers())
+        .append(getBalance(), other.getBalance())
+        .append(getMediaStorages(), other.getMediaStorages())
+        .append(getRole(), other.getRole())
+        .append(getChief(), other.getChief())
+        .append(getAddress(), other.getAddress())
+        .append(getId(), other.getId());
+      return builder.isEquals();
+    }
+    return false;
+  }
+      
+  
 	// constructing public
 	public Public (String address, 
 		User chief, 
