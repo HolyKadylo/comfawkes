@@ -221,7 +221,9 @@ public class Poster extends Node{
 		}
 
 		//ordinal posting
+		takeScreenshot("bf");
 		post(addressee, content);
+		takeScreenshot("af");
 	}
 
 	private String extractWallId(String address){
