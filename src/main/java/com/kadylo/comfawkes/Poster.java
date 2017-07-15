@@ -2,6 +2,7 @@ package com.kadylo.comfawkes;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -141,6 +142,26 @@ public class Poster extends Node{
 		}
 	}
 	
+	//todo add it to ordinal post
+	private void scrollDownAndClick(WebElement el){
+		try{
+			boolean need2Scroll = true;
+			JavascriptExecutor jse = (JavascriptExecutor)driver;
+			while (need2Scroll){
+				try{
+					el.click();
+					need2Scroll = false;
+				} catch (ElementNotInteractableException e){
+
+					// Scrolling somewhat down
+					jse.executeScript("window.scrollBy(0,250)", "");
+				}
+			}
+		} catch (Exception e){
+			System.out.println("-->Exception occured in mediapost: " + e.toString());
+		}
+	}
+	
 	//post with media
 	// TODO private?
 	public void post (String addressee, String content, Public.Media media, String mediaURI){
@@ -152,10 +173,10 @@ public class Poster extends Node{
 		switch (media){
 			case PICTURE:  
 				openTab(addressee);
-				takeScreenshot("1");
 				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
-				element.sendKeys("");
-				element.click();
+				
+				scrollDownAndClick(element);
+				
 				sleep(5000); //1000
 				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
 				//element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
