@@ -222,7 +222,7 @@ public class Poster extends Node{
 
 		//ordinal posting
 		takeScreenshot("bf");
-		post(addressee, content);
+		post(addressee, content, true);
 		takeScreenshot("af");
 	}
 
@@ -243,10 +243,12 @@ public class Poster extends Node{
 	// takes address?w=WALL-XXXXX-YY that needs to be extracted from user input!!!!!
 	
 	// does not depend on public
-	public void post (String addressee, String content){
+	// cascaded means that is called from media post
+	public void post (String addressee, String content, boolean cascaded){
 		System.out.println("-->Poster " + id + " is posting to " + addressee);
         try{
-			openTab(addressee);
+			if (!cascaded)
+				openTab(addressee);
 			String leaveAComment = "Leave a comment...";
 			String postAsGroup = "Post as group";
 			sleep(3500);
