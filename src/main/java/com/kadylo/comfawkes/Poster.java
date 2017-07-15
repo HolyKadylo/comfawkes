@@ -279,7 +279,7 @@ public class Poster extends Node{
 			if (errorCount <= MAX_ERRORS_COUNT){
 				System.out.println("-->Error occured, retrying...");
 				counterPopup();
-				post(addressee, content);
+				post(addressee, content, cascaded);
 			} else {
 				System.out.println("-->Error while posting");
 				e.printStackTrace();
