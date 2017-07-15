@@ -143,56 +143,27 @@ public class Poster extends Node{
 	//post with media
 	// TODO private?
 	public void post (String addressee, String content, Public.Media media, String mediaURI){
-		System.out.println("-->1");
 		String leaveAComment = "Leave a comment...";
-		System.out.println("-->2");
 		String postAsGroup = "Post as group";
-		System.out.println("-->3");
 	
 		// adding media to the post
-		System.out.println("-->4");
 		switch (media){
 			case PICTURE:  
-				System.out.println("-->5");
 				openTab(addressee);
-            takeScreenshot("5");
-				System.out.println("-->6");
 				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
-            takeScreenshot("6");
-				System.out.println("-->7");
 				element.click();
-            takeScreenshot("7");
-				System.out.println("-->8");
 				sleep(1000); 
-            takeScreenshot("8");
-				System.out.println("-->9");
 				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
 				//element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
-            System.out.println("-->bf: " + element);
 				element = driver.findElement(By.xpath("//div[@id='reply_add_media_-" + extractWallId(addressee) + "']//a[@class='ms_item ms_item_photo _type_photo']"));
 				//element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
-            takeScreenshot("9");
-            System.out.println("-->af: " + element);
-				System.out.println("-->10");
 				element.click();
             sleep(500);
                 element.click();
-            takeScreenshot("10");
-				System.out.println("-->11");
 				sleep(2500);
-            takeScreenshot("11");
-				System.out.println("-->12");
-				
 				element = driver.findElement(By.xpath("//*[text() = 'Choose from community photos']"));
-				
-            takeScreenshot("12");
-				System.out.println("-->12.1");
 				element.click();
-            takeScreenshot("12.1");
-				System.out.println("-->13");
 				sleep(1000);
-				System.out.println("-->14");
-				System.out.println("-->" + pub.getMediaStorage(Public.Media.PICTURE).substring(20));
 				//-9761670_245781876
 				//*[@id='album" + + "?rev=1']/a
 				element = driver.findElement(By.xpath("//*[@id='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']/a/div/div"));
@@ -201,16 +172,11 @@ public class Poster extends Node{
 				// element = driver.findElement(By.xpath("//a[@data-href='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']"));
 				// ((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
 				element.click();
-				System.out.println("-->15");
 				sleep(2500);
-				System.out.println("-->16");
 				element = driver.findElement(By.id("photos_choose_row-" + mediaURI + "_" + pub.getMediaStorage(Public.Media.PICTURE).substring(20)));
-				System.out.println("-->17");
 				// <a id="photos_choose_row-9761670_456239024_-9761670_245781876" href="photo-9761670_456239024" 
 				element.click();
-				System.out.println("-->18");
 				sleep(500);
-				System.out.println("-->19");
 				break;
 			case AUDIO:
 				break;
@@ -221,9 +187,7 @@ public class Poster extends Node{
 		}
 
 		//ordinal posting
-		takeScreenshot("bf");
 		post(addressee, content, true);
-		takeScreenshot("af");
 	}
 
 	private String extractWallId(String address){
@@ -232,7 +196,6 @@ public class Poster extends Node{
 		// https://vk.com/the_god_machine_sect?w=wall-9761670_39
 		String result = address.substring(address.indexOf("?w=wall-")+1, address.length());
 		String res2 = result.substring(result.indexOf("-")+1);
-		System.out.println("-->result of extractWallId: " + res2);
 		return res2;
 	}
 
