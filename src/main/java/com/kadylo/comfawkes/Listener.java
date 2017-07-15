@@ -68,6 +68,12 @@ public class Listener extends Node{
 			sleep(5000);
 		}
 		
+		// if we have proper user opened, then do nothing
+		/* try{ ..................................................................
+			driver.getCurrentUrl().
+		} */
+		
+		
 		try{
 			element = driver.findElement(By.id("im_dialogs_search"));
 			element.click();

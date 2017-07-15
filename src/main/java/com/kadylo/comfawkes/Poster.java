@@ -158,7 +158,7 @@ public class Poster extends Node{
 				element = driver.findElement(By.xpath("//div[@id='reply_add_media_-" + extractWallId(addressee) + "']//a[@class='ms_item ms_item_photo _type_photo']"));
 				//element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
 				element.click();
-            sleep(500);
+				sleep(500);
                 element.click();
 				sleep(2500);
 				element = driver.findElement(By.xpath("//*[text() = 'Choose from community photos']"));

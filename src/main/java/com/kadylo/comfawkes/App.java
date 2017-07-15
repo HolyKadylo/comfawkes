@@ -47,13 +47,13 @@ public class App
 		HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
 		
 		
-		storage0.put(Public.Media.PICTURE, "https://vk.com/album-9761670_245781876");
+		storage0.put(Public.Media.PICTURE, "https://vk.com/album-144898340_245793281");
 		//
 		// storage.put(Public.Media.VIDEO, "https://vk.com/videos-9761670?section=album_1");
 		//
 		// storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
-		Public pub0 = new Public ("https://vk.com/the_god_machine_sect", me, null, 249, 16, Public.ListenerRole.ADMIN, storage0);
+		Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 16, Public.ListenerRole.ADMIN, storage0);
         // Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
 		// Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
@@ -80,7 +80,7 @@ public class App
 		System.out.println("-->PICTURE " + pub2.getMediaStorage(Public.Media.PICTURE));
 		poster.sleep(1500);
 		poster.stop(); */
-		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "ALL HEIL OPTIMUS PRIME!", Public.Media.PICTURE, "9761670_456239022");
+		poster.post("https://vk.com/kadylosbooks?w=wall-144898340_47", "НОН НОБІС ДОМІНЕ! АВЕ МАРІА! ДЕУС ВУЛЬТ!", Public.Media.PICTURE, "144898340_456239029");
 		poster.sleep(6000);
 		/* poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
 		poster.sleep(1000);
