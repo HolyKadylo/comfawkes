@@ -152,6 +152,7 @@ public class Poster extends Node{
 		switch (media){
 			case PICTURE:  
 				openTab(addressee);
+				takeScreenshot("1");
 				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
 				element.click();
 				sleep(5000); //1000
