@@ -193,13 +193,16 @@ public class Poster extends Node{
 				sleep(1000);
 				System.out.println("-->14");
 				System.out.println("-->" + pub.getMediaStorage(Public.Media.PICTURE).substring(20));
-				element = driver.findElement(By.xpath("//a[@data-href='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']"));
+				
+				element = driver.findElement(By.xpath("//a[@onclick='if (cur.cancelClick) return (cur.cancelClick = false); return cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "');; return nav.go(this, event)']"));
+				// "if (cur.cancelClick) return (cur.cancelClick = false); return cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "');; return nav.go(this, event)"
+				// element = driver.findElement(By.xpath("//a[@data-href='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']"));
 				// ((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
 				element.click();
 				System.out.println("-->15");
 				sleep(2500);
 				System.out.println("-->16");
-				element = driver.findElement(By.id("photos_choose_row-" + mediaURI + "_-" + pub.getMediaStorage(Public.Media.PICTURE).substring(20)));
+				element = driver.findElement(By.id("photos_choose_row-" + mediaURI + "_" + pub.getMediaStorage(Public.Media.PICTURE).substring(20)));
 				System.out.println("-->17");
 				// <a id="photos_choose_row-9761670_456239024_-9761670_245781876" href="photo-9761670_456239024" 
 				element.click();
