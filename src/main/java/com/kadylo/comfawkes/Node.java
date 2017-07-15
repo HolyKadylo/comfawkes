@@ -345,6 +345,7 @@ public class Node{
   
 	// stops execution for a certain amount of ms
 	protected void sleep (long i){
+		System.out.println("-->Sleeping " + i + " ms");
       
         // +-40%
         i = Math.round(i + 0.4 * i * (Math.random() * 2 - 1));

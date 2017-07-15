@@ -113,6 +113,7 @@ public class Poster extends Node{
 				}
 			}
         }
+		System.out.println("-->Tab is opened");
 	}
 	
 	// used in the next method
@@ -143,6 +144,7 @@ public class Poster extends Node{
 	//post with media
 	// TODO private?
 	public void post (String addressee, String content, Public.Media media, String mediaURI){
+		System.out.println("-->hello");
 		String leaveAComment = "Leave a comment...";
 		String postAsGroup = "Post as group";
 	
@@ -152,18 +154,18 @@ public class Poster extends Node{
 				openTab(addressee);
 				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
 				element.click();
-				sleep(1000); 
+				sleep(5000); //1000
 				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
 				//element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
 				element = driver.findElement(By.xpath("//div[@id='reply_add_media_-" + extractWallId(addressee) + "']//a[@class='ms_item ms_item_photo _type_photo']"));
 				//element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
 				element.click();
-				sleep(500);
+				sleep(5000);//500
                 element.click();
-				sleep(2500);
+				sleep(5000);//2500
 				element = driver.findElement(By.xpath("//*[text() = 'Choose from community photos']"));
 				element.click();
-				sleep(1000);
+				sleep(5000);//1000
 				//-9761670_245781876
 				//*[@id='album" + + "?rev=1']/a
 				element = driver.findElement(By.xpath("//*[@id='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']/a/div/div"));
@@ -172,11 +174,11 @@ public class Poster extends Node{
 				// element = driver.findElement(By.xpath("//a[@data-href='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']"));
 				// ((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
 				element.click();
-				sleep(2500);
+				sleep(5000);//2500
 				element = driver.findElement(By.id("photos_choose_row-" + mediaURI + "_" + pub.getMediaStorage(Public.Media.PICTURE).substring(20)));
 				// <a id="photos_choose_row-9761670_456239024_-9761670_245781876" href="photo-9761670_456239024" 
 				element.click();
-				sleep(500);
+				sleep(5000);//500
 				break;
 			case AUDIO:
 				break;
