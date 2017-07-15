@@ -194,7 +194,7 @@ public class Poster extends Node{
 				System.out.println("-->14");
 				System.out.println("-->" + pub.getMediaStorage(Public.Media.PICTURE).substring(20));
 				
-				element = driver.findElement(By.xpath("//a[@onclick='if (cur.cancelClick) return (cur.cancelClick = false); return cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "');; return nav.go(this, event)']"));
+				element = driver.findElement(By.xpath("//a[@onclick=\"if (cur.cancelClick) return (cur.cancelClick = false); return cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "');; return nav.go(this, event)\"]"));
 				// "if (cur.cancelClick) return (cur.cancelClick = false); return cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "');; return nav.go(this, event)"
 				// element = driver.findElement(By.xpath("//a[@data-href='album" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "?rev=1']"));
 				// ((JavascriptExecutor)driver).executeScript("cur.chooseFromAlbum('" + pub.getMediaStorage(Public.Media.PICTURE).substring(20) + "')");
