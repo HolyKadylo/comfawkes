@@ -329,17 +329,18 @@ public class Node{
 		}
 	}
 	
-  //debug method
-  // todo format
-  protected void takeScreenshot(String name){
-    try{
-      File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
-      FileUtils.copyFile(scrFile, new File(name + ".png"));
-    } catch (IOException ioe){
-      System.out.println("-->Screenshot error");
-      ioe.printStackTrace();
-    }
-  }
+	//debug method
+	// todo format
+	protected void takeScreenshot(String name){
+		System.out.println("-->Taking a screenshot " + name + ".png");
+		try{
+			File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+			FileUtils.copyFile(scrFile, new File(name + ".png"));
+		} catch (IOException ioe){
+			System.out.println("-->Screenshot error");
+			ioe.printStackTrace();
+		}
+	}
   
   
   

@@ -154,6 +154,7 @@ public class Poster extends Node{
 				openTab(addressee);
 				takeScreenshot("1");
 				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
+				element.sendKeys("");
 				element.click();
 				sleep(5000); //1000
 				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
