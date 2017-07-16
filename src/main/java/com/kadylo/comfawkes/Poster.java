@@ -144,6 +144,8 @@ public class Poster extends Node{
 	
 	//todo add it to ordinal post
 	private void scrollDownAndClick(WebElement el){
+		int max = 1000000;
+		int cur = 0;
 		try{
 			boolean need2Scroll = true;
 			JavascriptExecutor jse = (JavascriptExecutor)driver;
@@ -156,6 +158,11 @@ public class Poster extends Node{
 					// Scrolling somewhat down
 					jse.executeScript("window.scrollBy(0,250)", "");
 				}
+				
+				// breaking if exceeding maximum amount of iterations
+				cur++;
+				if (cur >= max)
+					need2Scroll = false;
 			}
 		} catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
