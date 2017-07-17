@@ -143,20 +143,21 @@ public class Poster extends Node{
 	}
 	
   // TODO format
+  // todo remove unnesessary hierarchy
   private void scrollDownAndClick(WebElement el){
-    JavascriptExecutor jse = (JavascriptExecutor) driver;
-    scrollDownAndClickRecursively (el, jse);
+   // JavascriptExecutor jse = (JavascriptExecutor) driver;
+    scrollDownAndClickRecursively (el);
   }
   
-	private void scrollDownAndClickRecursively(WebElement el, JavascriptExecutor jse){
-            jse.executeScript("window.scrollBy(0, 250)", "");
+	private void scrollDownAndClickRecursively(WebElement el){
+            driver.executeScript("window.scrollBy(0, 250)", "");
           try{
                   sleep(150);
 					el.click();
                     System.out.println("-->Clicked");
         } catch (ElementNotInteractableException enie) {
-          System.out.println("-->catched");
-          scrollDownAndClickRecursively(el, jse);
+          System.out.println("-->catched"); 
+          scrollDownAndClickRecursively(el);
 } catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
 		}
