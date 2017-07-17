@@ -143,7 +143,7 @@ public class Poster extends Node{
 	}
 	
   // TODO format
-  private scrollDownAndClick(WebElement el){
+  private void scrollDownAndClick(WebElement el){
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     scrollDownAndClickRecursively (el, jse);
   }
