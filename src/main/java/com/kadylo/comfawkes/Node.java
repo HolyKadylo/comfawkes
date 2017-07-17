@@ -261,7 +261,7 @@ public class Node{
 			this.state = State.BROKEN;
 			return;
 		}
-		driver = new RemoteWebDriver(url, cap); 
+		driver = new FirefoxDriver(url, cap); 
 		System.out.println("-->URL " + sURL + " was set to node " + id);
 		// after that browser is opened or reopened
 	}
