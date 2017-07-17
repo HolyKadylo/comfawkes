@@ -82,6 +82,7 @@ public class App
 		poster.stop(); */
 		poster.post("https://vk.com/kadylosbooks?w=wall-144898340_47", "НОН НОБІС ДОМІНЕ! АВЕ МАРІА! ДЕУС ВУЛЬТ!", Public.Media.PICTURE, "144898340_456239029");
 		poster.sleep(6000);
+        poster.takeScreenshot("res");
 		/* poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
 		poster.sleep(1000);
 		poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "AVE CAESAR");

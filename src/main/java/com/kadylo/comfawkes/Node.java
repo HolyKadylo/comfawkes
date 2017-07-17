@@ -330,8 +330,8 @@ public class Node{
 	}
 	
 	//debug method
-	// todo format
-	protected void takeScreenshot(String name){
+	// todo return protwcted state
+	public void takeScreenshot(String name){
 		System.out.println("-->Taking a screenshot " + name + ".png");
 		try{
 			File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
