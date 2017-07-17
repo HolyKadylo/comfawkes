@@ -143,7 +143,7 @@ public class Poster extends Node{
 	}
 	
 	private void scrollDownAndClick(WebElement el){
-		int max = 1000000;
+		int max = 100;
 		int cur = 0;
 		try{
 			boolean need2Scroll = true;
@@ -152,10 +152,13 @@ public class Poster extends Node{
 				try{
 					el.click();
 					need2Scroll = false;
+                    System.out.println("-->Clicked");
 				} catch (ElementNotInteractableException e){
 
 					// Scrolling somewhat down
-					jse.executeScript("window.scrollBy(0,250)", "");
+                     int amount = 250 * cur;
+					jse.executeScript("window.scrollBy(0,"+amount+")", "");
+                  System.out.println("-->scrolling by " + amount);
 				}
 				
 				// breaking if exceeding maximum amount of iterations
