@@ -156,7 +156,7 @@ public class Poster extends Node{
 					el.click();
                     System.out.println("-->Clicked");
         } catch (ElementNotInteractableException enie) {
-          System.out.println("-->catched"); 
+            System.out.println("-->catched"); 
           scrollDownAndClickRecursively(el);
 } catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
