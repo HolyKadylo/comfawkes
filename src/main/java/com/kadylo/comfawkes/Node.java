@@ -31,7 +31,7 @@ public class Node{
 	protected static final String CLASS_TO_CREATE_PLAYLIST = "audio_page__main_tabs_btn audio_page__add_playlist_btn";
 	protected static final String PLAYLIST_TITLE_ID = "ape_pl_name";
 	
-	protected FirefoxDriver driver;
+	protected RemoteWebDriver driver;
 	protected DesiredCapabilities cap;
 	protected WebElement element;
   
@@ -261,8 +261,7 @@ public class Node{
 			this.state = State.BROKEN;
 			return;
 		}
-		WebDriver parentDriver= new RemoteWebDriver(url, cap); 
-      driver = (FirefoxDriver) parentDriver;
+		driver= new RemoteWebDriver(url, cap);
 		System.out.println("-->URL " + sURL + " was set to node " + id);
 		// after that browser is opened or reopened
 	}
