@@ -150,6 +150,7 @@ public class Poster extends Node{
 			JavascriptExecutor jse = (JavascriptExecutor)driver;
 			while (need2Scroll){
 				try{
+                  sleep(150);
 					el.click();
 					need2Scroll = false;
                     System.out.println("-->Clicked");
@@ -157,7 +158,7 @@ public class Poster extends Node{
 
 					// Scrolling somewhat down
                      int amount = 250 * cur;
-					jse.executeScript("window.scrollBy(0,"+amount+")", "");
+					jse.executeScript("scroll(0,"+amount+");");
                   System.out.println("-->scrolling by " + amount);
 				}
 				
