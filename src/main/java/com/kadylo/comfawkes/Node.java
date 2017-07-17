@@ -58,7 +58,7 @@ public class Node{
 	protected int id;
   
     // TODO relocate
-    public FirefoxDriver getDriver(){
+    public RemoteWebDriver getDriver(){
       return driver;
     }
 	
