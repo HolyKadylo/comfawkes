@@ -150,14 +150,16 @@ public class Poster extends Node{
   }
   
 	private void scrollDownAndClickRecursively(WebElement el){
-            driver.executeScript("window.scrollBy(0, 250)", "");
+      takeScreenshot("bf");
+            driver.executeScript("window.scrollBy(0, 500)", "");
+      takeScreenshot("af");
           try{
                   sleep(150);
 					el.click();
                     System.out.println("-->Clicked");
         } catch (ElementNotInteractableException enie) {
             System.out.println("-->catched"); 
-          scrollDownAndClickRecursively(el);
+          //scrollDownAndClickRecursively(el);
 } catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
 		}
