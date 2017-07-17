@@ -142,7 +142,6 @@ public class Poster extends Node{
 		}
 	}
 	
-	//todo add it to ordinal post
 	private void scrollDownAndClick(WebElement el){
 		int max = 1000000;
 		int cur = 0;
@@ -181,9 +180,7 @@ public class Poster extends Node{
 			case PICTURE:  
 				openTab(addressee);
 				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
-				
 				scrollDownAndClick(element);
-				
 				sleep(5000); //1000
 				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
 				//element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
@@ -249,7 +246,7 @@ public class Poster extends Node{
 			sleep(3500);
 			element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
 			//element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
-			element.click();
+             scrollDownAndClick(element);
 			sleep(500); 
 			WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
 			commentBox.sendKeys(content);
