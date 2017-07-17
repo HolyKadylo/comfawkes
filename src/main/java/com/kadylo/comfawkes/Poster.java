@@ -151,7 +151,8 @@ public class Poster extends Node{
   
 	private void scrollDownAndClickRecursively(WebElement el){
       takeScreenshot("bf");
-      driver.executeScript("scroll(0, 500);");
+	  ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", el);
+      //driver.executeScript("scroll(0, 500);");
       takeScreenshot("af");
           try{
                   sleep(150);
