@@ -142,32 +142,22 @@ public class Poster extends Node{
 		}
 	}
 	
-	private void scrollDownAndClick(WebElement el){
-		int max = 100;
-		int cur = 0;
-		try{
-			boolean need2Scroll = true;
-			JavascriptExecutor jse = (JavascriptExecutor)driver;
-			while (need2Scroll){
-				try{
+  // TODO format
+  private scrollDownAndClick(WebElement el){
+    JavascriptExecutor jse = (JavascriptExecutor) driver;
+    scrollDownAndClickRecursively (el, jse);
+  }
+  
+	private void scrollDownAndClickRecursively(WebElement el, JavascriptExecutor jse){
+            jse.executeScript("window.scrollBy(0, 250)", "");
+          try{
                   sleep(150);
 					el.click();
-					need2Scroll = false;
                     System.out.println("-->Clicked");
-				} catch (ElementNotInteractableException e){
-
-					// Scrolling somewhat down
-                     int amount = 250 * cur;
-					jse.executeScript("scroll(0,"+amount+");");
-                  System.out.println("-->scrolling by " + amount);
-				}
-				
-				// breaking if exceeding maximum amount of iterations
-				cur++;
-				if (cur >= max)
-					need2Scroll = false;
-			}
-		} catch (Exception e){
+        } catch (ElementNotInteractableException enie) {
+          System.out.println("-->catched");
+          scrollDownAndClickRecursively(el, jse);
+} catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
 		}
 	}
