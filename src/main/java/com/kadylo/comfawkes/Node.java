@@ -1,6 +1,7 @@
 package com.kadylo.comfawkes;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import java.net.MalformedURLException; 
 import java.net.URL;
@@ -30,7 +31,7 @@ public class Node{
 	protected static final String CLASS_TO_CREATE_PLAYLIST = "audio_page__main_tabs_btn audio_page__add_playlist_btn";
 	protected static final String PLAYLIST_TITLE_ID = "ape_pl_name";
 	
-	protected WebDriver driver;
+	protected FirefoxDriver driver;
 	protected DesiredCapabilities cap;
 	protected WebElement element;
   
@@ -57,7 +58,7 @@ public class Node{
 	protected int id;
   
     // TODO relocate
-    public WebDriver getDriver(){
+    public FirefoxDriver getDriver(){
       return driver;
     }
 	
