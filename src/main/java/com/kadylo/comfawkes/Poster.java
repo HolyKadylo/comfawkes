@@ -144,15 +144,19 @@ public class Poster extends Node{
 	
   // TODO format
   // todo remove unnesessary hierarchy
-  private void scrollDownAndClick(WebElement el){
+  private void scrollDownAndClick(WebElement el, RemoteWebDriver dr){
    // JavascriptExecutor jse = (JavascriptExecutor) driver;
-    scrollDownAndClickRecursively (el);
+    scrollDownAndClickRecursively (el, dr);
   }
   
-	private void scrollDownAndClickRecursively(WebElement el){
+	private void scrollDownAndClickRecursively(WebElement el, RemoteWebDriver dr){
       takeScreenshot("bf");
-	  ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", el);
+	  System.out.println("-->"+driver.getCurrentUrl());
+      System.out.println("-->"+dr.getCurrentUrl());
+                         ((JavascriptExecutor)dr).executeScript("arguments[0].scrollIntoView();", el);
       //driver.executeScript("scroll(0, 500);");
+      System.out.println("-->"+driver.getCurrentUrl());
+      System.out.println("-->"+dr.getCurrentUrl());
       takeScreenshot("af");
           try{
                   sleep(150);
