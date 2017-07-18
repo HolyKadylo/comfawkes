@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Set;
+import org.openqa.selenium.Keys;
 
 // This is browser endpoint
 public class Poster extends Node{
@@ -143,30 +144,28 @@ public class Poster extends Node{
 		}
 	}
 	
-  // TODO format
-  // todo remove unnesessary hierarchy
-  private void scrollDownAndClick(WebElement el, RemoteWebDriver dr){
-   // JavascriptExecutor jse = (JavascriptExecutor) driver;
-    scrollDownAndClickRecursively (el, dr);
-  }
-  
-	private void scrollDownAndClickRecursively(WebElement el, RemoteWebDriver dr){
-      takeScreenshot("bf");
-	  System.out.println("-->"+driver.getCurrentUrl());
-      System.out.println("-->"+dr.getCurrentUrl());
-                         ((JavascriptExecutor)dr).executeScript("arguments[0].scrollIntoView();", el);
-      //driver.executeScript("scroll(0, 500);");
-      System.out.println("-->"+driver.getCurrentUrl());
-      System.out.println("-->"+dr.getCurrentUrl());
-      takeScreenshot("af");
-          try{
-                  sleep(150);
-					el.click();
-                    System.out.println("-->Clicked");
-        } catch (ElementNotInteractableException enie) {
-            System.out.println("-->catched"); 
-          //scrollDownAndClickRecursively(el);
-} catch (Exception e){
+	// TODO format
+	// todo remove unnesessary hierarchy
+	private void scrollDownAndClick(WebElement el){
+		takeScreenshot("bf");
+		
+		// means any
+		WebElement voidElement = driver.findElement(By.xpath("//*[@type='text/css']"));
+		voidElement.sendKeys(Keys.PAGE_DOWN);
+		sleep(100);
+		voidElement.sendKeys(Keys.PAGE_DOWN);
+		//((JavascriptExecutor)dr).executeScript("arguments[0].scrollIntoView();", el);
+		//driver.executeScript("scroll(0, 500);");
+		//System.out.println("-->"+driver.getCurrentUrl());
+		takeScreenshot("af");
+		try{
+			sleep(150);
+			el.click();
+			System.out.println("-->Clicked");
+		} catch (ElementNotInteractableException enie) {
+			System.out.println("-->catched"); 
+			//scrollDownAndClickRecursively(el);
+		} catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
 		}
 	}
@@ -183,7 +182,7 @@ public class Poster extends Node{
 			case PICTURE:  
 				openTab(addressee);
 				element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
-				scrollDownAndClick(element, driver);
+				scrollDownAndClick(element);
 				sleep(5000); //1000
 				//element = driver.findElement(By.cssSelector("a.ms_item.ms_item_photo_type_photo"));
 				//element = driver.findElement(By.className("ms_item ms_item_photo _type_photo"));
@@ -249,7 +248,7 @@ public class Poster extends Node{
 			sleep(3500);
 			element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
 			//element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
-             scrollDownAndClick(element, driver);
+            scrollDownAndClick(element);
 			sleep(500); 
 			WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
 			commentBox.sendKeys(content);
