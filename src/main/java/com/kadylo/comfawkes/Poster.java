@@ -147,24 +147,16 @@ public class Poster extends Node{
 	// TODO format
 	// todo remove unnesessary hierarchy
 	private void scrollDownAndClick(WebElement el){
-		takeScreenshot("bf");
-		
-		// means any
-		WebElement voidElement = driver.findElement(By.xpath("//body"));
-		voidElement.sendKeys(Keys.PAGE_DOWN);
-		sleep(100);
-		voidElement.sendKeys(Keys.PAGE_DOWN);
-		//((JavascriptExecutor)dr).executeScript("arguments[0].scrollIntoView();", el);
-		//driver.executeScript("scroll(0, 500);");
-		//System.out.println("-->"+driver.getCurrentUrl());
-		takeScreenshot("af");
 		try{
 			sleep(150);
 			el.click();
-			System.out.println("-->Clicked");
 		} catch (ElementNotInteractableException enie) {
-			System.out.println("-->catched"); 
-			//scrollDownAndClickRecursively(el);
+			//System.out.println("-->catched " + enie.toString()); 
+			
+			// means any
+			WebElement voidElement = driver.findElement(By.xpath("//body"));
+			voidElement.sendKeys(Keys.PAGE_DOWN);
+			scrollDownAndClick(el);
 		} catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
 		}
@@ -189,8 +181,6 @@ public class Poster extends Node{
 				element = driver.findElement(By.xpath("//div[@id='reply_add_media_-" + extractWallId(addressee) + "']//a[@class='ms_item ms_item_photo _type_photo']"));
 				//element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
 				element.click();
-				sleep(5000);//500
-                element.click();
 				sleep(5000);//2500
 				element = driver.findElement(By.xpath("//*[text() = 'Choose from community photos']"));
 				element.click();
@@ -271,7 +261,7 @@ public class Poster extends Node{
 		} catch (Exception e){
 			errorCount++;
 			if (errorCount <= MAX_ERRORS_COUNT){
-				System.out.println("-->Error occured, retrying...");
+				System.out.println("-->Error occured, retrying... " + e.toString());
 				counterPopup();
 				post(addressee, content, cascaded);
 			} else {
