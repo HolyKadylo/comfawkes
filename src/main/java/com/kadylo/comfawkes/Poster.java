@@ -2,6 +2,7 @@ package com.kadylo.comfawkes;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Set;
+import org.openqa.selenium.Keys;
 
 // This is browser endpoint
 public class Poster extends Node{
@@ -142,25 +144,20 @@ public class Poster extends Node{
 		}
 	}
 	
-  // TODO format
-  // todo remove unnesessary hierarchy
-  private void scrollDownAndClick(WebElement el){
-   // JavascriptExecutor jse = (JavascriptExecutor) driver;
-    scrollDownAndClickRecursively (el);
-  }
-  
-	private void scrollDownAndClickRecursively(WebElement el){
-      takeScreenshot("bf");
-      driver.executeScript("scroll(0, 500);");
-      takeScreenshot("af");
-          try{
-                  sleep(150);
-					el.click();
-                    System.out.println("-->Clicked");
-        } catch (ElementNotInteractableException enie) {
-            System.out.println("-->catched"); 
-          //scrollDownAndClickRecursively(el);
-} catch (Exception e){
+	// TODO format
+	// todo remove unnesessary hierarchy
+	private void scrollDownAndClick(WebElement el){
+		try{
+			sleep(150);
+			el.click();
+		} catch (ElementNotInteractableException enie) {
+			//System.out.println("-->catched " + enie.toString()); 
+			
+			// means any
+			WebElement voidElement = driver.findElement(By.xpath("//body"));
+			voidElement.sendKeys(Keys.PAGE_DOWN);
+			scrollDownAndClick(el);
+		} catch (Exception e){
 			System.out.println("-->Exception occured in mediapost: " + e.toString());
 		}
 	}
@@ -184,8 +181,6 @@ public class Poster extends Node{
 				element = driver.findElement(By.xpath("//div[@id='reply_add_media_-" + extractWallId(addressee) + "']//a[@class='ms_item ms_item_photo _type_photo']"));
 				//element = driver.findElement(By.xpath("//a[@class='ms_item ms_item_photo _type_photo']"));
 				element.click();
-				sleep(5000);//500
-                element.click();
 				sleep(5000);//2500
 				element = driver.findElement(By.xpath("//*[text() = 'Choose from community photos']"));
 				element.click();
@@ -243,7 +238,7 @@ public class Poster extends Node{
 			sleep(3500);
 			element = driver.findElement(By.id("reply_field-" + extractWallId(addressee)));
 			//element = driver.findElement(By.xpath("//*[text() = '" + leaveAComment + "']"));
-             scrollDownAndClick(element);
+            scrollDownAndClick(element);
 			sleep(500); 
 			WebElement commentBox = driver.findElement(By.id(makeReplyFieldId(addressee)));
 			commentBox.sendKeys(content);
@@ -266,7 +261,7 @@ public class Poster extends Node{
 		} catch (Exception e){
 			errorCount++;
 			if (errorCount <= MAX_ERRORS_COUNT){
-				System.out.println("-->Error occured, retrying...");
+				System.out.println("-->Error occured, retrying... " + e.toString());
 				counterPopup();
 				post(addressee, content, cascaded);
 			} else {
