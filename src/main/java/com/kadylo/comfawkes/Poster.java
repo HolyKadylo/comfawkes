@@ -150,7 +150,7 @@ public class Poster extends Node{
 		takeScreenshot("bf");
 		
 		// means any
-		WebElement voidElement = driver.findElement(By.xpath("//*[@type='text/css']"));
+		WebElement voidElement = driver.findElement(By.xpath("//body"));
 		voidElement.sendKeys(Keys.PAGE_DOWN);
 		sleep(100);
 		voidElement.sendKeys(Keys.PAGE_DOWN);
