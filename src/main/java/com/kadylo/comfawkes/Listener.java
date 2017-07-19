@@ -51,6 +51,14 @@ public class Listener extends Node{
 	public void post (User addressee, String content){
 		String convTitle = "Conversations";
 		
+		switch(pub.getRole()){
+			case STANDALONE:
+				break;
+			case ADMIN:
+				break;
+			default:
+				break;
+		}
 		
 		// verify that we are in dialogs
 		try{

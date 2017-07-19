@@ -34,14 +34,15 @@ public class App
 		Node node, 
 		Role role) */
 		Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
-        Poster poster = new Poster(account, "http://localhost:5000", 10);
-		account.setNode(poster);
+        Listener listener = new Listener(account, "http://localhost:5000", 10);
+		account.setNode(listener);
         WebDriver driver = null;
-        driver = poster.getDriver();
+        driver = listener.getDriver();
 		
 		User me = new User ("https://vk.com/holy_kadylo", 11, null, "Illya Piven", 150);
 		
 		// everything allowed
+		HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
 		HashMap <Public.Media, String> storage0 = new HashMap<Public.Media, String>();
 		HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
 		HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
@@ -53,12 +54,14 @@ public class App
 		//
 		// storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
+		Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 15, Public.ListenerRole.ADMIN, storage00);
 		Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 16, Public.ListenerRole.ADMIN, storage0);
         // Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
 		// Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
       try{
-		poster.start(pub0);
+		listener.start(pub00);
+		listener.initialize(pub00);
 		/* poster.sleep(1500);
 		poster.initialize(pub1);
 		System.out.println("-->\n-->\n-->");
@@ -80,8 +83,9 @@ public class App
 		System.out.println("-->PICTURE " + pub2.getMediaStorage(Public.Media.PICTURE));
 		poster.sleep(1500);
 		poster.stop(); */
-		poster.post("https://vk.com/kadylosbooks?w=wall-144898340_47", "НОН НОБІС ДОМІНЕ! АВЕ МАРІА! ДЕУС ВУЛЬТ!", Public.Media.PICTURE, "144898340_456239029");
-		poster.sleep(6000);
+		//listener.post("https://vk.com/kadylosbooks?w=wall-144898340_47", "НОН НОБІС ДОМІНЕ! АВЕ МАРІА! ДЕУС ВУЛЬТ!", Public.Media.PICTURE, "144898340_456239029");
+		//listener.post(me, "Взвейтесь кострами синие ночи. Мы -- руснявые империалисты и красно-коричневые маньяки, Дети рабочих");
+		//listener.sleep(6000);
       //  poster.takeScreenshot("res");
 		/* poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
 		poster.sleep(1000);
@@ -109,7 +113,7 @@ public class App
 		poster.sleep(1000); */
 		//poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
 		//poster.sleep(6000);
-		poster.stop();
+		listener.stop();
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());
 		//poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");
