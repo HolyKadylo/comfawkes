@@ -55,32 +55,38 @@ public class Listener extends Node{
 			case STANDALONE:
 				break;
 			case ADMIN:
+				
+				
+				// we need to be right in the user's cell
+				// are we in it?
+				if ( !driver.getCurrentUrl().equals("https://vk.com/gim" + pub.getId() + "?sel=" + addressee.getId()) ){
+					
+					//are we at least in dialogs?
+					if ( !driver.getCurrentUrl().equals("https://vk.com/gim" + pub.getId())){
+						driver.get("https://vk.com/gim" + pub.getId());
+						sleep(5000);
+					}
+					
+					// we aren't in user's cell, but in dialogs. getting user
+					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
+					element.sendKeys(addressee.getName());
+					sleep(100);
+					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
+					element.click();
+					sleep(150);
+				} else {
+					
+					//do nothing, we are in the right place
+				}
+				
+				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
+				element.sendKeys(content);
+				takeScreenshot("ListenerRes");
+
 				break;
 			default:
 				break;
 		}
-		
-		// verify that we are in dialogs
-		try{
-			
-			// if we are in the right place, then nothing
-			if (!driver.getTitle().equals(convTitle)){
-				
-				// means that we're somewhere else
-				// getting back
-				driver.get("https://vk.com/im");
-				sleep(5000);
-			}
-		} catch (Exception e){
-			driver.get("https://vk.com/im");
-			sleep(5000);
-		}
-		
-		// if we have proper user opened, then do nothing
-		/* try{ ..................................................................
-			driver.getCurrentUrl().
-		} */
-		
 		
 		try{
 			element = driver.findElement(By.id("im_dialogs_search"));

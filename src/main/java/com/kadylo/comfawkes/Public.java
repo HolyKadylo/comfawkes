@@ -9,6 +9,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class Public{
 	
 	// identification number in our DB
+	// and vk DB
 	private int id;
 	
 	// link to the public

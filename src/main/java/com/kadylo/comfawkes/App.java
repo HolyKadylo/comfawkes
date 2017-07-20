@@ -39,7 +39,7 @@ public class App
         WebDriver driver = null;
         driver = listener.getDriver();
 		
-		User me = new User ("https://vk.com/holy_kadylo", 11, null, "Illya Piven", 150);
+		User me = new User ("https://vk.com/holy_kadylo", 12585304, null, "Illya Piven", 150);
 		
 		// everything allowed
 		HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
@@ -61,7 +61,8 @@ public class App
 		
       try{
 		listener.start(pub00);
-		listener.initialize(pub00);
+		//listener.initialize(pub00);
+		listener.post(me, "\0");
 		/* poster.sleep(1500);
 		poster.initialize(pub1);
 		System.out.println("-->\n-->\n-->");
