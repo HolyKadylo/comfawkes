@@ -54,7 +54,7 @@ public class App
 		//
 		// storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
-		Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 15, Public.ListenerRole.ADMIN, storage00);
+		Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 150574507, Public.ListenerRole.ADMIN, storage00);
 		Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 16, Public.ListenerRole.ADMIN, storage0);
         // Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
 		// Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
