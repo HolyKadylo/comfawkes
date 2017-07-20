@@ -49,7 +49,6 @@ public class Listener extends Node{
 	
 	// posts message to site user in dialog
 	public void post (User addressee, String content){
-		String convTitle = "Conversations";
 		
 		switch(pub.getRole()){
 			case STANDALONE:
@@ -65,15 +64,18 @@ public class Listener extends Node{
 					if ( !driver.getCurrentUrl().equals("https://vk.com/gim" + pub.getId())){
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(5000);
+						takeScreenshot("in_gim");
 					}
 					
 					// we aren't in user's cell, but in dialogs. getting user
 					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
 					element.sendKeys(addressee.getName());
+					takeScreenshot("with_name");
 					sleep(100);
 					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
 					element.click();
 					sleep(150);
+					takeScreenshot("inside_dialog");
 				} else {
 					
 					//do nothing, we are in the right place
@@ -81,14 +83,15 @@ public class Listener extends Node{
 				
 				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
 				element.sendKeys(content);
-				takeScreenshot("ListenerRes");
+				takeScreenshot("with_content");
 
 				break;
 			default:
 				break;
 		}
 		
-		try{
+		//??
+		/* try{
 			element = driver.findElement(By.id("im_dialogs_search"));
 			element.click();
 			sleep(300);
@@ -98,7 +101,7 @@ public class Listener extends Node{
 		} catch (NoSuchElementException nsee){
 			
 			//means that there is no this user in close
-		}
+		} */
 	}
 	
 	// reads something from site
