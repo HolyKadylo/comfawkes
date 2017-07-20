@@ -48,7 +48,7 @@ public class App
 		HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
 		
 		
-		storage0.put(Public.Media.PICTURE, "https://vk.com/album-144898340_245793281");
+		storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
 		//
 		// storage.put(Public.Media.VIDEO, "https://vk.com/videos-9761670?section=album_1");
 		//
