@@ -80,10 +80,15 @@ public class Listener extends Node{
 					
 					//do nothing, we are in the right place
 				}
-				
+				//*[@id="im_editable0"]
 				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
+				element.click();
 				element.sendKeys(content);
 				takeScreenshot("with_content");
+				sleep(250);
+				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
+				element.click();
+				takeScreenshot("sent");
 
 				break;
 			default:
