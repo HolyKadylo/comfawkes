@@ -81,7 +81,9 @@ public class Listener extends Node{
 					//do nothing, we are in the right place
 				}
 				//*[@id="im_editable0"]
-				element = driver.findElement(By.xpath("//*[@id='im_editable0'][2]"));
+				//element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
+				
+				element = driver.findElement(By.xpath("//div[contains(text(), 'Write a message')]"));
 				element.click();
 				element.sendKeys(content);
 				takeScreenshot("with_content");
