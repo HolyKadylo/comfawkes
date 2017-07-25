@@ -49,6 +49,7 @@ public class Listener extends Node{
 	
 	// posts message to site user in dialog
 	public void post (User addressee, String content){
+		boolean needToGetUser = false;
 		switch(pub.getRole()){
 			case STANDALONE:
 				
@@ -61,6 +62,8 @@ public class Listener extends Node{
 						driver.get("https://vk.com/im");
 						sleep(5000);
 					}
+					needToGetUser = true;
+				}
 					
 					/* // we aren't in user's cell, but in dialogs. getting user
 					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
@@ -92,6 +95,8 @@ public class Listener extends Node{
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(5000);
 					}
+					needToGetUser = true;
+				}
 					
 					/* // we aren't in user's cell, but in dialogs. getting user
 					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
@@ -117,15 +122,13 @@ public class Listener extends Node{
 		}
 		
 	// we aren't in user's cell, but in dialogs. getting user
-				element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
-				element.sendKeys(addressee.getName());
-				sleep(100);
-				element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
-				element.click();
-				sleep(150);
-				} else {
-					
-					//do nothing, we are in the right place
+				if (needToGetUser){
+					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
+					element.sendKeys(addressee.getName());
+					sleep(100);
+					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
+					element.click();
+					sleep(150);
 				}
 				//*[@id="im_editable0"]
 				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
