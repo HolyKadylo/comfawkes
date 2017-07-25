@@ -1,5 +1,6 @@
 com\kadylo\comfawkes\User.class
 com\kadylo\comfawkes\Listener$1.class
+com\kadylo\comfawkes\Listener$Message.class
 com\kadylo\comfawkes\Poster$1.class
 com\kadylo\comfawkes\Public.class
 com\kadylo\comfawkes\App.class

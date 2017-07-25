@@ -64,25 +64,6 @@ public class Listener extends Node{
 					}
 					needToGetUser = true;
 				}
-					
-					/* // we aren't in user's cell, but in dialogs. getting user
-					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
-					element.sendKeys(addressee.getName());
-					sleep(100);
-					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
-					element.click();
-					sleep(150);
-				} else {
-					
-					//do nothing, we are in the right place
-				}
-				//*[@id="im_editable0"]
-				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
-				element.click();
-				element.sendKeys(content);
-				sleep(250);
-				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
-				element.click(); */
 				break;
 			case ADMIN:
 				
@@ -97,66 +78,34 @@ public class Listener extends Node{
 					}
 					needToGetUser = true;
 				}
-					
-					/* // we aren't in user's cell, but in dialogs. getting user
-					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
-					element.sendKeys(addressee.getName());
-					sleep(100);
-					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
-					element.click();
-					sleep(150);
-				} else {
-					
-					//do nothing, we are in the right place
-				}
-				//*[@id="im_editable0"]
-				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
-				element.click();
-				element.sendKeys(content);
-				sleep(250);
-				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
-				element.click(); */
 				break;
 			default:
 				break;
 		}
 		
-	// we aren't in user's cell, but in dialogs. getting user
-				if (needToGetUser){
-					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
-					element.sendKeys(addressee.getName());
-					sleep(100);
-					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
-					element.click();
-					sleep(150);
-				}
-				//*[@id="im_editable0"]
-				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
-				element.click();
-				element.sendKeys(content);
-				sleep(250);
-				element.sendKeys(Keys.RETURN);
-				//element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
-				//element.click();
-		
-		//??
-		/* try{
-			element = driver.findElement(By.id("im_dialogs_search"));
-			element.click();
-			sleep(300);
+		// we aren't in user's cell, but in dialogs. getting user
+		if (needToGetUser){
+			element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
 			element.sendKeys(addressee.getName());
-			element.submit();
-			sleep(1000);//....
-		} catch (NoSuchElementException nsee){
-			
-			//means that there is no this user in close
-		} */
+			sleep(100);
+			element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
+			element.click();
+			sleep(150);
+		}
+		element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
+		element.click();
+		element.sendKeys(content);
+		sleep(250);
+		element.sendKeys(Keys.RETURN);
 	}
 	
-	// reads something from site
-	public String read(){
-		String message = null;
-		driver.switchTo().window(readTab);
+	// attempts to read the site. if success, returns message
+	// otherwise null
+	public Message read(){
+		// user constr
+		// public User (String URL, int id, HashMap<Public, String> nicknames, String name, int balance){
+		Listener.Message message = this.new Message("abc", new User("123", 12, null, "123", 123)); 
+		//driver.switchTo().window(readTab);
 		
 		return message;
 	}
@@ -227,4 +176,26 @@ public class Listener extends Node{
 			e.printStackTrace();
 		}
 	}
+	
+	// Message that returns read()
+	class Message{
+		private String content;
+		private User user;
+		
+		private Message(String content, User user){
+			System.out.println("-->Creating Message");
+			this.content = content;
+			this.user = user;
+			System.out.println("-->Message created");
+		}
+		
+		public String getContent(){
+			return content;
+		}
+		
+		public User getUser(){
+			return user;
+		}
+	}
+	
 }
