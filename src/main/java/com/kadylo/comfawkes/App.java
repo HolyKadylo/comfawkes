@@ -67,7 +67,7 @@ public class App
 		listener.sleep(1500);
 		
 		listener.start(pub0);
-		listener.post(me, "і снова сєдая ночь і только єй довєряю я");
+		listener.post(me, "зіга ой \nнігєр стой");
 		listener.stop();
 		/* poster.sleep(1500);
 		poster.initialize(pub1);

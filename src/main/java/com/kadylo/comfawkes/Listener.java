@@ -135,8 +135,9 @@ public class Listener extends Node{
 				element.click();
 				element.sendKeys(content);
 				sleep(250);
-				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
-				element.click();
+				element.sendKeys(Keys.RETURN);
+				//element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
+				//element.click();
 		
 		//??
 		/* try{
