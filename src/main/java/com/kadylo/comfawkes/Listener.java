@@ -85,6 +85,7 @@ public class Listener extends Node{
 				
 				element = driver.findElement(By.xpath("//div[contains(text(), 'Write a message')]"));
 				element.click();
+            System.out.println("-->attempting to send content: " + content);
 				element.sendKeys(content);
 				takeScreenshot("with_content");
 				sleep(250);
