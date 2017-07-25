@@ -55,7 +55,7 @@ public class App
 		// storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
 		//
 		Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 150574507, Public.ListenerRole.ADMIN, storage00);
-		Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 16, Public.ListenerRole.ADMIN, storage0);
+		Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 144898340, Public.ListenerRole.STANDALONE, storage0);
         // Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
 		// Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
@@ -63,6 +63,12 @@ public class App
 		listener.start(pub00);
 		//listener.initialize(pub00);
 		listener.post(me, "hi there");
+		listener.stop();
+		listener.sleep(1500);
+		
+		listener.start(pub0);
+		listener.post(me, "і снова сєдая ночь і только єй довєряю я");
+		listener.stop();
 		/* poster.sleep(1500);
 		poster.initialize(pub1);
 		System.out.println("-->\n-->\n-->");
@@ -114,7 +120,7 @@ public class App
 		poster.sleep(1000); */
 		//poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
 		//poster.sleep(6000);
-		listener.stop();
+		
         //poster.setSettings();
 		//System.out.println("-->" + System.currentTimeMillis());
 		//poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");

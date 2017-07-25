@@ -49,12 +49,39 @@ public class Listener extends Node{
 	
 	// posts message to site user in dialog
 	public void post (User addressee, String content){
-		System.out.println("-->At first content is: " + content);
 		switch(pub.getRole()){
 			case STANDALONE:
+				
+				// we need to be right in the user's cell
+				// are we in it?
+				if ( !driver.getCurrentUrl().equals("https://vk.com/im?sel=" + addressee.getId()) ){
+					
+					//are we at least in dialogs?
+					if ( !driver.getCurrentUrl().equals("https://vk.com/im")){
+						driver.get("https://vk.com/im");
+						sleep(5000);
+					}
+					
+					/* // we aren't in user's cell, but in dialogs. getting user
+					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
+					element.sendKeys(addressee.getName());
+					sleep(100);
+					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
+					element.click();
+					sleep(150);
+				} else {
+					
+					//do nothing, we are in the right place
+				}
+				//*[@id="im_editable0"]
+				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
+				element.click();
+				element.sendKeys(content);
+				sleep(250);
+				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
+				element.click(); */
 				break;
 			case ADMIN:
-				
 				
 				// we need to be right in the user's cell
 				// are we in it?
@@ -64,38 +91,49 @@ public class Listener extends Node{
 					if ( !driver.getCurrentUrl().equals("https://vk.com/gim" + pub.getId())){
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(5000);
-						takeScreenshot("in_gim");
 					}
 					
-					// we aren't in user's cell, but in dialogs. getting user
+					/* // we aren't in user's cell, but in dialogs. getting user
 					element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
 					element.sendKeys(addressee.getName());
-					takeScreenshot("with_name");
 					sleep(100);
 					element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
 					element.click();
 					sleep(150);
-					takeScreenshot("inside_dialog");
 				} else {
 					
 					//do nothing, we are in the right place
 				}
 				//*[@id="im_editable0"]
 				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
-				
-				//element = driver.findElement(By.xpath("//div[contains(text(), 'Write a message')]"));
 				element.click();
-            System.out.println("-->attempting to send content: " + content);
 				element.sendKeys(content);
-				takeScreenshot("with_content");
 				sleep(250);
 				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
-				element.click();
-				takeScreenshot("sent");
+				element.click(); */
 				break;
 			default:
 				break;
 		}
+		
+	// we aren't in user's cell, but in dialogs. getting user
+				element = driver.findElement(By.xpath("//*[@id='im_dialogs_search']"));
+				element.sendKeys(addressee.getName());
+				sleep(100);
+				element = driver.findElement(By.xpath("//li[@data-list-id='" + addressee.getId() + "']"));
+				element.click();
+				sleep(150);
+				} else {
+					
+					//do nothing, we are in the right place
+				}
+				//*[@id="im_editable0"]
+				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
+				element.click();
+				element.sendKeys(content);
+				sleep(250);
+				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));
+				element.click();
 		
 		//??
 		/* try{
