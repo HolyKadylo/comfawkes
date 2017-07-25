@@ -48,8 +48,8 @@ public class Listener extends Node{
 	}
 	
 	// posts message to site user in dialog
-	public void post (User addressee, String msg){
-		System.out.println("-->At first content is: " + msg);
+	public void post (User addressee, String content){
+		System.out.println("-->At first content is: " + content);
 		switch(pub.getRole()){
 			case STANDALONE:
 				break;
@@ -81,12 +81,12 @@ public class Listener extends Node{
 					//do nothing, we are in the right place
 				}
 				//*[@id="im_editable0"]
-				//element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
+				element = driver.findElement(By.xpath("//*[@id='im_editable0']"));
 				
-				element = driver.findElement(By.xpath("//div[contains(text(), 'Write a message')]"));
+				//element = driver.findElement(By.xpath("//div[contains(text(), 'Write a message')]"));
 				element.click();
-            System.out.println("-->attempting to send content: " + msg);
-				element.sendKeys(msg);
+            System.out.println("-->attempting to send content: " + content);
+				element.sendKeys(content);
 				takeScreenshot("with_content");
 				sleep(250);
 				element = driver.findElement(By.xpath("//*[@id='content']/div/div[1]/div[2]/div[3]/div[3]/div[3]/div[2]/div[1]/button"));

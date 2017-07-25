@@ -62,7 +62,7 @@ public class App
       try{
 		listener.start(pub00);
 		//listener.initialize(pub00);
-		listener.post(me, "\0");
+		listener.post(me, "hi there");
 		/* poster.sleep(1500);
 		poster.initialize(pub1);
 		System.out.println("-->\n-->\n-->");
