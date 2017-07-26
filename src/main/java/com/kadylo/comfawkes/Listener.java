@@ -108,28 +108,29 @@ public class Listener extends Node{
 			// means we are in simple messages
 			try { 
 				element = driver.findElement(By.xpath("//span[@class='left_count']"));
-				element.click();
-				sleep(250);
-				element = driver.findElement(By.xpath("//*[@id='content']/div/div/div[3]/div[3]/div[2]/div/div/div[1]/div[1]/div/div[1]/div/div/div[1]/div[5]/div[2]/ul/li/div[3]/div"));
-				//element.getText();
-				
-				// TODO return user from DB
-				try {
-					System.out.println("-->Returning " + element.getText());
-					String text = element.getText();
-					int uid = Integer.parseInt(driver.getCurrentUrl().substring(22));
-					driver.get("https://vk.com/im");
-					sleep(250);
-					return this.new Message(text, new User(uid));
-				} catch (NumberFormatException nfe){
-					System.out.println("-->Exception while parsing id: " + nfe.toString());
-				}
-			
 			} catch (NoSuchElementException nsee){
 				
 				// means there is no count i.e no new messages
 				System.out.println("-->No new messages");
 				return null;
+			}
+			element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
+			element.click();
+			sleep(250);
+			element = driver.findElement(By.xpath("//*[@id='content']/div/div/div[3]/div[3]/div[2]/div/div/div[1]/div[1]/div/div[1]/div/div/div[1]/div[5]/div[2]/ul/li/div[3]/div"));
+			//element.getText();
+			
+			// TODO return user from DB
+			// returning message
+			try {
+				System.out.println("-->Returning " + element.getText());
+				String text = element.getText();
+				int uid = Integer.parseInt(driver.getCurrentUrl().substring(22));
+				driver.get("https://vk.com/im");
+				sleep(250);
+				return this.new Message(text, new User(uid));
+			} catch (NumberFormatException nfe){
+				System.out.println("-->Exception while parsing id: " + nfe.toString());
 			}
 		} else {
 			if (driver.getCurrentUrl().contains("im?sel=")){
