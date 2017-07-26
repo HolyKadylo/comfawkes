@@ -76,7 +76,7 @@ public class App
 			listener.takeScreenshot(String.valueOf(i));
 			i++;
 			iterate = i > 5 ? false : true;
-			listener.sleep(999);
+			listener.sleep(5000);
 		}
 		listener.stop();
 		/* poster.sleep(1500);

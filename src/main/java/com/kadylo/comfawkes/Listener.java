@@ -107,14 +107,15 @@ public class Listener extends Node{
 			
 			// means we are in simple messages
 			try { 
-				element = driver.findElement(By.xpath("//span[@class='left_count']"));
+				element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
+				//element = driver.findElement(By.xpath("//span[@class='left_count']"));
 			} catch (NoSuchElementException nsee){
 				
 				// means there is no count i.e no new messages
 				System.out.println("-->No new messages");
 				return null;
 			}
-			element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
+			//element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
 			element.click();
 			sleep(250);
 			element = driver.findElement(By.xpath("//*[@id='content']/div/div/div[3]/div[3]/div[2]/div/div/div[1]/div[1]/div/div[1]/div/div/div[1]/div[5]/div[2]/ul/li/div[3]/div"));
