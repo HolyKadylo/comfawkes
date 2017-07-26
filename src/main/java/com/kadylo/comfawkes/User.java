@@ -69,6 +69,12 @@ public class User{
 		return false;
 	}
       
+	//TODO user from DB
+	public User (int id){
+		System.out.println("-->TODO: Constructing user from id & DB");
+		this.id = id;
+		System.out.println("-->Done. User " + id);
+	}
   
   
 	//TODO generate id?
