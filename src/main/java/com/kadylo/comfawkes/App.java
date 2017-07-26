@@ -74,7 +74,7 @@ public class App
 		while (iterate){
 			listener.read();
 			i++;
-			iterate = i > 1000000 ? true : false;
+			iterate = i > 1000000 ? false : true;
 			listener.sleep(250);
 		}
 		listener.stop();
