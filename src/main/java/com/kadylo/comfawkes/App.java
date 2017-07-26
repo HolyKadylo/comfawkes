@@ -73,8 +73,9 @@ public class App
 		int i = 0;
 		while (iterate){
 			listener.read();
+			listener.takeScreenshot(String.valueOf(i));
 			i++;
-			iterate = i > 1000000 ? false : true;
+			iterate = i > 5 ? false : true;
 			listener.sleep(999);
 		}
 		listener.stop();
