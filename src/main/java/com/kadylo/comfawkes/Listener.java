@@ -107,7 +107,7 @@ public class Listener extends Node{
 			
 			// means we are in simple messages
 			try { 
-				element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
+				element = driver.findElement(By.xpath("//li[@class='nim-dialog_unread']"));
 				//element = driver.findElement(By.xpath("//span[@class='left_count']"));
 			} catch (NoSuchElementException nsee){
 				
