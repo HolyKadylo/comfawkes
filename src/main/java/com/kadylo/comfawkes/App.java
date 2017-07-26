@@ -60,23 +60,23 @@ public class App
 		// Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 		
       try{
-		/* listener.start(pub00);
+		listener.start(pub00);
 		//listener.initialize(pub00);
 		listener.post(me, "hi there");
 		listener.stop();
-		listener.sleep(1500); */
+		listener.sleep(1500);
 		
 		listener.start(pub0);
 		listener.post(me, "зіга ой \nнігєр стой");
 		
-		boolean iterate = true;
+		/* boolean iterate = true;
 		int i = 0;
 		while (iterate){
 			listener.read();
 			i++;
 			iterate = i > 1000000 ? false : true;
 			listener.sleep(250);
-		}
+		} */
 		listener.stop();
 		/* poster.sleep(1500);
 		poster.initialize(pub1);
