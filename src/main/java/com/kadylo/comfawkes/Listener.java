@@ -121,7 +121,7 @@ public class Listener extends Node{
 			sleep(250);
 			ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
 			System.out.println("-->Size: " + elements.size());
-			element = elements.get(elements.size());
+			element = elements.get(elements.size() - 1);
 			//element.getText();
 			
 			// TODO return user from DB
