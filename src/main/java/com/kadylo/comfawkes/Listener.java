@@ -9,6 +9,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.CompositeAction;
 import java.util.ArrayList;
+import java.util.List;
 
 // This is browser endpoint
 public class Listener extends Node{
@@ -118,7 +119,9 @@ public class Listener extends Node{
 			//element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
 			element.click();
 			sleep(250);
-			element = driver.findElement(By.xpath("//h4[@class='im-page--history-new-bar _im_unread_bar_row']/div[@class='im-mess--text wall_module _im_log_body']"));
+			ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
+			System.out.println("-->Size: " + elements.size());
+			element = elements.get(elements.size());
 			//element.getText();
 			
 			// TODO return user from DB
