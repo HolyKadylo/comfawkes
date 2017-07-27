@@ -118,7 +118,8 @@ public class Listener extends Node{
 			//element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
 			element.click();
 			sleep(250);
-			element = driver.findElement(By.xpath("//*[@id='content']/div/div/div[3]/div[3]/div[2]/div/div/div[1]/div[1]/div/div[1]/div/div/div[1]/div[5]/div[2]/ul/li/div[3]/div"));
+			//<h4 class=""><span>Unread Messages</span></h4>
+			element = driver.findElement(By.xpath("h4[@class='im-page--history-new-bar _im_unread_bar_row']/div[@class='im_msg_text']"));
 			//element.getText();
 			
 			// TODO return user from DB
