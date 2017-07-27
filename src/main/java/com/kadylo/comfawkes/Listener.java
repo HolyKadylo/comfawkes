@@ -107,7 +107,7 @@ public class Listener extends Node{
 			
 			// means we are in simple messages
 			try { 
-				element = driver.findElement(By.xpath("//li[@class='nim-dialog_unread']"));
+				element = driver.findElement(By.cssSelector("li.nim-dialog_unread"));
 				//element = driver.findElement(By.xpath("//span[@class='left_count']"));
 			} catch (NoSuchElementException nsee){
 				
@@ -140,7 +140,7 @@ public class Listener extends Node{
 			}
 		}
 		System.out.println("-->Not in messages, waiting, re-entering");
-		sleep(25000);
+		sleep(10000);
 		driver.get("https://vk.com/im");
 		read();
 		System.out.println("-->Something wrong");
