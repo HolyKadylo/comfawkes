@@ -176,7 +176,7 @@ public class Listener extends Node{
 						System.out.println("-->Returning " + element.getText());
 						String text = element.getText();
 						//vk.com/gim124124214?sel=1111222
-						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=")));
+						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=") + 1));
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(250);
 						return this.new Message(text, new User(uid));
@@ -195,9 +195,9 @@ public class Listener extends Node{
 				read();
 				System.out.println("-->Something wrong");
 				return null;
-			//	break;
+				//	break;
 			
-			
+			//<a onclick="return showPhoto('123771214_456239019', 'mail1395079', {&quot;temp&quot;:{&quot;base&quot;:&quot;https://pp.userapi.com/&quot;,&quot;x_&quot;:[&quot;c621509/v621509547/8c88/d0ci8bp4r3c&quot;,359,327]},queue:1}, event);" style="width: 329px; height: 300px; background-image: url(https://pp.userapi.com/c621509/v621509547/8c88/d0ci8bp4r3c.jpg)" class="page_post_thumb_wrap image_cover  page_post_thumb_last_column page_post_thumb_last_row"></a>
 				//break;
 			default:
 				System.out.println("-->No public role");
