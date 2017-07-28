@@ -103,56 +103,107 @@ public class Listener extends Node{
 	// attempts to read the site. if success, returns message
 	// otherwise null
 	public Message read(){
-		// user constr
-		if ( driver.getCurrentUrl().equals("https://vk.com/im") ){
-			
-			// means we are in simple messages
-			try { 
-				element = driver.findElement(By.cssSelector("li.nim-dialog_unread"));
-				//element = driver.findElement(By.xpath("//span[@class='left_count']"));
-			} catch (NoSuchElementException nsee){
-				
-				// means there is no count i.e no new messages
-				System.out.println("-->No new messages");
-				return null;
-			}
-			//element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
-			element.click();
-			sleep(250);
-			ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-			System.out.println("-->Size: " + elements.size());
-			element = elements.get(elements.size() - 1);
-			//element.getText();
-			
-			// TODO return user from DB
-			// returning message
-			try {
-				System.out.println("-->Returning " + element.getText());
-				String text = element.getText();
-				int uid = Integer.parseInt(driver.getCurrentUrl().substring(22));
-				driver.get("https://vk.com/im");
-				sleep(250);
-				return this.new Message(text, new User(uid));
-			} catch (NumberFormatException nfe){
-				System.out.println("-->Exception while parsing id: " + nfe.toString());
-			}
-		} else {
-			if (driver.getCurrentUrl().contains("im?sel=")){
-				
-				// means we are in some user
-			}
-		}
-		System.out.println("-->Not in messages, waiting, re-entering");
-		sleep(10000);
-		driver.get("https://vk.com/im");
-		read();
-		System.out.println("-->Something wrong");
-		return null;
-		// public User (String URL, int id, HashMap<Public, String> nicknames, String name, int balance){
-		//Listener.Message message = this.new Message("abc", new User("123", 12, null, "123", 123)); 
-		//driver.switchTo().window(readTab);
 		
-		//return message;
+		switch(pub.getRole()){
+			case STANDALONE:
+				if ( driver.getCurrentUrl().equals("https://vk.com/im") ){
+					
+					// means we are in simple messages
+					try { 
+						element = driver.findElement(By.cssSelector("li.nim-dialog_unread"));
+						//element = driver.findElement(By.xpath("//span[@class='left_count']"));
+					} catch (NoSuchElementException nsee){
+						
+						// means there is no count i.e no new messages
+						System.out.println("-->No new messages");
+						return null;
+					}
+					//element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
+					element.click();
+					sleep(250);
+					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
+					element = elements.get(elements.size() - 1);
+					//element.getText();
+					
+					// TODO return user from DB
+					// returning message
+					try {
+						System.out.println("-->Returning " + element.getText());
+						String text = element.getText();
+						int uid = Integer.parseInt(driver.getCurrentUrl().substring(22));
+						driver.get("https://vk.com/im");
+						sleep(250);
+						return this.new Message(text, new User(uid));
+					} catch (NumberFormatException nfe){
+						System.out.println("-->Exception while parsing id: " + nfe.toString());
+					}
+				} else {
+					if (driver.getCurrentUrl().contains("im?sel=")){
+						
+						// means we are in some user
+					}
+				}
+				System.out.println("-->Not in messages, waiting, re-entering");
+				sleep(10000);
+				driver.get("https://vk.com/im");
+				read();
+				System.out.println("-->Something wrong");
+				return null;
+				//break;
+			case ADMIN:
+				if ( driver.getCurrentUrl().equals("https://vk.com/gim" + pub.getId()) ){
+					
+					// means we are in simple messages
+					try { 
+						element = driver.findElement(By.cssSelector("li.nim-dialog_unread"));
+						//element = driver.findElement(By.xpath("//span[@class='left_count']"));
+					} catch (NoSuchElementException nsee){
+						
+						// means there is no count i.e no new messages
+						System.out.println("-->No new messages");
+						return null;
+					}
+					//element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
+					element.click();
+					sleep(250);
+					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
+					element = elements.get(elements.size() - 1);
+					//element.getText();
+					
+					// TODO return user from DB
+					// returning message
+					try {
+						System.out.println("-->Returning " + element.getText());
+						String text = element.getText();
+						//vk.com/gim124124214?sel=1111222
+						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=")));
+						driver.get("https://vk.com/gim" + pub.getId());
+						sleep(250);
+						return this.new Message(text, new User(uid));
+					} catch (NumberFormatException nfe){
+						System.out.println("-->Exception while parsing id: " + nfe.toString());
+					}
+				} else {
+					if (driver.getCurrentUrl().contains("im?sel=")){
+						
+						// means we are in some user
+					}
+				}
+				System.out.println("-->Not in messages, waiting, re-entering");
+				sleep(10000);
+				driver.get("https://vk.com/gim" + pub.getId());
+				read();
+				System.out.println("-->Something wrong");
+				return null;
+			//	break;
+			
+			
+				//break;
+			default:
+				System.out.println("-->No public role");
+				return null;
+				//break;
+		}
 	}
 	
 	//is used in next method

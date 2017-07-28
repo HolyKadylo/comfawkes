@@ -66,7 +66,7 @@ public class App
 		listener.stop();
 		listener.sleep(1500); */
 		
-		listener.start(pub0);
+		listener.start(pub00);
 		//listener.post(me, "зіга ой \nнігєр стой");
 		
 		boolean iterate = true;
@@ -75,7 +75,7 @@ public class App
 			listener.read();
 			listener.takeScreenshot(String.valueOf(i));
 			i++;
-			iterate = i > 5 ? false : true;
+			iterate = i > 5000 ? false : true;
 			listener.sleep(5000);
 		}
 		listener.stop();
