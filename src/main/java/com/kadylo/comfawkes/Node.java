@@ -110,6 +110,7 @@ public class Node{
 	// returns integer public id
 	public int initialize (Public pub){
 		System.out.println("-->Node " + this.id + " is starting initialization of storages in " + pub.getAddress());
+		System.out.println("-->Process is now revisioned. No albums are created");
 		
 		// this is vk's id, not our node's
 		int id = 0;
@@ -141,7 +142,7 @@ public class Node{
 		}
 
 		// crating picture album
-		try{
+		/* try{
 			driver.get("https://vk.com/albums-" + String.valueOf(id));
 			sleep(5000);
 			element = driver.findElement(By.id("photos_add_album_btn"));
@@ -166,17 +167,17 @@ public class Node{
 				System.out.println("-->file exception");
 				ioe.printStackTrace();
 			}
-		}
+		} */
 
 		// creating playlist
-		try{
+		/* try{
 			driver.get(pub.getAddress());
 			sleep(1500);
 			driver.get("https://vk.com/audios-" + String.valueOf(id));
 			sleep(5000);
-			/* element = driver.findElement(By.className(CLASS_TO_CREATE_PLAYLIST));
-			System.out.println("-->32");
-			element.click(); */
+			//element = driver.findElement(By.className(CLASS_TO_CREATE_PLAYLIST));
+			//System.out.println("-->32");
+			//element.click(); 
 			((JavascriptExecutor) driver).executeScript("AudioPage.editPlaylist(-" + String.valueOf(id) + ");");
 			sleep(1500);
 			element = driver.findElement(By.id(PLAYLIST_TITLE_ID));
@@ -200,10 +201,10 @@ public class Node{
 				System.out.println("-->file exception");
 				ioe.printStackTrace();
 			}
-		}
+		} */
 
 		// creating video album
-		try{
+		/* try{
 			driver.get(pub.getAddress());
 			sleep(2000);
 			driver.get("https://vk.com/videos-" + String.valueOf(id));
@@ -227,7 +228,7 @@ public class Node{
 				System.out.println("-->file exception");
 				ioe.printStackTrace();
 			}
-		}
+		} */
 		state = State.WORKING;
 		pub.setId(id);
 		return id;
