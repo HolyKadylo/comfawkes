@@ -73,7 +73,7 @@ public class App
 		int i = 0;
 		while (iterate){
 			listener.read();
-			listener.takeScreenshot(String.valueOf(i));
+			// listener.takeScreenshot(String.valueOf(i));
 			i++;
 			iterate = i > 5000 ? false : true;
 			listener.sleep(5000);
