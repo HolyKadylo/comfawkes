@@ -213,6 +213,37 @@ public class Listener extends Node{
 						String text = element.getText();
 						//vk.com/gim124124214?sel=1111222
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=") + 1));
+						
+						// TODO TEST
+						...
+						//adding image
+						try{
+							System.out.println("-->Trying to get image");
+							ArrayList<WebElement> imageElements = new ArrayList(driver.findElements(By.cssSelector("a.page_post_thumb_wrap.image_cover.page_post_thumb_last_column.page_post_thumb_last_row")));
+							WebElement imageElement = imageElements.get(imageElements.size() - 1);
+							//WebElement imageElement = driver.findElement(By.cssSelector("a.page_post_thumb_wrap.image_cover.page_post_thumb_last_column.page_post_thumb_last_row"));
+							String style = imageElement.getAttribute("style");
+							System.out.println("-->Style 1: " + style);
+							style = style.substring(style.indexOf("("), style.length() - 1);
+							System.out.println("-->Style 2: " + style);
+							style = style.substring(2, style.length() - 2);
+							System.out.println("-->Style 3: " + style);
+							
+							// finding out which is the last image
+							boolean imageLast = false;
+							if (imageElement.getLocation().getY() > element.getLocation().getY()){
+								imageLast = true;
+								System.out.println("-->Image last");
+							}
+							
+							//<a onclick="return showPhoto('123771214_456239019', 'mail1395079', {&quot;temp&quot;:{&quot;base&quot;:&quot;https://pp.userapi.com/&quot;,&quot;x_&quot;:[&quot;c621509/v621509547/8c88/d0ci8bp4r3c&quot;,359,327]},queue:1}, event);" style="width: 329px; height: 300px; background-image: url(https://pp.userapi.com/c621509/v621509547/8c88/d0ci8bp4r3c.jpg)" class="page_post_thumb_wrap image_cover page_post_thumb_last_column page_post_thumb_last_row"></a>
+						} catch (NoSuchElementException nseex){
+							System.out.println("-->No image");
+						} catch (IndexOutOfBoundsException ioobe){
+							// nothing
+						}
+						
+						
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(250);
 						return this.new Message(text, new User(uid));
