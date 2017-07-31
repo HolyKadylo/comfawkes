@@ -122,7 +122,7 @@ public class Listener extends Node{
 					element.click();
 					sleep(250);
 					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-					element = elements.get(elements.size() - 1);
+					element = elements.get(elements.size());
 					//element.getText();
 					
 					// TODO return user from DB
@@ -180,7 +180,7 @@ public class Listener extends Node{
 					element.click();
 					sleep(250);
 					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-					element = elements.get(elements.size() - 1);
+					element = elements.get(elements.size());
 					//element.getText();
 					
 					// TODO return user from DB

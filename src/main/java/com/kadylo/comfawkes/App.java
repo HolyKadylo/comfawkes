@@ -152,7 +152,7 @@ public class App
 		//System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
 		//System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
 		//poster.stop();
-        } catch (NoSuchElementException nse){
+        } catch (Exception nse){
 			try{
 				File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
 				FileUtils.copyFile(scrFile, new File("TESTCASEFAIL.png"));
