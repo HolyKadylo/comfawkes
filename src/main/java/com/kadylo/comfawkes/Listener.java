@@ -122,7 +122,12 @@ public class Listener extends Node{
 					element.click();
 					sleep(250);
 					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-					element = elements.get(elements.size() - 1);
+					try {
+						element = elements.get(elements.size() - 1);
+						System.out.println("-->OK");
+					} catch (IndexOutOfBoundsException ioobe){
+						System.out.println("-->Wrong");
+					}
 					//element.getText();
 					
 					// TODO return user from DB
@@ -180,7 +185,12 @@ public class Listener extends Node{
 					element.click();
 					sleep(250);
 					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-					element = elements.get(elements.size() - 1);
+					try{
+						element = elements.get(elements.size() - 1);
+						System.out.println("-->OK2");
+					} catch (IndexOutOfBoundsException ioobe){
+						System.out.println("-->Wrong2");
+					}
 					//element.getText();
 					
 					// TODO return user from DB
