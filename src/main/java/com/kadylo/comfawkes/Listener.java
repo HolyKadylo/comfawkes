@@ -231,6 +231,10 @@ public class Listener extends Node{
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(250);
 						System.out.println("-->Actual: " + text);
+						if (text.equals("")){
+							System.out.println("-->Wrong. Recursive call");
+							read();
+						}
 						return this.new Message(text, new User(uid));
 					} catch (NumberFormatException nfe){
 						System.out.println("-->Exception while parsing id: " + nfe.toString());
