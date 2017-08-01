@@ -183,7 +183,6 @@ public class Listener extends Node{
 						System.out.println("-->No new messages");
 						return null;
 					}
-					//element = driver.findElement(By.xpath("//li[@class='nim-dialog_recent']"));
 					element.click();
 					sleep(250);
 					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
@@ -193,18 +192,13 @@ public class Listener extends Node{
 
 						// nothing
 					}
-					//element.getText();
-					
-					// TODO return user from DB
+		
 					// returning message
 					try {
 						System.out.println("-->Returning " + element.getText());
 						String text = element.getText();
-						//vk.com/gim124124214?sel=1111222
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=") + 1));
-						
-						// TODO TEST
-						//...
+
 						//adding image
 						try{
 							System.out.println("-->Trying to get image");
@@ -236,6 +230,7 @@ public class Listener extends Node{
 						
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(250);
+						System.out.println("-->Actual: " + text);
 						return this.new Message(text, new User(uid));
 					} catch (NumberFormatException nfe){
 						System.out.println("-->Exception while parsing id: " + nfe.toString());
