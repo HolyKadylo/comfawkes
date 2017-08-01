@@ -120,6 +120,7 @@ public class Listener extends Node{
 					}
 					element.click();
 					sleep(250);
+					takeScreenshot("wtf");
 					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
 					try {
 						element = elements.get(elements.size() - 1);
