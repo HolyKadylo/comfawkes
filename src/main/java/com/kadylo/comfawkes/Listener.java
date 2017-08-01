@@ -215,7 +215,7 @@ public class Listener extends Node{
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=") + 1));
 						
 						// TODO TEST
-						...
+						//...
 						//adding image
 						try{
 							System.out.println("-->Trying to get image");
