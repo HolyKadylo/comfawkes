@@ -186,7 +186,7 @@ public class Listener extends Node{
 					}
 					element.click();
 					sleep(250);
-					WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
+					//WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
 					//...........final WebElement errorElement = web.findElement(By.xpath("//*[@id='" + elementId + "']/following-sibling::span[@class='error']"));
 					//ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
 					element = driver.findElement(By.xpath("//h4[text() = 'Unread Messages']/following-sibling::div[@class='im-mess-stack']"));
