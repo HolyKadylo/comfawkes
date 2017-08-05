@@ -213,6 +213,7 @@ public class Listener extends Node{
 							if (imageElement.getLocation().getY() > element.getLocation().getY()){
 								imageLast = true;
 								System.out.println("-->Image last");
+								takeScreenshot("thinksthatimagelast");
 								text = text + " " + style;
 							}
 						} catch (NoSuchElementException nseex){
