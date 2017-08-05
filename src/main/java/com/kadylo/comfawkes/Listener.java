@@ -190,6 +190,21 @@ public class Listener extends Node{
 					//...........final WebElement errorElement = web.findElement(By.xpath("//*[@id='" + elementId + "']/following-sibling::span[@class='error']"));
 					//ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
 					element = driver.findElement(By.xpath("//h4/following-sibling::div"));
+					String text = element.getText();
+					try{
+						
+						//if has style
+						element = driver.findElement(By.xpath("//h4/following-sibling::div/div/ul/li[2]/div[3]/div[1]/div/a"));
+						String style = element.getAttribute("style");
+						style = style.substring(style.indexOf("("), style.length() - 1);
+						style = style.substring(2, style.length() - 2);
+						text += " ";
+						text += style;
+					} catch (NoSuchElementException ns){
+						
+						System.out.println("-->No image");
+					}
+					System.out.println("-->Have text: " + text);
 					/* try{
 						element = elements.get(elements.size() - 1);
 					} catch (IndexOutOfBoundsException ioobe){
@@ -198,10 +213,10 @@ public class Listener extends Node{
 					} */
 		
 					// returning message
-					try {
-						String text = element.getText();
+					 try {
+						//String text = element.getText();
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=") + 1));
-
+/*
 						//adding image
 						try{
 							ArrayList<WebElement> imageElements = new ArrayList(driver.findElements(By.cssSelector("a.page_post_thumb_wrap.image_cover.page_post_thumb_last_column.page_post_thumb_last_row")));
@@ -223,12 +238,12 @@ public class Listener extends Node{
 							System.out.println("-->No image");
 						} catch (IndexOutOfBoundsException ioobe){
 							// nothing
-						}
+						} */
 						
 						
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(250);
-						System.out.println("-->Actual: " + text);
+						//System.out.println("-->Actual: " + text);
 						if (text.equals("")){
 							System.out.println("-->Wrong. Recursive call");
 							read();
