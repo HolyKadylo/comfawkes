@@ -120,19 +120,31 @@ public class Listener extends Node{
 					}
 					element.click();
 					sleep(250);
-					WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
-					ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-					try {
-						element = elements.get(elements.size() - 1);
-					} catch (IndexOutOfBoundsException ioobe){
-						//nothing
+					//WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
+					//...........final WebElement errorElement = web.findElement(By.xpath("//*[@id='" + elementId + "']/following-sibling::span[@class='error']"));
+					//ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
+					element = driver.findElement(By.xpath("//h4/following-sibling::div"));
+					String text = element.getText();
+					try{
+						
+						//if has style
+						element = driver.findElement(By.xpath("//h4/following-sibling::div/div/ul/li[2]/div[3]/div[1]/div/a"));
+						String style = element.getAttribute("style");
+						style = style.substring(style.indexOf("("), style.length() - 1);
+						style = style.substring(2, style.length() - 2);
+						text += " ";
+						text += style;
+					} catch (NoSuchElementException ns){
+						
+						System.out.println("-->No image");
 					}
+					System.out.println("-->Have text: " + text);
 					
 					try {
-						String text = element.getText();
+						//String text = element.getText();
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(22));
 						
-						//adding image
+					/* 	//adding image
 						try{
 							ArrayList<WebElement> imageElements = new ArrayList(driver.findElements(By.cssSelector("a.page_post_thumb_wrap.image_cover.page_post_thumb_last_column.page_post_thumb_last_row")));
 							WebElement imageElement = imageElements.get(imageElements.size() - 1);
@@ -150,7 +162,7 @@ public class Listener extends Node{
 							// nothing 
 						} catch (IndexOutOfBoundsException ioobe){
 							// nothing
-						}
+						} */
 						driver.get("https://vk.com/im");
 						sleep(250);
 						System.out.println("-->Returning " + text);
