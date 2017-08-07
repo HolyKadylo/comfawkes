@@ -134,7 +134,7 @@ public class Listener extends Node{
 					try{
 						
 						//if has style
-						element = driver.findElement(By.xpath("//h4/following-sibling::div/div/ul/li[2]/div[3]/div[1]/div/a"));
+						element = driver.findElement(By.xpath("//h4/following-sibling::div/div/ul/li/div/div/div/a"));
 						String style = element.getAttribute("style");
 						style = style.substring(style.indexOf("("), style.length() - 1);
 						style = style.substring(2, style.length() - 2);
@@ -218,7 +218,7 @@ public class Listener extends Node{
 					try{
 						
 						//if has style
-						element = driver.findElement(By.xpath("//h4/following-sibling::div/div/ul/li[2]/div[3]/div[1]/div/a"));
+						element = driver.findElement(By.xpath("//h4/following-sibling::div/div/ul/li/div/div/div/a"));
 						String style = element.getAttribute("style");
 						style = style.substring(style.indexOf("("), style.length() - 1);
 						style = style.substring(2, style.length() - 2);
