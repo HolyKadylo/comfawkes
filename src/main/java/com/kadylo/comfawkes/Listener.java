@@ -111,7 +111,6 @@ public class Listener extends Node{
 					// means we are in simple messages
 					try { 
 						element = driver.findElement(By.cssSelector("li.nim-dialog_unread"));
-						//element = driver.findElement(By.xpath("//span[@class='left_count']"));
 					} catch (NoSuchElementException nsee){
 						
 						// means there is no count i.e no new messages
@@ -120,9 +119,6 @@ public class Listener extends Node{
 					}
 					element.click();
 					sleep(250);
-					//WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
-					//...........final WebElement errorElement = web.findElement(By.xpath("//*[@id='" + elementId + "']/following-sibling::span[@class='error']"));
-					//ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
 					try{
 						element = driver.findElement(By.xpath("//h4/following-sibling::div"));
 					} catch (NoSuchElementException nse){
@@ -147,28 +143,7 @@ public class Listener extends Node{
 					System.out.println("-->Have text: " + text);
 					
 					try {
-						//String text = element.getText();
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(22));
-						
-					/* 	//adding image
-						try{
-							ArrayList<WebElement> imageElements = new ArrayList(driver.findElements(By.cssSelector("a.page_post_thumb_wrap.image_cover.page_post_thumb_last_column.page_post_thumb_last_row")));
-							WebElement imageElement = imageElements.get(imageElements.size() - 1);
-							String style = imageElement.getAttribute("style");
-							style = style.substring(style.indexOf("("), style.length() - 1);
-							style = style.substring(2, style.length() - 2);
-							
-							// finding out which is the last image
-							boolean imageLast = false;
-							if (imageElement.getLocation().getY() > element.getLocation().getY()){
-								imageLast = true;
-								text = text + " " + style;
-							}
-						} catch (NoSuchElementException nseex){
-							// nothing 
-						} catch (IndexOutOfBoundsException ioobe){
-							// nothing
-						} */
 						driver.get("https://vk.com/im");
 						sleep(250);
 						System.out.println("-->Returning " + text);
@@ -180,6 +155,10 @@ public class Listener extends Node{
 					if (driver.getCurrentUrl().contains("im?sel=")){
 						
 						// means we are in some user
+						System.out.println("-->In some other user, waiting, re-entering");
+						sleep(10000);
+						driver.get("https://vk.com/im");
+						read();
 					}
 				}
 				System.out.println("-->Not in messages, waiting, re-entering");
@@ -188,14 +167,12 @@ public class Listener extends Node{
 				read();
 				System.out.println("-->Something wrong");
 				return null;
-				//break;
 			case ADMIN:
 				if ( driver.getCurrentUrl().equals("https://vk.com/gim" + pub.getId()) ){
 					
 					// means we are in simple messages
 					try { 
 						element = driver.findElement(By.cssSelector("li.nim-dialog_unread"));
-						//element = driver.findElement(By.xpath("//span[@class='left_count']"));
 					} catch (NoSuchElementException nsee){
 						
 						// means there is no count i.e no new messages
@@ -204,9 +181,6 @@ public class Listener extends Node{
 					}
 					element.click();
 					sleep(250);
-					//WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
-					//...........final WebElement errorElement = web.findElement(By.xpath("//*[@id='" + elementId + "']/following-sibling::span[@class='error']"));
-					//ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
 					try{
 						element = driver.findElement(By.xpath("//h4/following-sibling::div"));
 					} catch (NoSuchElementException nse){
@@ -229,42 +203,10 @@ public class Listener extends Node{
 						System.out.println("-->No image");
 					}
 					System.out.println("-->Have text: " + text);
-					/* try{
-						element = elements.get(elements.size() - 1);
-					} catch (IndexOutOfBoundsException ioobe){
-
-						// nothing
-					} */
 		
 					// returning message
-					 try {
-						//String text = element.getText();
+					try {
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(driver.getCurrentUrl().indexOf("=") + 1));
-/*
-						//adding image
-						try{
-							ArrayList<WebElement> imageElements = new ArrayList(driver.findElements(By.cssSelector("a.page_post_thumb_wrap.image_cover.page_post_thumb_last_column.page_post_thumb_last_row")));
-							WebElement imageElement = imageElements.get(imageElements.size() - 1);
-							String style = imageElement.getAttribute("style");
-							style = style.substring(style.indexOf("("), style.length() - 1);
-							style = style.substring(2, style.length() - 2);
-							
-							// finding out which is the last image
-							boolean imageLast = false;
-							System.out.println("-->image y:" + imageElement.getLocation().getY() + "\n-->element y: " + element.getLocation().getY());
-							if (imageElement.getLocation().getY() > element.getLocation().getY()){
-								imageLast = true;
-								System.out.println("-->Image last");
-								takeScreenshot("thinksthatimagelast");
-								text = text + " " + style;
-							}
-						} catch (NoSuchElementException nseex){
-							System.out.println("-->No image");
-						} catch (IndexOutOfBoundsException ioobe){
-							// nothing
-						} */
-						
-						
 						driver.get("https://vk.com/gim" + pub.getId());
 						sleep(250);
 						//System.out.println("-->Actual: " + text);
@@ -280,6 +222,10 @@ public class Listener extends Node{
 					if (driver.getCurrentUrl().contains("im?sel=")){
 						
 						// means we are in some user
+						System.out.println("-->In some other user, waiting, re-entering");
+						sleep(10000);
+						driver.get("https://vk.com/gim");
+						read();
 					}
 				}
 				System.out.println("-->Not in messages, waiting, re-entering");
@@ -288,14 +234,9 @@ public class Listener extends Node{
 				read();
 				System.out.println("-->Something wrong");
 				return null;
-				//	break;
-			
-			//<a onclick="return showPhoto('123771214_456239019', 'mail1395079', {&quot;temp&quot;:{&quot;base&quot;:&quot;https://pp.userapi.com/&quot;,&quot;x_&quot;:[&quot;c621509/v621509547/8c88/d0ci8bp4r3c&quot;,359,327]},queue:1}, event);" style="width: 329px; height: 300px; background-image: url(https://pp.userapi.com/c621509/v621509547/8c88/d0ci8bp4r3c.jpg)" class="page_post_thumb_wrap image_cover  page_post_thumb_last_column page_post_thumb_last_row"></a>
-				//break;
 			default:
 				System.out.println("-->No public role");
 				return null;
-				//break;
 		}
 	}
 	
