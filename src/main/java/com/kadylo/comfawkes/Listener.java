@@ -146,7 +146,6 @@ public class Listener extends Node{
 						int uid = Integer.parseInt(driver.getCurrentUrl().substring(22));
 						driver.get("https://vk.com/im");
 						sleep(250);
-						System.out.println("-->Returning " + text);
 						return this.new Message(text, new User(uid));
 					} catch (NumberFormatException nfe){
 						System.out.println("-->Exception while parsing id: " + nfe.toString());
