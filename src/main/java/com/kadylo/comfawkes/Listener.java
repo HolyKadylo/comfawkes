@@ -124,7 +124,7 @@ public class Listener extends Node{
 					} catch (NoSuchElementException nse){
 						
 						// means we have today bar
-						element = driver.findElement(By.xpath("//h5/following-sibling::div"));
+						element = driver.findElement(By.xpath("//h5[text()='today']/following-sibling::div"));
 					}
 					String text = element.getText();
 					try{
@@ -185,7 +185,7 @@ public class Listener extends Node{
 					} catch (NoSuchElementException nse){
 						
 						// means we have today bar
-						element = driver.findElement(By.xpath("//h5/following-sibling::div"));
+						element = driver.findElement(By.xpath("//h5[text()='today']/following-sibling::div"));
 					}
 					String text = element.getText();
 					try{
