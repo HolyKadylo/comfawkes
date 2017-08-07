@@ -123,7 +123,13 @@ public class Listener extends Node{
 					//WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
 					//...........final WebElement errorElement = web.findElement(By.xpath("//*[@id='" + elementId + "']/following-sibling::span[@class='error']"));
 					//ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-					element = driver.findElement(By.xpath("//h4/following-sibling::div"));
+					try{
+						element = driver.findElement(By.xpath("//h4/following-sibling::div"));
+					} catch (NoSuchElementException nse){
+						
+						// means we have today bar
+						element = driver.findElement(By.xpath("//h5/following-sibling::div"));
+					}
 					String text = element.getText();
 					try{
 						
@@ -201,7 +207,13 @@ public class Listener extends Node{
 					//WebElement unreadBar = driver.findElement(By.cssSelector("h4.im-page--history-new-bar._im_unread_bar_row"));
 					//...........final WebElement errorElement = web.findElement(By.xpath("//*[@id='" + elementId + "']/following-sibling::span[@class='error']"));
 					//ArrayList<WebElement> elements = new ArrayList(driver.findElements(By.cssSelector("div.im-mess-stack._im_mess_stack")));
-					element = driver.findElement(By.xpath("//h4/following-sibling::div"));
+					try{
+						element = driver.findElement(By.xpath("//h4/following-sibling::div"));
+					} catch (NoSuchElementException nse){
+						
+						// means we have today bar
+						element = driver.findElement(By.xpath("//h5/following-sibling::div"));
+					}
 					String text = element.getText();
 					try{
 						
