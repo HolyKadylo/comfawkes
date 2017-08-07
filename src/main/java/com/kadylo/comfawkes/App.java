@@ -65,8 +65,8 @@ public class App
 		listener.post(me, "hi there");
 		listener.stop();
 		listener.sleep(1500); */
-		
-		listener.start(pub0);
+		System.out.println("-->merge OK");
+		listener.start(pub00);
 		//listener.post(me, "зіга ой \nнігєр стой");
 		
 		boolean iterate = true;
