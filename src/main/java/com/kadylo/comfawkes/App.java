@@ -66,7 +66,7 @@ public class App
 		listener.stop();
 		listener.sleep(1500); */
 		
-		listener.start(pub00);
+		listener.start(pub0);
 		//listener.post(me, "зіга ой \nнігєр стой");
 		
 		boolean iterate = true;
