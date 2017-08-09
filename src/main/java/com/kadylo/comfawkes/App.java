@@ -34,10 +34,10 @@ public class App {
 		//String args are:
 		// node -- for node testcase
 		// nestor -- for being a Nestor
-		
-		if (args[0].equals("node"))
+		System.out.println("-->Our args is " + args[1]);
+		if (args[1].equals("node"))
 			approle = Approle.NODE;
-		if (args[0].equals("nestor"))
+		if (args[1].equals("nestor"))
 			approle = Approle.NESTOR;
 		
 		switch (approle){
