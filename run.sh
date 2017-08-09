@@ -1,10 +1,10 @@
 arg=$1
 echo "-->Running in $arg mode"
-if [$arg = "node"]
+if ["$arg" = "node"]
 then
 	mode="-node"
 else
-	if [$arg = "nestor"]
+	if ["$arg" = "nestor"]
 	then 
 		mode="-nestor"
 	else
