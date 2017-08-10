@@ -1,30 +1,22 @@
 echo "-->Running in $1 mode"
-if [ "$1" == "node" ]
-then
-	mode="-node"
-else
-	if [ "$1" == "nestor" ]
-	then 
-		mode="-nestor"
-	else
-		echo "-->Mode disabled, exiting"
-		exit 0
-	fi
-fi
 
 # Starting Node
-if [ "$mode" == "-node" ]
+if [ "$1" == "node" ]
 then
-	echo "-->Starting App.java with $mode"
 	./stop-node.sh
 	./start-node.sh
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar $mode
+	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$1"
 	./stop-node.sh
+	exit 0
 fi 
 
 # Starting Nestor
-if [ "$mode" == "-nestor" ]
+if [ "$1" == "nestor" ]
 then
-	echo "-->Starting App.java with $mode"
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar $mode
+	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$1"
+	exit 0
 fi
+
+# No valid mode
+echo "-->No valid mode, exiting"
+exit 0
