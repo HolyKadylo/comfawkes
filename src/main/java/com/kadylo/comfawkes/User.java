@@ -3,9 +3,10 @@ package com.kadylo.comfawkes;
 import java.util.HashMap;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import java.io.Serializable;
 
 // represents user of our service
-public class User{
+public class User implements Serializable{
 	
 	// link to user's page
 	// XXX.com/idXXXXXXXX

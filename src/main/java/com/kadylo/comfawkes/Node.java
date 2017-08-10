@@ -62,6 +62,11 @@ public class Node{
       return driver;
     }
 	
+	// empty
+	public Node(){
+		
+	}
+	
 	// constructor
 	public Node (Account account, String sURL, int id){
 		System.out.println("-->Constructing node");

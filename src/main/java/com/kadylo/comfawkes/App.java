@@ -34,7 +34,6 @@ public class App {
 		//String args are:
 		// node -- for node testcase
 		// nestor -- for being a Nestor
-		System.out.println("-->Our args is " + args[0]);
 		if (args[0].equals("node"))
 			approle = Approle.NODE;
 		if (args[0].equals("nestor"))
@@ -221,9 +220,13 @@ public class App {
 			driver.quit(); */
 			break;
 			case NESTOR:
-			
-			System.out.println("-->This is Nestor");
-			SimpleNestor nestor = new SimpleNestor();
+				SimpleNestor nestor = new SimpleNestor();
+				Listener list = new Listener();
+				Listener.Message message = list.new Message("HELLO NAMECHEAP EMPLOYEE", new User(150));
+				String ss = message.getSerialized();
+				System.out.println("-->Serialized message is: " + ss);
+				Listener.Message message2 = list.new Message(ss);
+				System.out.println("-->Deserialized content is: " + message2.getContent());
 			break;
 			
 			default:

@@ -9,4 +9,10 @@ public class SimpleNestor{
 		System.out.println("-->This is simpleNestor constructor");
 	}
 	
+	private void act(){
+		System.out.println("-->Nestor acts");
+		
+	}
+	
+	//private String read
 }

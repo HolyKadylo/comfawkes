@@ -10,9 +10,15 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.CompositeAction;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 
 // This is browser endpoint
-public class Listener extends Node{
+public class Listener extends Node implements Serializable{
 	
 	// users that we ignore for a while or forever
 	// this list is renewed in each message
@@ -22,6 +28,11 @@ public class Listener extends Node{
 	private ArrayList<User> ignoredUsers;
     private String readTab;
     private String writeTab;
+	
+	// empty
+	public Listener (){
+		super();
+	}
 	
 	public Listener(Account account, String sURL, int id){
 		super(account, sURL, id);
@@ -307,15 +318,66 @@ public class Listener extends Node{
 	}
 	
 	// Message that returns read()
-	class Message{
+	class Message implements Serializable{
+		// private static final String ENCODING = "UTF-8";
 		private String content;
 		private User user;
+		private String serialized;
 		
-		private Message(String content, User user){
-			System.out.println("-->Creating Message");
+		// creating from serialized state
+		// can't be private
+		public Message(String s){
+			System.out.println("-->Starting deseriaization constructor");
+			this.serialized = s;
+			
+			// deserializing string 
+			Message m = null;
+			try {
+				
+				// sIn is for string Input Stream
+				ByteArrayInputStream sIn = new ByteArrayInputStream(s.getBytes());
+				ObjectInputStream in = new ObjectInputStream(sIn);
+				m = (Message) in.readObject();
+				in.close();
+				sIn.close();
+			}catch(IOException ioe) {
+				System.out.println("-->Error while deserealizing");
+				ioe.printStackTrace();
+			}catch(ClassNotFoundException c) {
+				System.out.println("-->Message class not found");
+				c.printStackTrace();
+			}
+			
+			this.setUser(m.getUser());
+			this.setContent(m.getContent());
+			
+			System.out.println("-->Ending deseriaization constructor");
+		}
+		
+		// creating from content
+		public Message(String content, User user){
+			System.out.println("-->Starting seriaization constructor");
 			this.content = content;
 			this.user = user;
-			System.out.println("-->Message created");
+
+			// Serializing
+			try {
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ObjectOutputStream out = new ObjectOutputStream(baos);
+				out.writeObject(this);
+				out.flush();
+				out.close();
+				baos.close();
+				this.serialized = new String (baos.toByteArray());
+			}catch(IOException ioe) {
+				System.out.println("-->Exception while serializing message");
+				ioe.printStackTrace();
+			}
+			System.out.println("-->Ending seriaization constructor");
+		}
+		
+		public String getSerialized(){
+			return serialized;
 		}
 		
 		public String getContent(){
@@ -324,6 +386,14 @@ public class Listener extends Node{
 		
 		public User getUser(){
 			return user;
+		}
+		
+		private void setContent (String con){
+			this.content = con;
+		}
+		
+		private void setUser (User u){
+			this.user = u;
 		}
 	}
 	

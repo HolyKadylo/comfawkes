@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import java.io.Serializable;
 
-public class Public{
+public class Public implements Serializable{
 	
 	// identification number in our DB
 	// and vk DB
