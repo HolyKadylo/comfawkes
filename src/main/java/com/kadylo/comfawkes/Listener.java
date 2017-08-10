@@ -17,6 +17,9 @@ import java.io.Serializable;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 
+//https://stackoverflow.com/questions/134492/how-to-serialize-an-object-into-a-string
+import java.util.Base64;
+
 // This is browser endpoint
 public class Listener extends Node implements Serializable{
 	
@@ -325,7 +328,6 @@ public class Listener extends Node implements Serializable{
 		private String serialized;
 		
 		// creating from serialized state
-		// can't be private
 		public Message(String s){
 			System.out.println("-->Starting deseriaization constructor");
 			this.serialized = s;
@@ -335,7 +337,7 @@ public class Listener extends Node implements Serializable{
 			try {
 				
 				// sIn is for string Input Stream
-				ByteArrayInputStream sIn = new ByteArrayInputStream(s.getBytes());
+				ByteArrayInputStream sIn = new ByteArrayInputStream(Base64.getDecoder().decode(s));
 				ObjectInputStream in = new ObjectInputStream(sIn);
 				m = (Message) in.readObject();
 				in.close();
@@ -368,7 +370,7 @@ public class Listener extends Node implements Serializable{
 				out.flush();
 				out.close();
 				baos.close();
-				this.serialized = new String (baos.toByteArray());
+				this.serialized = new String (Base64.getEncoder().encodeToString(baos.toByteArray()));
 			}catch(IOException ioe) {
 				System.out.println("-->Exception while serializing message");
 				ioe.printStackTrace();
