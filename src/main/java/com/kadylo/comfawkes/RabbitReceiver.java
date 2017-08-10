@@ -9,7 +9,7 @@ private final static String QUEUE_NAME = "hello";
 
 	public void startReceive() throws Exception {
 		ConnectionFactory factory = new ConnectionFactory();
-		factory.setHost("rabbithost");
+		factory.setHost("localhost");
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 

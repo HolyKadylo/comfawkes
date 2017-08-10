@@ -10,7 +10,7 @@ public class RabbitSender {
 
 	public void send(String message) throws Exception {
 		ConnectionFactory factory = new ConnectionFactory();
-		factory.setHost("rabbithost");
+		factory.setHost("localhost");
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 
