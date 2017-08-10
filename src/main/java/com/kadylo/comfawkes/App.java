@@ -221,12 +221,7 @@ public class App {
 			break;
 			case NESTOR:
 				SimpleNestor nestor = new SimpleNestor();
-				Listener list = new Listener();
-				Listener.Message message = list.new Message("HELLO NAMECHEAP EMPLOYEE", new User(150));
-				String ss = message.getSerialized();
-				System.out.println("-->Serialized message is: " + ss);
-				Listener.Message message2 = list.new Message(ss);
-				System.out.println("-->Deserialized content is: " + message2.getContent());
+				nestor.act();
 			break;
 			
 			default:
