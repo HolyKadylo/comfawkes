@@ -26,28 +26,38 @@ import org.openqa.selenium.Platform;
  */
 public class App {
 	private static enum Approle{
-		NESTOR,NODE
+		NESTOR,LISTENER,POSTER
 	}
 	private static Approle approle;
+	
+	// args[0] -- role of the application
+	// args[1] -- email
+	// args[2] -- password
+	// args[3] -- publicAddress
+	// args[4] -- publicId
 	
     public static void main( String[] args ){
 		//String args are:
 		// node -- for node testcase
 		// nestor -- for being a Nestor
-		if (args[0].equals("node"))
-			approle = Approle.NODE;
+		if (args[0].equals("listener"))
+			approle = Approle.LISTENER;
+		if (args[0].equals("poster"))
+			approle = Approle.POSTER;
 		if (args[0].equals("nestor"))
 			approle = Approle.NESTOR;
 		
 		switch (approle){
-			case NODE:
-			System.out.println("-->This is Node");
+			case LISTENER:
+			System.out.println("-->This is listener");
 			/* //(String email, 
 			String password, 
 			String phoneNo, 
 			Node node, 
 			Role role) */
-			Account account = new Account("jokeprikol@rambler.ru", "prikol15", "0972594950", Account.Role.LISTENER);
+			
+			// we think that we don't need telephone
+			Account account = new Account(args[1], args[2], "0972594950", Account.Role.LISTENER);
 			Listener listener = new Listener(account, "http://localhost:5000", 10);
 			account.setNode(listener);
 			WebDriver driver = null;
