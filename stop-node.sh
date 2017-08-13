@@ -1,2 +1,4 @@
-sudo docker stop node
-sudo docker rm node
+
+# $1 name of the node
+sudo docker stop "$1"
+sudo docker rm "$1"
