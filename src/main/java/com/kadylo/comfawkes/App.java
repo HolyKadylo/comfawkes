@@ -40,13 +40,17 @@ public class App {
 		//String args are:
 		// node -- for node testcase
 		// nestor -- for being a Nestor
+      try{
 		if (args[0].equals("listener"))
 			approle = Approle.LISTENER;
 		if (args[0].equals("poster"))
 			approle = Approle.POSTER;
 		if (args[0].equals("nestor"))
 			approle = Approle.NESTOR;
-		
+      } catch (Exception e) {
+        System.out.println("-->No approle specified, picking Nestor");
+        approle = Approle.NESTOR;
+      }
 		switch (approle){
 			case LISTENER:
 			System.out.println("-->This is listener");
