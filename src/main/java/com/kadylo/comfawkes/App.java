@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import org.openqa.selenium.TakesScreenshot;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import java.net.MalformedURLException; 
 import java.net.URL;
@@ -26,37 +27,39 @@ import org.openqa.selenium.Platform;
  */
 public class App {
 	private static enum Approle{
-		NESTOR,LISTENER,POSTER
+		NESTOR,NODE
 	}
 	private static Approle approle;
+	private static ArrayList<Node> nodes;
 	
 	// args[0] -- role of the application
 	// args[1] -- email
 	// args[2] -- password
 	// args[3] -- publicAddress
 	// args[4] -- publicId
+	// args[5] -- port on localhost for selenium
+	// args[6] -- RMQ cookie
 	
     public static void main( String[] args ){
 		//String args are:
 		// node -- for node testcase
 		// nestor -- for being a Nestor
-		if (args[0].equals("listener"))
-			approle = Approle.LISTENER;
-		if (args[0].equals("poster"))
-			approle = Approle.POSTER;
+		if (args[0].equals("node"))
+			approle = Approle.NODE;
 		if (args[0].equals("nestor"))
 			approle = Approle.NESTOR;
 		
 		switch (approle){
-			case LISTENER:
-			System.out.println("-->This is listener");
-			/* //(String email, 
-			String password, 
-			String phoneNo, 
-			Node node, 
-			Role role) */
 			
-			// we think that we don't need telephone
+			// node
+			case NODE:
+			System.out.println("-->This is Node");
+			RabbitReceiver receiver = new RabbitReceiver(this, args[6]);
+			System.out.println("-->Node starts to recieve");
+			receiver.startReceive();
+			System.out.println("-->Node started to receive");
+			
+			/* // we think that we don't need telephone
 			Account account = new Account(args[1], args[2], "0972594950", Account.Role.LISTENER);
 			Listener listener = new Listener(account, "http://localhost:5000", 10);
 			account.setNode(listener);
@@ -73,25 +76,12 @@ public class App {
 			
 			
 			storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
-			//
-			// storage.put(Public.Media.VIDEO, "https://vk.com/videos-9761670?section=album_1");
-			//
-			// storage.put(Public.Media.AUDIO, "https://vk.com/audios-9761670");
-			//
+
 			Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 150574507, Public.ListenerRole.ADMIN, storage00);
 			Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 144898340, Public.ListenerRole.STANDALONE, storage0);
-			// Public pub1 = new Public("https://vk.com/kadylosbooks", me, null, 250, 17, Public.ListenerRole.ADMIN, storage);
-			// Public pub2 = new Public("https://vk.com/groundhog_day_for_every_day", me, null, 251, 18, Public.ListenerRole.ADMIN, storage2);
 			
 		  try{
-			/* listener.start(pub00);
-			//listener.initialize(pub00);
-			listener.post(me, "hi there");
-			listener.stop();
-			listener.sleep(1500); */
-			System.out.println("-->merge OK");
 			listener.start(pub00);
-			//listener.post(me, "зіга ой \nнігєр стой");
 			
 			boolean iterate = true;
 			int i = 0;
@@ -103,79 +93,7 @@ public class App {
 				listener.sleep(5000);
 			}
 			listener.stop();
-			/* poster.sleep(1500);
-			poster.initialize(pub1);
-			System.out.println("-->\n-->\n-->");
-			System.out.println("-->AUDIO " + pub1.getMediaStorage(Public.Media.AUDIO));
-			System.out.println("-->VIDEO " + pub1.getMediaStorage(Public.Media.VIDEO));
-			System.out.println("-->PICTURE " + pub1.getMediaStorage(Public.Media.PICTURE));
-			poster.sleep(1500);
-			poster.stop(); */
 			
-			/* poster.start(pub2);
-			poster.sleep(1500);
-			poster.subscribe("https://vk.com/groundhog_day_for_every_day");
-			poster.sleep(120000);
-			poster.sleep(1500);
-			poster.initialize(pub2);
-			System.out.println("-->\n-->\n-->");
-			System.out.println("-->AUDIO " + pub2.getMediaStorage(Public.Media.AUDIO));
-			System.out.println("-->VIDEO " + pub2.getMediaStorage(Public.Media.VIDEO));
-			System.out.println("-->PICTURE " + pub2.getMediaStorage(Public.Media.PICTURE));
-			poster.sleep(1500);
-			poster.stop(); */
-			//listener.post("https://vk.com/kadylosbooks?w=wall-144898340_47", "НОН НОБІС ДОМІНЕ! АВЕ МАРІА! ДЕУС ВУЛЬТ!", Public.Media.PICTURE, "144898340_456239029");
-			//listener.post(me, "Взвейтесь кострами синие ночи. Мы -- руснявые империалисты и красно-коричневые маньяки, Дети рабочих");
-			//listener.sleep(6000);
-		  //  poster.takeScreenshot("res");
-			/* poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "NO< MEGATRON YOU SON OF A BITCH");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "AVE CAESAR");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "NO! HEIL CENATE");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "SPQR FOR CAESAR");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "[stabbing Caesar to death]");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "et tu, Brutus?");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "et [fataliity]");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_26", "AVE CAESAR");
-			poster.sleep(1000); */
-			/* poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Батько Бандера знов до нас прийде");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "І за Україну в бій нас поведе");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Буде Україна сильна, буде ненька самостійна");
-			poster.sleep(1000);
-			poster.post("https://vk.com/the_god_machine_sect?w=wall-144898340_46", "Москалів на ножі, на ножі");
-			poster.sleep(1000); */
-			//poster.post("https://vk.com/the_god_machine_sect?w=wall-9761670_39", "AUTOBOTS WILL PREVAIL!");
-			//poster.sleep(6000);
-			
-			//poster.setSettings();
-			//System.out.println("-->" + System.currentTimeMillis());
-			//poster.post("https://vk.com/wall-144898340_47", "Слава Україні! Героям слава!");
-			//System.out.println("-->" + System.currentTimeMillis());
-			//poster.sleep(10000);
-			//listener.subscribe("https://vk.com/biletskiy_swag");
-			//listener.sleep(2000);
-			//listener.addToFriends("https://vk.com/holy_kadylo");
-			//listener.sleep(3000);
-			//listener.subscribe("https://vk.com/kpop.fanfiki");
-			//System.out.println("-->inside bil: " + listener.isInside("https://vk.com/biletskiy_swag"));
-			//listener.sleep(3000);
-			//System.out.println("-->inside kpf: " + listener.isInside("https://vk.com/kpop.fanfiki"));
-			//if(listener.isInside("https://vk.com/biletskiy_swag"))
-			//	listener.leaveResource("https://vk.com/biletskiy_swag");
-			//if(listener.isInside("https://vk.com/kpop.fanfiki"));
-			//	listener.leaveResource("https://vk.com/kpop.fanfiki");
-			//listener.leaveResource("https://vk.com/biletskiy_swag");
-			//System.out.println("-->" + listener.isInside("https://vk.com/biletskiy_swag"));
-			//System.out.println("-->" + listener.isClosedGroup("https://vk.com/kpop.fanfiki"));
-			//poster.stop();
 			} catch (Exception nse){
 				try{
 					File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
@@ -185,50 +103,10 @@ public class App {
 					ioe.printStackTrace();
 				}
 				nse.printStackTrace();
-			}
-			/* System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
-			DesiredCapabilities cap = DesiredCapabilities.firefox();
-			cap.setBrowserName("firefox"); 	
-			cap.setCapability("marionette", true); 			
-			URL url = null;
-			try{
-				url = new URL("http://localhost:5000/wd/hub");
-			} catch (MalformedURLException e){
-				System.out.println("-->" + e);
-			}
-			WebDriver driver = new RemoteWebDriver(url, cap); 	
-
-			// And now use this to visit Google
-			driver.get("http://www.google.com");
-			
-			// Alternatively the same thing can be done like this
-			// driver.navigate().to("http://www.google.com");
-			// Find the text input element by its name
-			WebElement element = driver.findElement(By.name("q"));
-
-			// Enter something to search for
-			element.sendKeys("Cheese!");
-
-			// Now submit the form. WebDriver will find the form for us from the element
-			element.submit();
-
-			// Check the title of the page
-			System.out.println("Page title is: " + driver.getTitle());
-			
-			// Google's search is rendered dynamically with JavaScript.
-			// Wait for the page to load, timeout after 10 seconds
-			(new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-				public Boolean apply(WebDriver d) {
-					return d.getTitle().toLowerCase().startsWith("cheese!");
-				}
-			});
-
-			// Should see: "cheese! - Google Search"
-			System.out.println("Page title is: " + driver.getTitle());
-			
-			//Close the browser
-			driver.quit(); */
+			} */
 			break;
+			
+			// Nestor
 			case NESTOR:
 				SimpleNestor nestor = new SimpleNestor();
 				nestor.act();
@@ -241,4 +119,164 @@ public class App {
 			break;
 		}
     }
+	
+	//1 role listener/poster
+	//2 email foo@bar.com / telephoneNo which we treat the same way
+	//3 password abc123
+	//4 publicAddress https://vv.com/xxxx
+	//5 publicId 1234567
+	//6 port 5001
+	
+	public void start (String role, String email, String password, String publicAddress, String publicId, String port){
+		System.out.println("-->App starts a node " + publicId);
+		int newId;
+		try{
+			newId = Integer.parseInt(publicAddress);
+		} catch (NumberFormatException nfe){
+			System.out.println("-->Error while parsing publicAddress at start");
+		}
+			/*Account account = new Account(email, password, "0972594950", Account.Role.LISTENER);
+			Listener listener = new Listener(account, "http://localhost:5000", 10);
+			account.setNode(listener);
+			WebDriver driver = null;
+			driver = listener.getDriver();
+			
+			User me = new User ("https://vk.com/holy_kadylo", 12585304, null, "Illya Piven", 150);
+			
+			// everything allowed
+			HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
+			HashMap <Public.Media, String> storage0 = new HashMap<Public.Media, String>();
+			HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
+			HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
+			
+			
+			storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
+
+			Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 150574507, Public.ListenerRole.ADMIN, storage00);
+			Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 144898340, Public.ListenerRole.STANDALONE, storage0);
+			
+		  try{
+			listener.start(pub00);
+			
+			boolean iterate = true;
+			int i = 0;
+			while (iterate){
+				listener.read();
+				// listener.takeScreenshot(String.valueOf(i));
+				i++;
+				iterate = i > 5000 ? false : true;
+				listener.sleep(5000);
+			}
+			listener.stop();
+			
+			} catch (Exception nse){
+				try{
+					File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+					FileUtils.copyFile(scrFile, new File("TESTCASEFAIL.png"));
+				} catch (IOException ioe){
+					System.out.println("-->file exception");
+					ioe.printStackTrace();
+				}
+				nse.printStackTrace();
+			} */
+		
+		
+		HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
+		storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
+		
+		
+		User me = new User ("https://vk.com/holy_kadylo", 12585304, null, "Illya Piven", 150);
+		Public public2use = new Public(publicAddress, me, null, 0, newId, Public.ListenerRole.ADMIN, storage00);
+		WebDriver driver = null;
+		if (role.equals("listener")){
+			Account account = new Account(email, password, "0972594950", Account.Role.LISTENER);
+			Listener listener = new Listener(account, "http://localhost:" + port, newId);
+			account.setNode(listener);
+			driver = listener.getDriver();
+			
+			nodes.add(listener);
+		}
+		if (role.equals("poster")){
+			Account account = new Account(email, password, "0972594950", Account.Role.POSTER);
+			Poster poster = new Poster(account, "http://localhost:" + port, newId);
+			account.setNode(poster);
+			driver = poster.getDriver();
+			
+			nodes.add(poster);
+		}
+	}
+	
+	public void stop (String publicId){
+		System.out.println("-->App stops a node " + publicId);
+		System.out.println("-->Attempting to stop Node " + publicId);
+		System.out.println("-->Finding proper Node");
+		for (Node node : nodes){
+			if (node.getId() == id){
+				node.stop();
+				nodes.remove(node);
+				break;
+			}
+		}
+		System.out.println("-->Node " + publicId + " stopped");
+	}
+	
+	public void reboot (String publicId){
+		System.out.println("-->App a reboot process");
+		int id;
+		try{
+			id = Integer.parseInt();
+		} catch (NumberFormatException nfe){
+			System.out.println("-->Not parsable publicId while reboot");
+			return;
+		}
+		switch (approle){
+			case NODE:
+				System.out.println("-->Attempting to reboot Node " + publicId);
+				System.out.println("-->Finding proper Node");
+				Node node2reboot;
+				
+				// finding proper Node
+				for (Node node : nodes){
+					if (node.getId() == id){
+						node2reboot = node;
+						nodes.remove(node);
+						break;
+					}
+				}
+				System.out.println("-->Proper Node found. Stopping it");
+				node2reboot.stop();
+				node2reboot.sleep(10000);
+				System.out.println("-->Node " + publicId + " stopped. Starting it again");
+				Account oldAcc = node2reboot.getCurrentAccount();
+				
+				if (node2reboot instanceof Listener){
+					System.out.println("-->node instanceof listener");
+					Listener listener = new Listener(oldAcc, node2reboot.getSUrl(), node2reboot.getId());
+					oldAcc.setNode(listener);
+					WebDriver driver = null;
+					driver = listener.getDriver();
+				}
+				if (node2reboot instanceof Poster){
+					System.out.println("-->node instanceof poster");
+					Poster poster = new Poster(oldAcc, node2reboot.getSUrl(), node2reboot.getId());
+					oldAcc.setNode(poster);
+					WebDriver driver = null;
+					driver = poster.getDriver();
+				}
+				
+				Public oldPub = node2reboot.getPublic();
+				Public newPub = new Public(oldPub.getAdddress(), null, null, null, oldPub.getId(), oldPub.getRole(), null);
+				node2reboot.start(newPub);
+				nodes.add(node2reboot);
+				System.out.println("-->Node " + publicId + " started again");
+			break;
+			case NESTOR:
+				System.out.println("-->Attempting to reboot Nestor, declining");
+			break;
+			default:
+				System.out.println("-->Default reboot, declining");
+			break;
+		}
+		System.out.println("-->App ended to reboot");
+	}
 }

@@ -54,6 +54,9 @@ public class Node{
 	// to sURL
 	protected URL url;
 	
+	// needed for reboot action
+	private String sURL;
+	
 	// unique identifier
 	protected int id;
   
@@ -71,6 +74,7 @@ public class Node{
 	public Node (Account account, String sURL, int id){
 		System.out.println("-->Constructing node");
 		this.id = id;
+		this.sURL = sURL;
 		System.setProperty("webdriver.gecko.driver", "geckodriver"); 	
 		cap = DesiredCapabilities.firefox();
  		cap.setBrowserName("firefox"); 	
@@ -104,6 +108,23 @@ public class Node{
 		logout();
 		state = State.CREATED;
 		System.out.println("-->Node " + id + " stopped");
+	}
+	
+	// setters & getters
+	public void setId(int id){
+		this.id = id;
+	}
+	public int getId(){
+		return this.id;
+	}
+	public Public getPublic(){
+		return this.pub;
+	}
+	public Account getCurrentAccount(){
+		return this.currentAccount;
+	}
+	public String getSUrl(){
+		return this.sURL;
 	}
 	
 	// initialize inside the public
