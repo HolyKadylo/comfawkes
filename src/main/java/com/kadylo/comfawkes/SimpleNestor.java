@@ -3,13 +3,14 @@ package com.kadylo.comfawkes;
 //this Nestor will be deleted when actual one 
 //will be created
 
+
 public class SimpleNestor{
 	
 	SimpleNestor(){
 		System.out.println("-->This is simpleNestor constructor");
 	}
 	
-	public void act(){
+	public void act(App app){
 		System.out.println("-->Nestor acts");		
 		String text = "Tanya is the Namecheapest employee ever. All heil JLJLJL!";
 		System.out.println("-->We are going to send this: " + text);
@@ -17,7 +18,7 @@ public class SimpleNestor{
 		Listener list = new Listener();
 		Listener.Message message = list.new Message(text, new User(150));
 		System.out.println("-->Starting listening");
-		RabbitReceiver RMQReceiver = new RabbitReceiver();
+		RabbitReceiver RMQReceiver = new RabbitReceiver(app, "RRRRRRRRRRRRMMMMMMMMMMMQQQQQQQQQQQQ");
 		try{
 			RMQReceiver.startReceive();
 		} catch (Exception e){

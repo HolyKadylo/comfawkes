@@ -41,6 +41,7 @@ public class App {
 	// args[6] -- RMQ cookie
 	
     public static void main( String[] args ){
+		App app = new App();
 		//String args are:
 		// node -- for node testcase
 		// nestor -- for being a Nestor
@@ -54,9 +55,13 @@ public class App {
 			// node
 			case NODE:
 			System.out.println("-->This is Node");
-			RabbitReceiver receiver = new RabbitReceiver(this, args[6]);
+			RabbitReceiver receiver = new RabbitReceiver(app, args[6]);
 			System.out.println("-->Node starts to recieve");
-			receiver.startReceive();
+			try{
+				receiver.startReceive();
+			} catch (Exception e){
+				System.out.println("-->Error while receiving: " + e.toString());
+			}
 			System.out.println("-->Node started to receive");
 			
 			/* // we think that we don't need telephone
@@ -109,7 +114,7 @@ public class App {
 			// Nestor
 			case NESTOR:
 				SimpleNestor nestor = new SimpleNestor();
-				nestor.act();
+				nestor.act(app);
 			break;
 			
 			default:
@@ -129,7 +134,7 @@ public class App {
 	
 	public void start (String role, String email, String password, String publicAddress, String publicId, String port){
 		System.out.println("-->App starts a node " + publicId);
-		int newId;
+		int newId = 0;
 		try{
 			newId = Integer.parseInt(publicAddress);
 		} catch (NumberFormatException nfe){
@@ -210,6 +215,13 @@ public class App {
 		System.out.println("-->App stops a node " + publicId);
 		System.out.println("-->Attempting to stop Node " + publicId);
 		System.out.println("-->Finding proper Node");
+		int id;
+		try{
+			id = Integer.parseInt(publicId);
+		} catch (NumberFormatException nfe){
+			System.out.println("-->Not parsable publicId while stop");
+			return;
+		}
 		for (Node node : nodes){
 			if (node.getId() == id){
 				node.stop();
@@ -224,7 +236,7 @@ public class App {
 		System.out.println("-->App a reboot process");
 		int id;
 		try{
-			id = Integer.parseInt();
+			id = Integer.parseInt(publicId);
 		} catch (NumberFormatException nfe){
 			System.out.println("-->Not parsable publicId while reboot");
 			return;
@@ -233,7 +245,7 @@ public class App {
 			case NODE:
 				System.out.println("-->Attempting to reboot Node " + publicId);
 				System.out.println("-->Finding proper Node");
-				Node node2reboot;
+				Node node2reboot = null;
 				
 				// finding proper Node
 				for (Node node : nodes){
@@ -265,7 +277,7 @@ public class App {
 				}
 				
 				Public oldPub = node2reboot.getPublic();
-				Public newPub = new Public(oldPub.getAdddress(), null, null, null, oldPub.getId(), oldPub.getRole(), null);
+				Public newPub = new Public(oldPub.getAddress(), null, null, 0, oldPub.getId(), oldPub.getRole(), null);
 				node2reboot.start(newPub);
 				nodes.add(node2reboot);
 				System.out.println("-->Node " + publicId + " started again");

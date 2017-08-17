@@ -72,7 +72,7 @@ private final static String QUEUE_NAME = "hello";
 				app.start(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
 			}
 			if (parts[0].equals("stop")){
-				app.stop(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
+				app.stop(parts[5]);
 			}
 			return;
 		} else {
