@@ -56,12 +56,15 @@ while read -r line; do
 	if [ "$i" -eq "4" ]; then
 		targetId[j]="$line"
 		echo "-->found targetId $targetId"
-		i=-1
+		i=0
 		((j++))
 	fi
 	((i++))
 done < "$1"
-echo "-->taskfile parsed with result of $(j+1) entity(ies)"
+
+((j++))
+echo "-->taskfile parsed with result of $j entity(ies)"
+((j--))
 
 # Starting RMQ server
 echo "-->starting RMQ"
