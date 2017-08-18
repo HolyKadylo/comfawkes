@@ -11,27 +11,27 @@ i=0
 echo "-->parsing taskfile $2"
 while read -r line; do
 	if [ "$i" -eq "0" ]; then
-		mode = "$line"
+		mode="$line"
 		echo "-->found mode $mode"
 	fi
 
 	if [ "$i" -eq "1" ]; then
-		email = "$line"
+		email="$line"
 		echo "-->found email $email"
 	fi
 	
 	if [ "$i" -eq "2" ]; then
-		password = "$line"
+		password="$line"
 		echo "-->found password $password"
 	fi
 	
 	if [ "$i" -eq "3" ]; then
-		targetLink = "$line"
+		targetLink="$line"
 		echo "-->found targetLink $targetLink"
 	fi
 	
 	if [ "$i" -eq "4" ]; then
-		targetId = "$line"
+		targetId="$line"
 		echo "-->found targetId $targetId"
 	fi
 	((i++))
