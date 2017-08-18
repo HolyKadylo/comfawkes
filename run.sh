@@ -1,10 +1,15 @@
 # $1 -- filename with task
-initialNodePort=5000;
+initialSeleniumPort=5000;
 initialRMQPort=5672;
 
 echo "-->Setting initial node port to $initialNodePort"
 echo "-->Setting initial RMQ port to $initialRMQPort"
 echo "-->Running in $1 mode"
+
+# reading RMQ cookie file
+echo "-->reading RMQ cookie file"
+RMQcookie="`cat RMQ_COOKIE`"
+echo "-->have read $RMQcookie"
 
 # reading task file
 i=0

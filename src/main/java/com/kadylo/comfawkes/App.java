@@ -32,6 +32,7 @@ public class App {
 	private static Approle approle;
 	private static ArrayList<Node> nodes;
 	
+	//node
 	// args[0] -- role of the application
 	// args[1] -- email
 	// args[2] -- password
@@ -39,7 +40,11 @@ public class App {
 	// args[4] -- publicId
 	// args[5] -- port on localhost for selenium
 	// args[6] -- RMQ cookie
-	// "$1" "$email" "$password" "$targetLink" "$targetId"
+	
+	//nestor
+	// args[0] -- role of the application
+	// args[1] -- RMQ cookie
+	
     public static void main( String[] args ){
 		App app = new App();
 		//String args are:
@@ -114,7 +119,7 @@ public class App {
 			// Nestor
 			case NESTOR:
 				SimpleNestor nestor = new SimpleNestor();
-				nestor.act(app, args[6]);
+				nestor.act(app, args[1]);
 			break;
 			
 			default:
