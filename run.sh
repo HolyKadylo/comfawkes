@@ -10,28 +10,27 @@ echo "-->Running in $1 mode"
 i=0
 echo "-->parsing taskfile $2"
 while read -r line; do
-	echo "iter $i"
-	if [ i == 0 ]; then
+	if [ i -eq 0 ]; then
 		mode = "$line"
 		echo "-->found mode $mode"
 	fi
 
-	if [ i == 1 ]; then
+	if [ i -eq 1 ]; then
 		email = "$line"
 		echo "-->found email $email"
 	fi
 	
-	if [ i == 2 ]; then
+	if [ i -eq 2 ]; then
 		password = "$line"
 		echo "-->found password $password"
 	fi
 	
-	if [ i == 3 ]; then
+	if [ i -eq 3 ]; then
 		targetLink = "$line"
 		echo "-->found targetLink $targetLink"
 	fi
 	
-	if [ i == 4 ]; then
+	if [ i -eq 4 ]; then
 		targetId = "$line"
 		echo "-->found targetId $targetId"
 	fi
@@ -41,7 +40,7 @@ echo "-->taskfile parsed"
 
 # Starting Listener
 echo "-->starging node"
-if [ "$1" == "listener" ]
+if [ "$mode" == "listener" ]
 then
 	./stop-node.sh
 	./start-node.sh
@@ -52,13 +51,13 @@ then
 	# args[3] -- publicAddress
 	# args[4] -- publicId
 	
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$1" "$email" "$password" "$targetLink" "$targetId"
+	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
 	./stop-node.sh
 	exit 0
 fi
 
 # Starting Poster
-if [ "$1" == "poster" ]
+if [ "$mode" == "poster" ]
 then
 	./stop-node.sh
 	./start-node.sh
@@ -69,15 +68,15 @@ then
 	# args[3] -- publicAddress
 	# args[4] -- publicId
 	
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$1" "$email" "$password" "$targetLink" "$targetId"
+	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
 	./stop-node.sh
 	exit 0
 fi  
 
 # Starting Nestor
-if [ "$1" == "nestor" ]
+if [ "$mode" == "nestor" ]
 then
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$1"
+	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode"
 	exit 0
 fi
 
