@@ -10,27 +10,27 @@ echo "-->Running in $1 mode"
 i=0
 echo "-->parsing taskfile $2"
 while read -r line; do
-	if [ i -eq 0 ]; then
+	if [ "$i" -eq "0" ]; then
 		mode = "$line"
 		echo "-->found mode $mode"
 	fi
 
-	if [ i -eq 1 ]; then
+	if [ "$i" -eq "1" ]; then
 		email = "$line"
 		echo "-->found email $email"
 	fi
 	
-	if [ i -eq 2 ]; then
+	if [ "$i" -eq "2" ]; then
 		password = "$line"
 		echo "-->found password $password"
 	fi
 	
-	if [ i -eq 3 ]; then
+	if [ "$i" -eq "3" ]; then
 		targetLink = "$line"
 		echo "-->found targetLink $targetLink"
 	fi
 	
-	if [ i -eq 4 ]; then
+	if [ "$i" -eq "4" ]; then
 		targetId = "$line"
 		echo "-->found targetId $targetId"
 	fi
