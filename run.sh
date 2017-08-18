@@ -26,7 +26,7 @@ echo "-->have read $RMQcookie"
 i=0
 j=0
 echo "-->parsing taskfile $2"
-while read -r line; do
+while read -r line || [[ -n "$line" ]]; do
 	if [ "$i" -eq "0" ]; then
 		mode[j]="$line"
 		echo "-->found mode $mode"
@@ -56,7 +56,7 @@ while read -r line; do
 	if [ "$i" -eq "4" ]; then
 		targetId[j]="$line"
 		echo "-->found targetId $targetId"
-		i=0
+		i=-1
 		((j++))
 	fi
 	((i++))
