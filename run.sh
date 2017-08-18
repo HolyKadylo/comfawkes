@@ -34,7 +34,7 @@ while read -r line; do
 		echo "-->found targetId $targetId"
 	fi
 	i=i + 1
-done < "$1"
+done < $1
 echo "-->taskfile parsed"
 
 # Starting Listener
