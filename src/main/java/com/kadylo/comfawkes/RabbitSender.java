@@ -5,12 +5,18 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 public class RabbitSender {
+	private int port = 0;
+	
+	RabbitSender(int port){
+		this.port = port;
+	}
 
 	private final static String QUEUE_NAME = "hello";
 
 	public void send(String message) throws Exception {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
+		factory.setPort(port);
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 

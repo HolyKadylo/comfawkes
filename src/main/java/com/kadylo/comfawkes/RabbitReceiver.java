@@ -6,20 +6,23 @@ import java.io.IOException;
 public class RabbitReceiver {
 	
 	// particular app that it serves to
-	App app;
-	String RMQ_COOKIE;
+	private App app = null;
+	private String RMQ_COOKIE = "";
+	private int port = 0;
 
 private final static String QUEUE_NAME = "hello";
 
 	// constructor
-	RabbitReceiver(App app, String cookie){
+	RabbitReceiver(App app, String cookie, int port){
 		this.app = app;
 		RMQ_COOKIE = cookie;
+		this.port = port;
 	}
 
 	public void startReceive() throws Exception {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
+		factory.setPort(port);
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 

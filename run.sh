@@ -1,13 +1,15 @@
 # $1 -- filename with task
 
+# initial port 
 # will be binded to container's 4444
-initialSeleniumPort=7100;
+seleniumPort=7101;
+# initial port 
 # will be binded to container's 5762 or something
-initialRMQPort=9100;
+RMQPort=9101;
 # will be conctated with order number _X
-initialSeleniumNodeName="node"
-# will be conctated with order number _X
-initialRMQServerName="appRabbit"
+seleniumNodeName="node"
+# we need only one RMQ per JVM TODO find out
+RMQServerName="appRabbit"
 
 echo "-->Setting initial node port to $initialNodePort"
 echo "-->Setting initial RMQ port to $initialRMQPort"
@@ -30,11 +32,10 @@ while read -r line; do
 		echo "-->found mode $mode"
 		
 		# if we've found nestor, we won't find any other credentials, so continue
-		if [ "$mode[j]" == "nestor" ]
-			then
-				i=0
-				((j++))
-			fi		
+		if [ "$mode[j]" == "nestor" ]; then
+			i=0
+			((j++))
+		fi		
 	fi
 
 	if [ "$i" -eq "1" ]; then
@@ -60,13 +61,19 @@ while read -r line; do
 	fi
 	((i++))
 done < "$1"
-echo "-->taskfile parsed with result of $j entity(ies)"
+echo "-->taskfile parsed with result of $(j+1) entity(ies)"
+
+# Starting RMQ server
+echo "-->starting RMQ"
+./stop-container.sh "$RMQServerName"
+./start-rmq.sh "$RMQServerName" "$RMQPort" "$RMQcookie"
+echo "-->RMQ $RMQServerName started at port $RMQPort"
 
 # Starting Listener
 echo "-->starging node"
 if [ "$mode" == "listener" ]
 then
-	./stop-node.sh
+	./stop-container.sh
 	./start-node.sh
 	
 	# args[0] -- role of the application
@@ -76,14 +83,14 @@ then
 	# args[4] -- publicId
 	
 	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
-	./stop-node.sh
+	./stop-container.sh
 	exit 0
 fi
 
 # Starting Poster
 if [ "$mode" == "poster" ]
 then
-	./stop-node.sh
+	./stop-container.sh
 	./start-node.sh
 	
 	# args[0] -- role of the application
@@ -93,7 +100,7 @@ then
 	# args[4] -- publicId
 	
 	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
-	./stop-node.sh
+	./stop-container.sh
 	exit 0
 fi  
 
@@ -105,5 +112,5 @@ then
 fi
 
 # No valid mode
-echo "-->No valid mode, exiting"
+echo "-->Invalid file, exiting"
 exit 0

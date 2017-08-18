@@ -60,7 +60,7 @@ public class App {
 			// node
 			case NODE:
 			System.out.println("-->This is Node");
-			RabbitReceiver receiver = new RabbitReceiver(app, args[6]);
+			RabbitReceiver receiver = new RabbitReceiver(app, args[6], );
 			System.out.println("-->Node starts to recieve RQM commands");
 			try{
 				receiver.startReceive();
