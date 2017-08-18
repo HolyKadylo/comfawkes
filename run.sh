@@ -1,5 +1,4 @@
-# $1 -- mode
-# $2 -- filename with task
+# $1 -- filename with task
 initialNodePort=5000;
 initialRMQPort=5672;
 
@@ -12,21 +11,25 @@ i=0
 echo "-->parsing taskfile $2"
 while read -r line; do
 	if [i == 0]; then
+		mode = "$line"
+		echo "-->found mode $mode"
+
+	if [i == 1]; then
 		email = "$line"
 		echo "-->found email $email"
 	fi
 	
-	if [i == 1]; then
+	if [i == 2]; then
 		password = "$line"
 		echo "-->found password $password"
 	fi
 	
-	if [i == 2]; then
+	if [i == 3]; then
 		targetLink = "$line"
 		echo "-->found targetLink $targetLink"
 	fi
 	
-	if [i == 3]; then
+	if [i == 4]; then
 		targetId = "$line"
 		echo "-->found targetId $targetId"
 	fi
