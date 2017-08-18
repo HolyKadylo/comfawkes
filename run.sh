@@ -10,6 +10,7 @@ echo "-->Running in $1 mode"
 i=0
 echo "-->parsing taskfile $2"
 while read -r line; do
+	echo "iter $i"
 	if [ i == 0 ]; then
 		mode = "$line"
 		echo "-->found mode $mode"
