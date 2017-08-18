@@ -39,7 +39,7 @@ public class App {
 	// args[4] -- publicId
 	// args[5] -- port on localhost for selenium
 	// args[6] -- RMQ cookie
-	"$1" "$email" "$password" "$targetLink" "$targetId"
+	// "$1" "$email" "$password" "$targetLink" "$targetId"
     public static void main( String[] args ){
 		App app = new App();
 		//String args are:
