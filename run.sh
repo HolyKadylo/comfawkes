@@ -1,6 +1,13 @@
 # $1 -- filename with task
-initialSeleniumPort=5000;
-initialRMQPort=5672;
+
+# will be binded to container's 4444
+initialSeleniumPort=7100;
+# will be binded to container's 5762 or something
+initialRMQPort=9100;
+# will be conctated with order number _X
+initialSeleniumNodeName="node"
+# will be conctated with order number _X
+initialRMQServerName="appRabbit"
 
 echo "-->Setting initial node port to $initialNodePort"
 echo "-->Setting initial RMQ port to $initialRMQPort"
@@ -12,36 +19,48 @@ RMQcookie="`cat RMQ_COOKIE`"
 echo "-->have read $RMQcookie"
 
 # reading task file
+# i -- iterator through types of variables
+# j -- iterator through desired nodes
 i=0
+j=0
 echo "-->parsing taskfile $2"
 while read -r line; do
 	if [ "$i" -eq "0" ]; then
-		mode="$line"
+		mode[j]="$line"
 		echo "-->found mode $mode"
+		
+		# if we've found nestor, we won't find any other credentials, so continue
+		if [ "$mode[j]" == "nestor" ]
+			then
+				i=0
+				((j++))
+			fi		
 	fi
 
 	if [ "$i" -eq "1" ]; then
-		email="$line"
+		email[j]="$line"
 		echo "-->found email $email"
 	fi
 	
 	if [ "$i" -eq "2" ]; then
-		password="$line"
+		password[j]="$line"
 		echo "-->found password $password"
 	fi
 	
 	if [ "$i" -eq "3" ]; then
-		targetLink="$line"
+		targetLink[j]="$line"
 		echo "-->found targetLink $targetLink"
 	fi
 	
 	if [ "$i" -eq "4" ]; then
-		targetId="$line"
+		targetId[j]="$line"
 		echo "-->found targetId $targetId"
+		i=-1
+		((j++))
 	fi
 	((i++))
 done < "$1"
-echo "-->taskfile parsed"
+echo "-->taskfile parsed with result of $j entity(ies)"
 
 # Starting Listener
 echo "-->starging node"
