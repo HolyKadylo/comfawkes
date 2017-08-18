@@ -13,6 +13,7 @@ while read -r line; do
 	if [i == 0]; then
 		mode = "$line"
 		echo "-->found mode $mode"
+	fi
 
 	if [i == 1]; then
 		email = "$line"
@@ -34,7 +35,7 @@ while read -r line; do
 		echo "-->found targetId $targetId"
 	fi
 	i=i + 1
-done < $1
+done < "$1"
 echo "-->taskfile parsed"
 
 # Starting Listener
