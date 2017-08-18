@@ -1,36 +1,50 @@
 # $1 -- mode
-# $2 -- filename with account
-# $3 -- filename with target public
+# $2 -- filename with task
+initialNodePort = 5000;
+initialRMQPort = 5672;
 
+echo "-->Setting initial node port to $initialNodePort"
+echo "-->Setting initial RMQ port to $initialRMQPort"
 echo "-->Running in $1 mode"
 
-# reading account file
+# reading nodemap
 i = 0
+echo "-->parsing nodemap file $3"
+while read -r line; do
+	
+	i = i + 1
+done < "$3"
+echo "-->nodemap parsed"
+
+# reading task file
+i = 0
+echo "-->parsing taskfile $2"
 while read -r line; do
 	if [i == 0]; then
 		email = "$line"
+		echo "-->found email $email"
 	fi
 	
 	if [i == 1]; then
 		password = "$line"
-	fi
-	i = i + 1
-done < accnt
-
-# reading target file
-i = 0
-while read -r line; do
-	if [i == 0]; then
-		targetLink = "$line"
+		echo "-->found password $password"
 	fi
 	
-	if [i == 0]; then
+	if [i == 2]; then
+		targetLink = "$line"
+		echo "-->found targetLink $targetLink"
+	fi
+	
+	if [i == 3]; then
 		targetId = "$line"
+		echo "-->found targetId $targetId"
 	fi
 	i = i + 1
-done < trgt
+done < "$2"
+echo "-->taskfile parsed"
 
 # Starting Listener
+echo "-->starging node"
 if [ "$1" == "listener" ]
 then
 	./stop-node.sh

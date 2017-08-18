@@ -39,7 +39,7 @@ public class App {
 	// args[4] -- publicId
 	// args[5] -- port on localhost for selenium
 	// args[6] -- RMQ cookie
-	
+	"$1" "$email" "$password" "$targetLink" "$targetId"
     public static void main( String[] args ){
 		App app = new App();
 		//String args are:
@@ -56,13 +56,13 @@ public class App {
 			case NODE:
 			System.out.println("-->This is Node");
 			RabbitReceiver receiver = new RabbitReceiver(app, args[6]);
-			System.out.println("-->Node starts to recieve");
+			System.out.println("-->Node starts to recieve RQM commands");
 			try{
 				receiver.startReceive();
 			} catch (Exception e){
-				System.out.println("-->Error while receiving: " + e.toString());
+				System.out.println("-->Error while receiving RMQ commands by Node: " + e.toString());
 			}
-			System.out.println("-->Node started to receive");
+			System.out.println("-->Node started to receive RMQ commands");
 			
 			/* // we think that we don't need telephone
 			Account account = new Account(args[1], args[2], "0972594950", Account.Role.LISTENER);
@@ -114,7 +114,7 @@ public class App {
 			// Nestor
 			case NESTOR:
 				SimpleNestor nestor = new SimpleNestor();
-				nestor.act(app);
+				nestor.act(app, args[6]);
 			break;
 			
 			default:

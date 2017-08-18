@@ -10,7 +10,7 @@ public class SimpleNestor{
 		System.out.println("-->This is simpleNestor constructor");
 	}
 	
-	public void act(App app){
+	public void act(App app, String RMQ_COOKIE){
 		System.out.println("-->Nestor acts");		
 		String text = "Tanya is the Namecheapest employee ever. All heil JLJLJL!";
 		System.out.println("-->We are going to send this: " + text);
@@ -18,7 +18,7 @@ public class SimpleNestor{
 		Listener list = new Listener();
 		Listener.Message message = list.new Message(text, new User(150));
 		System.out.println("-->Starting listening");
-		RabbitReceiver RMQReceiver = new RabbitReceiver(app, "RRRRRRRRRRRRMMMMMMMMMMMQQQQQQQQQQQQ");
+		RabbitReceiver RMQReceiver = new RabbitReceiver(app, RMQ_COOKIE);
 		try{
 			RMQReceiver.startReceive();
 		} catch (Exception e){

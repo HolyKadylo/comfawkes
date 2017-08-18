@@ -50,7 +50,7 @@ private final static String QUEUE_NAME = "hello";
 	
 	private void handleMessage(String message){
 		
-		// RMQCookie+instruction+role+email+password+publicAddress+publicId+port
+		//RMQCookie+instruction+role+email+password+publicAddress+publicId+port
 		//0 instruction
 		//1 email
 		
