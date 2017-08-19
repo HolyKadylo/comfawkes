@@ -64,12 +64,17 @@ done < "$1"
 echo "-->taskfile parsed with result of $j entity(ies)"
 
 echo "-->forming parameter strings for nodes"
-for i in {1.."$j"}; do
-	echo "-->this is $i"
+args=""
+for ((i=1; i<=$j; i++)); do
+	((args+=" ${mode[i]}"))
+	((args+=" ${email[i]}"))
+	((args+=" ${password[i]}"))
+	((args+=" ${targetLink[i]}"))
+	((args+=" ${targetId[i]}"))
 done
-echo "-->parameter strings for nodes formed"
+echo "-->parameter strings for nodes formed: $args"
 
-# Starting RMQ server
+# Starting RMQ server (single per this JVM)
 echo "-->starting RMQ"
 ./stop-container.sh "$RMQServerName"
 ./start-rmq.sh "$RMQServerName" "$RMQPort" "$RMQcookie"
@@ -77,22 +82,24 @@ echo "-->RMQ $RMQServerName started at port $RMQPort"
 
 # Starting App
 echo "-->starging app"
-if [ "$mode" == "listener" ]
-then
-	./stop-container.sh
-	./start-node.sh
-	
-	# args[0] -- role of the application
-	# args[1] -- email
-	# args[2] -- password
-	# args[3] -- publicAddress
-	# args[4] -- publicId
-	
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
-	./stop-container.sh
-	exit 0
-fi
 
-# No valid mode
-echo "-->Invalid file, exiting"
+# Stopping as much selenium containers as we need to start
+for ((i=1; i<=$j; i++)); do
+	./stop-container.sh "$seleniumNodeName""_$i"
+done
+
+# Starting selenium containers
+for ((i=1; i<=$j; i++)); do
+	./start-node.sh "$seleniumNodeName""_$i" "$seleniumPort"
+	((seleniumPort++))
+done
+
+# args[0] -- role of the application
+# args[1] -- email
+# args[2] -- password
+# args[3] -- publicAddress
+# args[4] -- publicId
+
+java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
+./stop-container.sh
 exit 0
