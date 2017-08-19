@@ -65,7 +65,7 @@ echo "-->taskfile parsed with result of $j entity(ies)"
 
 echo "-->forming parameter strings for nodes"
 args=""
-for ((i=1; i<=$j; i++)); do
+for ((i=0; i<=$j; i++)); do
 	args+=" ${mode[i]}"
 	args+=" ${email[i]}"
 	args+=" ${password[i]}"
