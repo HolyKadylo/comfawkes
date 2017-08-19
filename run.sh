@@ -11,14 +11,14 @@ seleniumNodeName="node"
 # we need only one RMQ per JVM TODO find out
 RMQServerName="appRabbit"
 
-echo "-->Setting initial node port to $initialNodePort"
-echo "-->Setting initial RMQ port to $initialRMQPort"
+echo "-->Setting initial node port to $seleniumPort"
+echo "-->Setting initial RMQ port to $RMQPort"
 echo "-->Running in $1 mode"
 
 # reading RMQ cookie file
 echo "-->reading RMQ cookie file"
 RMQcookie="`cat RMQ_COOKIE`"
-echo "-->have read $RMQcookie"
+echo "-->have read: $RMQcookie"
 
 # reading task file
 # i -- iterator through types of variables
@@ -29,33 +29,33 @@ echo "-->parsing taskfile $2"
 while read -r line || [[ -n "$line" ]]; do
 	if [ "$i" -eq "0" ]; then
 		mode[j]="$line"
-		echo "-->found mode $mode"
+		echo "-->found mode $mode[j]"
 		
 		# if we've found nestor, we won't find any other credentials, so continue
 		if [ "$mode[j]" == "nestor" ]; then
-			i=0
+			i=-1
 			((j++))
 		fi		
 	fi
 
 	if [ "$i" -eq "1" ]; then
 		email[j]="$line"
-		echo "-->found email $email"
+		echo "-->found email $email[j]"
 	fi
 	
 	if [ "$i" -eq "2" ]; then
 		password[j]="$line"
-		echo "-->found password $password"
+		echo "-->found password $password[j]"
 	fi
 	
 	if [ "$i" -eq "3" ]; then
 		targetLink[j]="$line"
-		echo "-->found targetLink $targetLink"
+		echo "-->found targetLink $targetLink[j]"
 	fi
 	
 	if [ "$i" -eq "4" ]; then
 		targetId[j]="$line"
-		echo "-->found targetId $targetId"
+		echo "-->found targetId $targetId[j]"
 		i=-1
 		((j++))
 	fi
