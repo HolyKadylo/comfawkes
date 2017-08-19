@@ -107,7 +107,7 @@ for ((i=1; i<=$j; i++)); do
 done
 
 # actually starting
-java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$args"
+java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$RMQcookie" "$seleniumPort" "$RMQPort" "$args"
 
 # Stopping RMQ server
 ./stop-container.sh "$RMQServerName"

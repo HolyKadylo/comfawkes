@@ -5,16 +5,16 @@ import java.io.IOException;
 
 public class RabbitReceiver {
 	
-	// particular app that it serves to
-	private App app = null;
+	// particular class that it serves to
+	private Object master = null;
 	private String RMQ_COOKIE = "";
 	private int port = 0;
-
+	
 private final static String QUEUE_NAME = "hello";
 
 	// constructor
-	RabbitReceiver(App app, String cookie, int port){
-		this.app = app;
+	RabbitReceiver(Object master, String cookie, int port){
+		this.master = master;
 		RMQ_COOKIE = cookie;
 		this.port = port;
 	}

@@ -26,12 +26,77 @@ import org.openqa.selenium.Platform;
  *
  */
 public class App {
-	private static enum Approle{
+	
+	
+	// node config that needs to be launched on this JVM
+	class ArgsTask{
+			
+		private String approle;
+		private String email = "";
+		private String password = "";
+		private String publicAddress = "";
+		private int id = 0;
+		private String RMQ_COOKIE = "";
+		private int seleniumPort = 0;
+		private int RMQPort = 0;
+		
+		ArgsTask(String approle, 
+			String email, 
+			String password, 
+			String publicAddress, 
+			int id, 
+			String RMQ_COOKIE, 
+			int seleniumPort, 
+			int RMQPort){
+				
+			this.approle = approle;
+			this.email = email;
+			this.password = password;
+			this.publicAddress = publicAddress;
+			this.id = id;
+			this.RMQ_COOKIE = RMQ_COOKIE;
+			this.seleniumPort = seleniumPort;
+			this.RMQPort = RMQPort;
+		}
+		
+		public String getApprole(){
+			return approle;
+		}
+		public String getEmail(){
+			return email;
+		}
+		public String getPassword(){
+			return password;
+		}
+		public String getPublicAddress(){
+			return publicAddress;
+		}
+		public int getId(){
+			return id;
+		}
+		public String getRMQCookie(){
+			return RMQ_COOKIE;
+		}
+		public int getSeleniumPort(){
+			return seleniumPort;
+		}
+		public int getRMQPort(){
+			return RMQPort;
+		}
+	}
+	
+	
+	/* private static enum Approle{
 		NESTOR,NODE
 	}
-	private static Approle approle;
+	private static Approle approle; */
+	
+	// nodes that are running on this JVM
 	private static ArrayList<Node> nodes;
 	
+	private String RMQ_COOKIE = "";
+	private int seleniumPort = 0;
+	private int RMQPort = 0;
 	//node
 	// args[0] -- role of the application
 	// args[1] -- email
@@ -41,26 +106,34 @@ public class App {
 	// args[5] -- port on localhost for selenium
 	// args[6] -- RMQ cookie
 	
-	//nestor
+	// nestor
 	// args[0] -- role of the application
 	// args[1] -- RMQ cookie
 	
     public static void main( String[] args ){
+		System.out.println("-->Starting app's public static void main");
+		
+		// this represents this instance
 		App app = new App();
-		//String args are:
-		// node -- for node testcase
-		// nestor -- for being a Nestor
-		if (args[0].equals("node"))
-			approle = Approle.NODE;
-		if (args[0].equals("nestor"))
-			approle = Approle.NESTOR;
+		app.RMQ_COOKIE = args[0];
+		try{
+			app.seleniumPort = Integer.parseInt(args[1]);
+			app.RMQPort = Integer.parseInt(args[2]);
+		} catch (NumberFormatException nfe){
+			System.out.println("-->Exception while parsing ports " + nfe.toString());
+		}
+		
+		// this represents it's "tentacles"
+		RabbitReceiver appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort);
+		RabbitSender appSender = new RabbitSender(app.RMQPort);
+		
 		
 		switch (approle){
 			
 			// node
 			case NODE:
 			System.out.println("-->This is Node");
-			RabbitReceiver receiver = new RabbitReceiver(app, args[6], );
+			RabbitReceiver receiver = new RabbitReceiver(app, args[6], 0);//-------------
 			System.out.println("-->Node starts to recieve RQM commands");
 			try{
 				receiver.startReceive();
