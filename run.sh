@@ -66,7 +66,11 @@ echo "-->taskfile parsed with result of $j entity(ies)"
 echo "-->forming parameter strings for nodes"
 args=""
 for ((i=0; i<=$j; i++)); do
-	args+=" ${mode[i]}"
+	if [ "$i" -eq "0" ]; then
+		args+="${mode[i]}"
+	else
+		args+=" ${mode[i]}"
+	fi
 	if [ "${email[i]}" != "" ]; then
 		args+=" ${email[i]}"
 	fi
@@ -76,7 +80,7 @@ for ((i=0; i<=$j; i++)); do
 	if [ "${targetLink[j]}" != "" ]; then
 		args+=" ${targetLink[j]}"
 	fi
-	if [ "$${targetId[j]}" != "" ]; then
+	if [ "${targetId[j]}" != "" ]; then
 		args+=" ${targetId[j]}"
 	fi
 done
