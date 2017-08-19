@@ -61,13 +61,10 @@ while read -r line || [[ -n "$line" ]]; do
 	fi
 	((i++))
 done < "$1"
-
-((j++))
 echo "-->taskfile parsed with result of $j entity(ies)"
-((j--))
 
 echo "-->forming parameter strings for nodes"
-for i in {1..$j}; do
+for i in {1.."$j"}; do
 	echo "-->this is $i"
 done
 echo "-->parameter strings for nodes formed"
