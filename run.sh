@@ -29,7 +29,7 @@ echo "-->parsing taskfile $2"
 while read -r line || [[ -n "$line" ]]; do
 	if [ "$i" -eq "0" ]; then
 		mode[j]="$line"
-		echo "-->found mode $mode[j]"
+		echo "-->found mode $(mode[j])"
 		
 		# if we've found nestor, we won't find any other credentials, so continue
 		if [ "$mode[j]" == "nestor" ]; then
@@ -40,22 +40,22 @@ while read -r line || [[ -n "$line" ]]; do
 
 	if [ "$i" -eq "1" ]; then
 		email[j]="$line"
-		echo "-->found email $email[j]"
+		echo "-->found email $(email[j])"
 	fi
 	
 	if [ "$i" -eq "2" ]; then
 		password[j]="$line"
-		echo "-->found password $password[j]"
+		echo "-->found password $(password[j])"
 	fi
 	
 	if [ "$i" -eq "3" ]; then
 		targetLink[j]="$line"
-		echo "-->found targetLink $targetLink[j]"
+		echo "-->found targetLink $(targetLink[j])"
 	fi
 	
 	if [ "$i" -eq "4" ]; then
 		targetId[j]="$line"
-		echo "-->found targetId $targetId[j]"
+		echo "-->found targetId $(targetId[j])"
 		i=-1
 		((j++))
 	fi
@@ -66,14 +66,20 @@ done < "$1"
 echo "-->taskfile parsed with result of $j entity(ies)"
 ((j--))
 
+echo "-->forming parameter strings for nodes"
+for i in {1.."$j"}; do
+	echo "-->this is $1"
+done
+echo "-->parameter strings for nodes formed"
+
 # Starting RMQ server
 echo "-->starting RMQ"
 ./stop-container.sh "$RMQServerName"
 ./start-rmq.sh "$RMQServerName" "$RMQPort" "$RMQcookie"
 echo "-->RMQ $RMQServerName started at port $RMQPort"
 
-# Starting Listener
-echo "-->starging node"
+# Starting App
+echo "-->starging app"
 if [ "$mode" == "listener" ]
 then
 	./stop-container.sh
@@ -87,30 +93,6 @@ then
 	
 	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
 	./stop-container.sh
-	exit 0
-fi
-
-# Starting Poster
-if [ "$mode" == "poster" ]
-then
-	./stop-container.sh
-	./start-node.sh
-	
-	# args[0] -- role of the application
-	# args[1] -- email
-	# args[2] -- password
-	# args[3] -- publicAddress
-	# args[4] -- publicId
-	
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
-	./stop-container.sh
-	exit 0
-fi  
-
-# Starting Nestor
-if [ "$mode" == "nestor" ]
-then
-	java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode"
 	exit 0
 fi
 
