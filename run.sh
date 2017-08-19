@@ -67,16 +67,16 @@ echo "-->forming parameter strings for nodes"
 args=""
 for ((i=0; i<=$j; i++)); do
 	args+=" ${mode[i]}"
-	if [ "${email[i]}" -ne "" ]; then
+	if [ "${email[i]}" != "" ]; then
 		args+=" ${email[i]}"
 	fi
-	if [ "${password[j]}" -ne "" ]; then
+	if [ "${password[j]}" != "" ]; then
 		args+=" ${password[j]}"
 	fi
-	if [ "${targetLink[j]}" -ne "" ]; then
+	if [ "${targetLink[j]}" != "" ]; then
 		args+=" ${targetLink[j]}"
 	fi
-	if [ "$${targetId[j]}" -ne "" ]; then
+	if [ "$${targetId[j]}" != "" ]; then
 		args+=" ${targetId[j]}"
 	fi
 done
