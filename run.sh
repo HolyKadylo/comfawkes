@@ -74,14 +74,14 @@ for ((i=0; i<=$j; i++)); do
 	if [ "${email[i]}" != "" ]; then
 		args+=" ${email[i]}"
 	fi
-	if [ "${password[j]}" != "" ]; then
-		args+=" ${password[j]}"
+	if [ "${password[i]}" != "" ]; then
+		args+=" ${password[i]}"
 	fi
-	if [ "${targetLink[j]}" != "" ]; then
-		args+=" ${targetLink[j]}"
+	if [ "${targetLink[i]}" != "" ]; then
+		args+=" ${targetLink[i]}"
 	fi
-	if [ "${targetId[j]}" != "" ]; then
-		args+=" ${targetId[j]}"
+	if [ "${targetId[i]}" != "" ]; then
+		args+=" ${targetId[i]}"
 	fi
 done
 echo "-->parameter strings for nodes formed: $args"
@@ -106,13 +106,8 @@ for ((i=1; i<=$j; i++)); do
 	((seleniumPort++))
 done
 
-# args[0] -- role of the application
-# args[1] -- email
-# args[2] -- password
-# args[3] -- publicAddress
-# args[4] -- publicId
-
-java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$mode" "$email" "$password" "$targetLink" "$targetId"
+# actually starting
+java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$args"
 
 # Stopping RMQ server
 ./stop-container.sh "$RMQServerName"
