@@ -146,8 +146,8 @@ public class App {
 		
 		// this represents it's "tentacles"
 		// using hostname as its unique queue name
-		RabbitReceiver appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort, app.hostname);
-		RabbitSender appSender = new RabbitSender(app.RMQPort);
+		//RabbitReceiver appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort, app.hostname);
+		//RabbitSender appSender = new RabbitSender(app.RMQPort);
 		
 		ArrayList<ArgsTask> argsTasks = new ArrayList<ArgsTask>();
 		try{
