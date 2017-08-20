@@ -194,8 +194,8 @@ public class App {
 					int RMQPort){ */
 				
 			}
-		} catch (NullPointerException npe){
-			System.out.println("-->:" + npe.toString());
+		} catch (ArrayIndexOutOfBoundsException aioobe){
+			System.out.println("-->:" + aioobe.toString());
 		}
 		
 		/* switch (approle){
