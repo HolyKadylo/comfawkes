@@ -180,6 +180,8 @@ public class App {
 						SimpleNestor nestor = new SimpleNestor();
 						nestor.act(app, app.RMQ_COOKIE);
 						i++;
+					} else {
+						i++;
 					}
 				}
 				/* ArgsTask(String approle, 
@@ -193,7 +195,7 @@ public class App {
 				
 			}
 		} catch (NullPointerException npe){
-			System.out.println();
+			System.out.println("-->:" + npe.toString());
 		}
 		
 		/* switch (approle){
