@@ -18,7 +18,9 @@ public class SimpleNestor{
 		Listener list = new Listener();
 		Listener.Message message = list.new Message(text, new User(150));
 		System.out.println("-->Starting listening");
-		RabbitReceiver RMQReceiver = new RabbitReceiver(app, RMQ_COOKIE, 0);//---------
+		
+		//RabbitReceiver(Object master, String cookie, int port, String QUEUE_NAME){
+		RabbitReceiver RMQReceiver = new RabbitReceiver(app, RMQ_COOKIE, 0, " ");//---------
 		try{
 			RMQReceiver.startReceive();
 		} catch (Exception e){
@@ -28,7 +30,7 @@ public class SimpleNestor{
 		System.out.println("-->Actually sending");
 		RabbitSender RMQSender = new RabbitSender(0);//----------------
 		try{
-			RMQSender.send(message.getSerialized());
+			RMQSender.send("",message.getSerialized());//----------------------------------
 		} catch (Exception e){
 			System.out.println("-->Exception while sending with RMQ: " + e.toString());
 		}

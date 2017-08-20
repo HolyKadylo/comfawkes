@@ -16,10 +16,11 @@ import java.io.IOException;
 import org.openqa.selenium.TakesScreenshot;
 import java.util.HashMap;
 import java.util.ArrayList;
-
 import java.net.MalformedURLException; 
 import java.net.URL;
 import org.openqa.selenium.Platform; 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * Hello world!
@@ -27,6 +28,15 @@ import org.openqa.selenium.Platform;
  */
 public class App {
 	
+	public App (){
+		try{
+			hostname = InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException uhe){
+			System.out.println("-->Unknown host exception: " + uhe.toString());
+			hostname = "unknown";
+		}
+		System.out.println("-->Hostname set to: " + hostname);
+	}
 	
 	// node config that needs to be launched on this JVM
 	class ArgsTask{
@@ -57,6 +67,20 @@ public class App {
 			this.RMQ_COOKIE = RMQ_COOKIE;
 			this.seleniumPort = seleniumPort;
 			this.RMQPort = RMQPort;
+			System.out.println("-->ArgsTask created: approle:" 
+				+ approle 
+				+ " email:" 
+				+ email 
+				+ " password:" 
+				+ password 
+				+ " id:" 
+				+ id 
+				+ " RMQ:" 
+				+ RMQ_COOKIE 
+				+ " seleniumPort:" 
+				+ seleniumPort 
+				+ " RMQPort:" 
+				+ RMQPort);
 		}
 		
 		public String getApprole(){
@@ -86,10 +110,7 @@ public class App {
 	}
 	
 	
-	/* private static enum Approle{
-		NESTOR,NODE
-	}
-	private static Approle approle; */
+	private String hostname = "";
 	
 	// nodes that are running on this JVM
 	private static ArrayList<Node> nodes;
@@ -124,11 +145,58 @@ public class App {
 		}
 		
 		// this represents it's "tentacles"
-		RabbitReceiver appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort);
+		// using hostname as its unique queue name
+		RabbitReceiver appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort, app.hostname);
 		RabbitSender appSender = new RabbitSender(app.RMQPort);
 		
+		ArrayList<ArgsTask> argsTasks = new ArrayList<ArgsTask>();
+		try{
+			int i = 0;
+			while (true) {
+				
+				// if chunk starts with listener or poster, we are parsing entities
+				if (args[i+3].equals("listener") || args[i+3].equals("poster")){
+					int id = 0;
+					try{
+						id = Integer.parseInt(args[i+7]);
+					} catch (NumberFormatException nfe){
+						System.out.println("-->Error while parsing arguments: " + nfe.toString());
+					}
+					argsTasks.add(app.new ArgsTask(
+						args[i+3], 
+						args[i+4], 
+						args[i+5], 
+						args[i+6], 
+						id, 
+						app.RMQ_COOKIE, 
+						app.seleniumPort, 
+						app.RMQPort));
+					i += 5;
+				} else {
+					if (args[i+3].equals("nestor")){
+						
+						// launching nestor
+						System.out.println("-->Launching Nestor");
+						SimpleNestor nestor = new SimpleNestor();
+						nestor.act(app, app.RMQ_COOKIE);
+						i++;
+					}
+				}
+				/* ArgsTask(String approle, 
+					String email, 
+					String password, 
+					String publicAddress, 
+					int id, 
+					String RMQ_COOKIE, 
+					int seleniumPort, 
+					int RMQPort){ */
+				
+			}
+		} catch (NullPointerException npe){
+			System.out.println();
+		}
 		
-		switch (approle){
+		/* switch (approle){
 			
 			// node
 			case NODE:
@@ -187,7 +255,7 @@ public class App {
 				}
 				nse.printStackTrace();
 			} */
-			break;
+			/* break;
 			
 			// Nestor
 			case NESTOR:
@@ -200,7 +268,7 @@ public class App {
 			System.out.println("-->This is default");
 			
 			break;
-		}
+		} */
     }
 	
 	//1 role listener/poster
@@ -319,7 +387,7 @@ public class App {
 			System.out.println("-->Not parsable publicId while reboot");
 			return;
 		}
-		switch (approle){
+		/* switch (approle){
 			case NODE:
 				System.out.println("-->Attempting to reboot Node " + publicId);
 				System.out.println("-->Finding proper Node");
@@ -366,7 +434,7 @@ public class App {
 			default:
 				System.out.println("-->Default reboot, declining");
 			break;
-		}
+		} */
 		System.out.println("-->App ended to reboot");
 	}
 }

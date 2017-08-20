@@ -9,14 +9,14 @@ public class RabbitReceiver {
 	private Object master = null;
 	private String RMQ_COOKIE = "";
 	private int port = 0;
-	
-private final static String QUEUE_NAME = "hello";
+	private String QUEUE_NAME = "";
 
 	// constructor
-	RabbitReceiver(Object master, String cookie, int port){
+	RabbitReceiver(Object master, String cookie, int port, String QUEUE_NAME){
 		this.master = master;
 		RMQ_COOKIE = cookie;
 		this.port = port;
+		this.QUEUE_NAME = QUEUE_NAME;
 	}
 
 	public void startReceive() throws Exception {
@@ -53,6 +53,21 @@ private final static String QUEUE_NAME = "hello";
 	
 	private void handleMessage(String message){
 		
+		// do something: instruction+role+email+password+publicAddress+publicId+port
+		if (master instanceof App){
+			
+		}
+		
+		// post:
+		if (master instanceof Listener){
+			
+		}
+		
+		// post:
+		if (master instanceof Poster){
+			
+		}
+		
 		//RMQCookie+instruction+role+email+password+publicAddress+publicId+port
 		//0 instruction
 		//1 email
@@ -69,13 +84,13 @@ private final static String QUEUE_NAME = "hello";
 			// means it is starting message
 			String[] parts = message.split("+");
 			if (parts[0].equals("reboot")){
-				app.reboot(parts[1]);
+	//			app.reboot(parts[1]);
 			}
 			if (parts[0].equals("start")){
-				app.start(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
+	//			app.start(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
 			}
 			if (parts[0].equals("stop")){
-				app.stop(parts[5]);
+	//			app.stop(parts[5]);
 			}
 			return;
 		} else {
