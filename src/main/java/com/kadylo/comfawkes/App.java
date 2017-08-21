@@ -169,7 +169,7 @@ public class App {
 						args[i+6], 
 						id, 
 						app.RMQ_COOKIE, 
-						app.seleniumPort, 
+						app.seleniumPort, increment here!!!!!
 						app.RMQPort));
 					i += 5;
 				} else {
