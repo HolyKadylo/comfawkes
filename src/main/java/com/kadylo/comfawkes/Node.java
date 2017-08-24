@@ -103,7 +103,7 @@ public class Node{
         this.pub = pub;
 		
 		// creating random queue name
-		String queueName = RandomStringUtils.randomAscii(25);
+		String queueName = RandomStringUtils.randomAlphabetic(25);
 		rabbitReceiver = new RabbitReceiver(master, RMQCookie, RMQPort, queueName);
 		
 		// creating sender & reporting queue name

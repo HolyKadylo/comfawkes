@@ -37,6 +37,7 @@ public class App{
 			hostname = "unknown";
 		}
 		System.out.println("-->Hostname set to: " + hostname);
+		nodes = new ArrayList<Node>();
 	}
 	
 	// node config that needs to be launched on this JVM
