@@ -2,7 +2,7 @@
 
 # initial port 
 # will be binded to container's 4444
-seleniumPort=7101;
+initialSeleniumPort=7101;
 # initial port 
 # will be binded to container's 5762 or something
 RMQPort=9101;
@@ -10,7 +10,7 @@ RMQPort=9101;
 seleniumNodeName="node"
 # we need only one RMQ per JVM TODO find out
 RMQServerName="appRabbit"
-
+seleniumPort=$initialSeleniumPort
 echo "-->Setting initial node port to $seleniumPort"
 echo "-->Setting initial RMQ port to $RMQPort"
 echo "-->Running in $1 mode"
@@ -107,7 +107,7 @@ for ((i=1; i<=$j; i++)); do
 done
 
 # actually starting
-java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$RMQcookie" "$seleniumPort" "$RMQPort" $args
+java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$RMQcookie" "$initialSeleniumPort" "$RMQPort" $args
 
 # Stopping RMQ server
 ./stop-container.sh "$RMQServerName"
