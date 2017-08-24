@@ -17,6 +17,7 @@ public class RabbitSender {
 		factory.setPort(port);
 	}
 
+	// address -- queue name
 	public void send(String address, String message) throws Exception {
 		connection = factory.newConnection();
 		channel = connection.createChannel();

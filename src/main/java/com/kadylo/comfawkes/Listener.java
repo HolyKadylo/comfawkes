@@ -21,7 +21,7 @@ import java.io.ObjectInputStream;
 import java.util.Base64;
 
 // This is browser endpoint
-public class Listener extends Node implements Serializable{
+public class Listener extends Node implements Serializable, Runnable{
 	
 	// users that we ignore for a while or forever
 	// this list is renewed in each message
@@ -52,6 +52,8 @@ public class Listener extends Node implements Serializable{
 		System.out.println("-->Listener " + id + " was created");
 	}
 	
+	
+	
 	// will be invoked internally
 	private void setIgnoredUsers(ArrayList<User> list){
 		ignoredUsers = list;
@@ -61,6 +63,18 @@ public class Listener extends Node implements Serializable{
 	private ArrayList<User> getIgnoredUsers(){
 		return ignoredUsers;
 	}
+	
+	public void run() {
+        /* System.out.println("-->Listener started, starting operations");
+				boolean iterate = true;
+				int i = 0;
+				while (iterate){
+					listener.read();
+					i++;
+					iterate = i > 5000 ? false : true;
+					listener.sleep(5000);
+				}	 */	
+    }
 	
 	// posts message to site user in dialog
 	public void post (User addressee, String content){

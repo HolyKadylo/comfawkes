@@ -26,7 +26,8 @@ import java.net.UnknownHostException;
  * Hello world!
  *
  */
-public class App {
+public class App{
+	public static final String NESTOR_RMQ_ADDRESS = "pw6shba02icivg8e2uh6pw6shba";
 	
 	public App (){
 		try{
@@ -118,6 +119,8 @@ public class App {
 	private String RMQ_COOKIE = "";
 	private int seleniumPort = 0;
 	private int RMQPort = 0;
+	public RabbitReceiver appReceiver;
+	public RabbitSender appSender;
 	//node
 	// args[0] -- role of the application
 	// args[1] -- email
@@ -146,9 +149,11 @@ public class App {
 		
 		// this represents it's "tentacles"
 		// using hostname as its unique queue name
-		//RabbitReceiver appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort, app.hostname);
-		//RabbitSender appSender = new RabbitSender(app.RMQPort);
+		app.appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort, app.hostname);
+		app.appSender = new RabbitSender(app.RMQPort);
+		app.RMQPort++;
 		
+		// forming args tasks
 		ArrayList<ArgsTask> argsTasks = new ArrayList<ArgsTask>();
 		try{
 			int i = 0;
@@ -169,14 +174,14 @@ public class App {
 						args[i+6], 
 						id, 
 						app.RMQ_COOKIE, 
-						app.seleniumPort, increment here!!!!!
-						app.RMQPort));
+						app.seleniumPort++,
+						app.RMQPort++));
 					i += 5;
 				} else {
 					if (args[i+3].equals("nestor")){
 						
 						// launching nestor
-						System.out.println("-->Launching Nestor");
+						System.out.println("-->Launching Nestor, TODO SimpleNestor.class");
 						SimpleNestor nestor = new SimpleNestor();
 						nestor.act(app, app.RMQ_COOKIE);
 						i++;
@@ -195,7 +200,14 @@ public class App {
 				
 			}
 		} catch (ArrayIndexOutOfBoundsException aioobe){
-			System.out.println("-->:" + aioobe.toString());
+			System.out.println("-->Args task formed, Nestor launched");
+		}
+		
+		// starting
+		for (ArgsTask t : argsTasks){
+			System.out.println("-->< >");
+			app.start(t);
+			System.out.println("--></>");
 		}
 		
 		/* switch (approle){
@@ -280,14 +292,43 @@ public class App {
 	//5 publicId 1234567
 	//6 port 5001
 	
-	public void start (String role, String email, String password, String publicAddress, String publicId, String port){
-		System.out.println("-->App starts a node " + publicId);
-		int newId = 0;
-		try{
-			newId = Integer.parseInt(publicAddress);
-		} catch (NumberFormatException nfe){
-			System.out.println("-->Error while parsing publicAddress at start");
+	
+	// starts either Poster or Listener
+	public void start (ArgsTask task){
+		System.out.println("-->App starts a node " + task.getPublicAddress() + " at role " + task.getApprole());	
+		Account.Role accountRole = null;
+		if (task.getApprole().equals("listener")){
+			accountRole = Account.Role.LISTENER;
+		} else {
+			if (task.getApprole().equals("poster")){
+				accountRole = Account.Role.POSTER;
+			} else {
+				System.out.println("unknown approle: " + task.getApprole() + "\n-->leaving approle null");
+			}
 		}
+		
+		Account account = new Account (task.getEmail(), task.getPassword(), "0972594950", accountRole);
+		Node node2Create = null;
+		switch (accountRole){
+			case LISTENER:
+				node2Create = new Listener (account, "http://localhost:" + task.getSeleniumPort(), task.getId());
+			break;
+			case POSTER:
+				node2Create = new Poster (account, "http://localhost:" + task.getSeleniumPort(), task.getId());
+				
+			break;
+			default:
+				System.out.println("-->No account role found");
+			break;
+		}
+		account.setNode(node2Create);
+		WebDriver driver = null;
+		driver = node2Create.getDriver();
+		
+		// it doesn't matter which user is here right now
+		User user = null;
+		Public public2use = new Public(task.getPublicAddress(), user, null, 0, task.getId(), Public.ListenerRole.ADMIN, new HashMap<Public.Media, String>());
+		
 			/*Account account = new Account(email, password, "0972594950", Account.Role.LISTENER);
 			Listener listener = new Listener(account, "http://localhost:5000", 10);
 			account.setNode(listener);
@@ -334,7 +375,7 @@ public class App {
 			} */
 		
 		
-		HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
+		/* HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
 		storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
 		
 		
@@ -356,6 +397,32 @@ public class App {
 			driver = poster.getDriver();
 			
 			nodes.add(poster);
+		} */
+		//(Public pub, Object master, String RMQCookie, int RMQPort){
+		
+		/* private String approle;
+		private String email = "";
+		private String password = "";
+		private String publicAddress = "";
+		private int id = 0;
+		private String RMQ_COOKIE = "";
+		private int seleniumPort = 0;
+		private int RMQPort = 0; */
+		
+		switch(accountRole){
+			case LISTENER:
+				node2Create.start(public2use, (Listener)node2Create, task.getRMQCookie(), task.getRMQPort());
+				(new Thread((Listener)node2Create)).start();
+				nodes.add(node2Create);		
+			break;
+			case POSTER:
+				node2Create.start(public2use, (Poster)node2Create, task.getRMQCookie(), task.getRMQPort());
+				(new Thread((Poster)node2Create)).start();
+				nodes.add(node2Create);	
+			break;
+			default:
+				System.out.println("-->No account role found");
+			break;
 		}
 	}
 	

@@ -15,7 +15,7 @@ import java.util.Set;
 import org.openqa.selenium.Keys;
 
 // This is browser endpoint
-public class Poster extends Node{
+public class Poster extends Node implements Runnable{
 	
 	private final int MAX_ERRORS_COUNT = 5;
 	private int errorCount = 0;
@@ -277,6 +277,10 @@ public class Poster extends Node{
 		element.click();
 		sleep(5000);	
 	}
+	
+	public void run() {
+        System.out.println("Hello from a thread!");
+    }
 	
 	// doesn't listen
 	// all's closed

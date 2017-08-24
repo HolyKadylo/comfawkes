@@ -3,12 +3,20 @@ package com.kadylo.comfawkes;
 //this Nestor will be deleted when actual one 
 //will be created
 
-
+//
 public class SimpleNestor{
 	
 	SimpleNestor(){
 		System.out.println("-->This is simpleNestor constructor");
 	}
+	
+	// receiver receives messages like this:
+	// 88+oisehfoseugosig+10023993+oriih...
+	
+	// receiver codes:
+	// 00 App created poster at address: address+publicId
+	// 01 App created listener at address address+publicId
+	// 
 	
 	public void act(App app, String RMQ_COOKIE){
 		System.out.println("-->Nestor acts");		

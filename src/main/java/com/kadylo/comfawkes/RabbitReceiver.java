@@ -17,6 +17,8 @@ public class RabbitReceiver {
 		RMQ_COOKIE = cookie;
 		this.port = port;
 		this.QUEUE_NAME = QUEUE_NAME;
+		
+		System.out.println("-->DELETECreated with queue name:" + this.QUEUE_NAME);
 	}
 
 	public void startReceive() throws Exception {
@@ -53,19 +55,21 @@ public class RabbitReceiver {
 	
 	private void handleMessage(String message){
 		
+		System.out.println("-->TODO DELETE: received with queueName " + QUEUE_NAME);
+		
 		// do something: instruction+role+email+password+publicAddress+publicId+port
 		if (master instanceof App){
-			
+			System.out.println("-->Message for app");
 		}
 		
 		// post:
 		if (master instanceof Listener){
-			
+			System.out.println("-->Message for listener");
 		}
 		
 		// post:
 		if (master instanceof Poster){
-			
+			System.out.println("-->Message for poster");
 		}
 		
 		//RMQCookie+instruction+role+email+password+publicAddress+publicId+port
