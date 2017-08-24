@@ -17,8 +17,6 @@ public class RabbitReceiver {
 		RMQ_COOKIE = cookie;
 		this.port = port;
 		this.QUEUE_NAME = QUEUE_NAME;
-		
-		System.out.println("-->DELETECreated with queue name:" + this.QUEUE_NAME);
 	}
 
 	public void startReceive() throws Exception {

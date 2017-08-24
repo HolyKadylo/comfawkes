@@ -109,12 +109,12 @@ public class Node{
 		// creating sender & reporting queue name
 		rabbitSender = new RabbitSender(RMQPort);
 		try {
-		if (master instanceof Poster){
-			rabbitSender.send(NESTOR_RMQ_ADDRESS, "00+" + queueName + "+" + pub.getId());
-		} 
-		if (master instanceof Listener){
-			rabbitSender.send(NESTOR_RMQ_ADDRESS, "01+" + queueName + "+" + pub.getId());
-		}
+			if (master instanceof Poster){
+				rabbitSender.send(NESTOR_RMQ_ADDRESS, "00+" + queueName + "+" + pub.getId());
+			} 
+			if (master instanceof Listener){
+				rabbitSender.send(NESTOR_RMQ_ADDRESS, "01+" + queueName + "+" + pub.getId());
+			}
 		} catch (Exception e){
 			System.out.println("-->Exception while sending queueName to Nestor: " + e.toString());
 		}

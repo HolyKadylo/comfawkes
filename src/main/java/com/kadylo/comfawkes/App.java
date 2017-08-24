@@ -151,7 +151,7 @@ public class App{
 		// using hostname as its unique queue name
 		app.appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort, app.hostname);
 		app.appSender = new RabbitSender(app.RMQPort);
-		app.RMQPort++;
+		app.RMQPort;
 		
 		// forming args tasks
 		ArrayList<ArgsTask> argsTasks = new ArrayList<ArgsTask>();
@@ -175,7 +175,7 @@ public class App{
 						id, 
 						app.RMQ_COOKIE, 
 						app.seleniumPort++,
-						app.RMQPort++));
+						app.RMQPort));
 					i += 5;
 				} else {
 					if (args[i+3].equals("nestor")){
