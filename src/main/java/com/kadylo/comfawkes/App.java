@@ -81,7 +81,7 @@ public class App{
 			
 			System.out.println("-->Creating target class of " + args[0]);
 			if (args[0].equals("listener")){
-				Listener listener = new Listener(new Account(args[1], args[2], "0972594950", Account.Role.LISTENER), args[5], publicId);
+				Listener listener = new Listener(new Account(args[1], args[2], "0972594950", Account.Role.LISTENER), args[5], publicId, rabbitSender);
 				app.setObject(listener);
 			}
 			if (args[0].equals("poster")){
@@ -112,6 +112,8 @@ public class App{
 			System.out.println("-->Public created, starting");
 			if (args[0].equals("listener")){
 				((Listener)app.getObject()).start(pub2use);
+				System.out.println("-->It's listener, starting operations");
+				(new Thread((Listener)app.getObject())).start();
 			}
 			if (args[0].equals("poster")){
 				((Poster)app.getObject()).start(pub2use);

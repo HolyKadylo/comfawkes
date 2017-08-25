@@ -55,7 +55,6 @@ public class RabbitReceiver {
 	
 	private void handleMessage(String message){
 		
-		// do something: instruction+role+email+password+publicAddress+publicId+port
 		// created node listener at RMQ address: 10+id+address
 		// created node poster at RMQ address: 11+id+address
 		// node logged in and ready to operate: 12+address
@@ -63,7 +62,7 @@ public class RabbitReceiver {
 			System.out.println("-->Message for SimpleNestor");
 		}
 		
-		// post:
+		// 
 		if (master instanceof Listener){
 			System.out.println("-->Message for listener");
 		}

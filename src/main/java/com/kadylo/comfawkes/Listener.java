@@ -22,6 +22,7 @@ import java.util.Base64;
 
 // This is browser endpoint
 public class Listener extends Node implements Serializable, Runnable{
+	public static final String NESTOR_RMQ_ADDRESS = "pw6shba02icivg8e2uh6pw6shba";
 	
 	// users that we ignore for a while or forever
 	// this list is renewed in each message
@@ -31,13 +32,14 @@ public class Listener extends Node implements Serializable, Runnable{
 	private ArrayList<User> ignoredUsers;
     private String readTab;
     private String writeTab;
+	private RabbitSender rabbitSender;
 	
 	// empty
 	public Listener (){
 		super();
 	}
 	
-	public Listener(Account account, String sURL, int id){
+	public Listener(Account account, String sURL, int id, RabbitSender rabbitSender){
 		super(account, sURL, id);
 		System.out.println("-->Continuing creation of Listener " + id);
         String s = Keys.chord(Keys.CONTROL, "t");
@@ -49,6 +51,7 @@ public class Listener extends Node implements Serializable, Runnable{
         readTab = handles.get(1);
         driver.switchTo().window(readTab);
 		ignoredUsers = new ArrayList<User>();
+		this.rabbitSender = rabbitSender;
 		System.out.println("-->Listener " + id + " was created");
 	}
 	
@@ -65,15 +68,17 @@ public class Listener extends Node implements Serializable, Runnable{
 	}
 	
 	public void run() {
-        /* System.out.println("-->Listener started, starting operations");
-				boolean iterate = true;
-				int i = 0;
-				while (iterate){
-					listener.read();
-					i++;
-					iterate = i > 5000 ? false : true;
-					listener.sleep(5000);
-				}	 */	
+		while (true){
+			Message m = read();
+			if (m != null){
+				try{
+					rabbitSender.send(NESTOR_RMQ_ADDRESS, m.getSerialized());
+				} catch (Exception e){
+					System.out.println("-->Exception while sending message: " + e.toString());
+				}
+			}
+			sleep(5000);
+		}
     }
 	
 	// posts message to site user in dialog
