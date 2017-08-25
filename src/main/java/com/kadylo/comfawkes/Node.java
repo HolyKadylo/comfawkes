@@ -17,7 +17,6 @@ import java.util.MissingResourceException;
 import org.openqa.selenium.TakesScreenshot;
 import java.lang.InterruptedException;
 import java.io.IOException;
-import org.apache.commons.lang.RandomStringUtils;
 
 // this class is used for basic selenium operations.
 // Is parent to Poster and Listener
@@ -90,7 +89,7 @@ public class Node{
 	
 	// TODO add setups
 	// starters & stoppers
-	public void start(Public pub, Object master, String RMQCookie, int RMQPort){
+	public void start(Public pub){
 		System.out.println("-->Starting node " + id);
 		try{
 			login();
@@ -101,23 +100,6 @@ public class Node{
 		}
 		setOwnStatus("-->Is up");
         this.pub = pub;
-		
-		// creating random queue name
-		String queueName = RandomStringUtils.randomAlphabetic(25);
-		rabbitReceiver = new RabbitReceiver(master, RMQCookie, RMQPort, queueName);
-		
-		// creating sender & reporting queue name
-		rabbitSender = new RabbitSender(RMQPort);
-		try {
-			if (master instanceof Poster){
-				rabbitSender.send(NESTOR_RMQ_ADDRESS, "00+" + queueName + "+" + pub.getId());
-			} 
-			if (master instanceof Listener){
-				rabbitSender.send(NESTOR_RMQ_ADDRESS, "01+" + queueName + "+" + pub.getId());
-			}
-		} catch (Exception e){
-			System.out.println("-->Exception while sending queueName to Nestor: " + e.toString());
-		}
 		state = State.READY;
 		System.out.println("-->Node " + id + " started");
 	}

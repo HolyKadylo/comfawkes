@@ -10,10 +10,10 @@ public class RabbitSender {
 	Connection connection;
 	Channel channel;
 	
-	RabbitSender(int port){
+	RabbitSender(String host, int port){
 		this.port = port;
 		factory = new ConnectionFactory();
-		factory.setHost("localhost");
+		factory.setHost(host);
 		factory.setPort(port);
 	}
 

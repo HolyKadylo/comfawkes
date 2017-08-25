@@ -4,7 +4,6 @@ com\kadylo\comfawkes\Listener$1.class
 com\kadylo\comfawkes\Listener$Message.class
 com\kadylo\comfawkes\Poster$1.class
 com\kadylo\comfawkes\Public.class
-com\kadylo\comfawkes\App$ArgsTask.class
 com\kadylo\comfawkes\SimpleNestor.class
 com\kadylo\comfawkes\App.class
 com\kadylo\comfawkes\Public$Media.class
@@ -12,7 +11,6 @@ com\kadylo\comfawkes\Poster.class
 com\kadylo\comfawkes\Account.class
 com\kadylo\comfawkes\Public$ListenerRole.class
 com\kadylo\comfawkes\Node$State.class
-com\kadylo\comfawkes\App$1.class
 com\kadylo\comfawkes\Listener.class
 com\kadylo\comfawkes\RabbitReceiver$1.class
 com\kadylo\comfawkes\Node.class

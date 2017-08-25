@@ -21,6 +21,7 @@ import java.net.URL;
 import org.openqa.selenium.Platform; 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import org.apache.commons.lang.RandomStringUtils;
 
 /**
  * Hello world!
@@ -29,482 +30,126 @@ import java.net.UnknownHostException;
 public class App{
 	public static final String NESTOR_RMQ_ADDRESS = "pw6shba02icivg8e2uh6pw6shba";
 	
+	// represents running in JVM code
 	public App (){
-		try{
-			hostname = InetAddress.getLocalHost().getHostName();
-		} catch (UnknownHostException uhe){
-			System.out.println("-->Unknown host exception: " + uhe.toString());
-			hostname = "unknown";
-		}
-		System.out.println("-->Hostname set to: " + hostname);
-		nodes = new ArrayList<Node>();
+
 	}
 	
-	// node config that needs to be launched on this JVM
-	class ArgsTask{
-			
-		private String approle;
-		private String email = "";
-		private String password = "";
-		private String publicAddress = "";
-		private int id = 0;
-		private String RMQ_COOKIE = "";
-		private int seleniumPort = 0;
-		private int RMQPort = 0;
-		
-		ArgsTask(String approle, 
-			String email, 
-			String password, 
-			String publicAddress, 
-			int id, 
-			String RMQ_COOKIE, 
-			int seleniumPort, 
-			int RMQPort){
-				
-			this.approle = approle;
-			this.email = email;
-			this.password = password;
-			this.publicAddress = publicAddress;
-			this.id = id;
-			this.RMQ_COOKIE = RMQ_COOKIE;
-			this.seleniumPort = seleniumPort;
-			this.RMQPort = RMQPort;
-			System.out.println("-->ArgsTask created: approle:" 
-				+ approle 
-				+ " email:" 
-				+ email 
-				+ " password:" 
-				+ password 
-				+ " id:" 
-				+ id 
-				+ " RMQ:" 
-				+ RMQ_COOKIE 
-				+ " seleniumPort:" 
-				+ seleniumPort 
-				+ " RMQPort:" 
-				+ RMQPort);
-		}
-		
-		public String getApprole(){
-			return approle;
-		}
-		public String getEmail(){
-			return email;
-		}
-		public String getPassword(){
-			return password;
-		}
-		public String getPublicAddress(){
-			return publicAddress;
-		}
-		public int getId(){
-			return id;
-		}
-		public String getRMQCookie(){
-			return RMQ_COOKIE;
-		}
-		public int getSeleniumPort(){
-			return seleniumPort;
-		}
-		public int getRMQPort(){
-			return RMQPort;
-		}
+	// represents object that runs in this JVM
+	Object object;
+	public Object getObject(){
+		return object;
+	}
+	public void setObject(Object object){
+		this.object = object;
 	}
 	
-	
-	private String hostname = "";
-	
-	// nodes that are running on this JVM
-	private static ArrayList<Node> nodes;
-	
-	private String RMQ_COOKIE = "";
-	private int seleniumPort = 0;
-	private int RMQPort = 0;
-	public RabbitReceiver appReceiver;
-	public RabbitSender appSender;
-	//node
+	// node
 	// args[0] -- role of the application
 	// args[1] -- email
 	// args[2] -- password
 	// args[3] -- publicAddress
 	// args[4] -- publicId
-	// args[5] -- port on localhost for selenium
+	// args[5] -- host & port on host for selenium
 	// args[6] -- RMQ cookie
+	// args[7] -- port on host for RMQ
+	// args[8] -- host for RMQ
 	
 	// nestor
 	// args[0] -- role of the application
 	// args[1] -- RMQ cookie
+	// args[2] -- port on host for RMQ
+	// args[3] -- host for RMQ
 	
     public static void main( String[] args ){
-		System.out.println("-->Starting app's public static void main");
 		
-		// this represents this instance
 		App app = new App();
-		app.RMQ_COOKIE = args[0];
-		try{
-			app.seleniumPort = Integer.parseInt(args[1]);
-			app.RMQPort = Integer.parseInt(args[2]);
-		} catch (NumberFormatException nfe){
-			System.out.println("-->Exception while parsing ports " + nfe.toString());
-		}
 		
-		// this represents it's "tentacles"
-		// using hostname as its unique queue name
-		app.appReceiver = new RabbitReceiver(app, app.RMQ_COOKIE, app.RMQPort, app.hostname);
-		app.appSender = new RabbitSender(app.RMQPort);
-		//app.RMQPort;
-		
-		// forming args tasks
-		ArrayList<ArgsTask> argsTasks = new ArrayList<ArgsTask>();
-		try{
-			int i = 0;
-			while (true) {
-				
-				// if chunk starts with listener or poster, we are parsing entities
-				if (args[i+3].equals("listener") || args[i+3].equals("poster")){
-					int id = 0;
-					try{
-						id = Integer.parseInt(args[i+7]);
-					} catch (NumberFormatException nfe){
-						System.out.println("-->Error while parsing arguments: " + nfe.toString());
-					}
-					argsTasks.add(app.new ArgsTask(
-						args[i+3], 
-						args[i+4], 
-						args[i+5], 
-						args[i+6], 
-						id, 
-						app.RMQ_COOKIE, 
-						app.seleniumPort++,
-						app.RMQPort));
-					i += 5;
-				} else {
-					if (args[i+3].equals("nestor")){
-						
-						// launching nestor
-						System.out.println("-->Launching Nestor, TODO SimpleNestor.class");
-						SimpleNestor nestor = new SimpleNestor();
-						nestor.act(app, app.RMQ_COOKIE);
-						i++;
-					} else {
-						i++;
-					}
-				}
-				/* ArgsTask(String approle, 
-					String email, 
-					String password, 
-					String publicAddress, 
-					int id, 
-					String RMQ_COOKIE, 
-					int seleniumPort, 
-					int RMQPort){ */
-				
-			}
-		} catch (ArrayIndexOutOfBoundsException aioobe){
-			System.out.println("-->Args task formed, Nestor launched");
-		}
-		
-		// starting
-		for (ArgsTask t : argsTasks){
-			System.out.println("-->< >");
-			app.start(t);
-			System.out.println("--></>");
-		}
-		
-		/* switch (approle){
-			
-			// node
-			case NODE:
-			System.out.println("-->This is Node");
-			RabbitReceiver receiver = new RabbitReceiver(app, args[6], 0);//-------------
-			System.out.println("-->Node starts to recieve RQM commands");
+		// WORKING NODE
+		if (args[0].equals("listener") || args[0].equals("poster")){
+			System.out.println("-->Linking to RMQ sender");
+			int RMQport = 0;
+			int publicId = 0;
 			try{
-				receiver.startReceive();
+				RMQport = Integer.parseInt(args[7]);
+				publicId = Integer.parseInt(args[4]);
+			} catch (NumberFormatException nfe){
+				System.out.println("-->Error while parsing RMQ port or publicID: " + nfe.toString());
+			}
+			RabbitSender rabbitSender = new RabbitSender(args[8], RMQport);
+			System.out.println("-->Linked to RMQ sender");
+			
+			System.out.println("-->Creating target class of " + args[0]);
+			if (args[0].equals("listener")){
+				Listener listener = new Listener(new Account(args[1], args[2], "0972594950", Account.Role.LISTENER), args[5], publicId);
+				app.setObject(listener);
+			}
+			if (args[0].equals("poster")){
+				Poster poster = new Poster(new Account(args[1], args[2], "0972594950", Account.Role.POSTER), args[5], publicId);
+				app.setObject(poster);
+			}
+			System.out.println("-->Target class created");
+			
+			System.out.println("-->Linking to RMQ receiver");
+			String queueName = RandomStringUtils.randomAlphabetic(25);
+			System.out.println("-->Created queueName of " + queueName + ", reporting it back to Nestor");
+			try{
+				if (args[0].equals("listener")){
+					rabbitSender.send(NESTOR_RMQ_ADDRESS, "10+" + publicId + "+" + queueName);
+				}
+				if (args[0].equals("poster")){
+					rabbitSender.send(NESTOR_RMQ_ADDRESS, "11+" + publicId + "+" + queueName);
+				}
 			} catch (Exception e){
-				System.out.println("-->Error while receiving RMQ commands by Node: " + e.toString());
+				System.out.println("-->Exception while reporting back queueName to Nestor");
 			}
-			System.out.println("-->Node started to receive RMQ commands");
+			System.out.println("-->Reported back, now creating class");
+			RabbitReceiver rabbitReceiver = new RabbitReceiver(app.getObject(), args[6], RMQport, queueName, args[8]);
+			System.out.println("-->Class created, linked to RMQ receiver");
 			
-			/* // we think that we don't need telephone
-			Account account = new Account(args[1], args[2], "0972594950", Account.Role.LISTENER);
-			Listener listener = new Listener(account, "http://localhost:5000", 10);
-			account.setNode(listener);
-			WebDriver driver = null;
-			driver = listener.getDriver();
-			
-			User me = new User ("https://vk.com/holy_kadylo", 12585304, null, "Illya Piven", 150);
-			
-			// everything allowed
-			HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
-			HashMap <Public.Media, String> storage0 = new HashMap<Public.Media, String>();
-			HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
-			HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
-			
-			
-			storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
-
-			Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 150574507, Public.ListenerRole.ADMIN, storage00);
-			Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 144898340, Public.ListenerRole.STANDALONE, storage0);
-			
-		  try{
-			listener.start(pub00);
-			
-			boolean iterate = true;
-			int i = 0;
-			while (iterate){
-				listener.read();
-				// listener.takeScreenshot(String.valueOf(i));
-				i++;
-				iterate = i > 5000 ? false : true;
-				listener.sleep(5000);
+			System.out.println("-->Logging in, creating public");			
+			Public pub2use = new Public(args[3], null, null, 0, publicId, Public.ListenerRole.ADMIN, null);
+			System.out.println("-->Public created, starting");
+			if (args[0].equals("listener")){
+				((Listener)app.getObject()).start(pub2use);
 			}
-			listener.stop();
-			
-			} catch (Exception nse){
-				try{
-					File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
-					FileUtils.copyFile(scrFile, new File("TESTCASEFAIL.png"));
-				} catch (IOException ioe){
-					System.out.println("-->file exception");
-					ioe.printStackTrace();
-				}
-				nse.printStackTrace();
-			} */
-			/* break;
-			
-			// Nestor
-			case NESTOR:
-				SimpleNestor nestor = new SimpleNestor();
-				nestor.act(app, args[1]);
-			break;
-			
-			default:
-			
-			System.out.println("-->This is default");
-			
-			break;
-		} */
-    }
-	
-	//1 role listener/poster
-	//2 email foo@bar.com / telephoneNo which we treat the same way
-	//3 password abc123
-	//4 publicAddress https://vv.com/xxxx
-	//5 publicId 1234567
-	//6 port 5001
-	
-	
-	// starts either Poster or Listener
-	public void start (ArgsTask task){
-		System.out.println("-->App starts a node " + task.getPublicAddress() + " at role " + task.getApprole());	
-		Account.Role accountRole = null;
-		if (task.getApprole().equals("listener")){
-			accountRole = Account.Role.LISTENER;
-		} else {
-			if (task.getApprole().equals("poster")){
-				accountRole = Account.Role.POSTER;
-			} else {
-				System.out.println("unknown approle: " + task.getApprole() + "\n-->leaving approle null");
+			if (args[0].equals("poster")){
+				((Poster)app.getObject()).start(pub2use);
 			}
-		}
-		
-		Account account = new Account (task.getEmail(), task.getPassword(), "0972594950", accountRole);
-		Node node2Create = null;
-		switch (accountRole){
-			case LISTENER:
-				node2Create = new Listener (account, "http://localhost:" + task.getSeleniumPort(), task.getId());
-			break;
-			case POSTER:
-				node2Create = new Poster (account, "http://localhost:" + task.getSeleniumPort(), task.getId());
-				
-			break;
-			default:
-				System.out.println("-->No account role found");
-			break;
-		}
-		account.setNode(node2Create);
-		WebDriver driver = null;
-		driver = node2Create.getDriver();
-		
-		// it doesn't matter which user is here right now
-		User user = null;
-		Public public2use = new Public(task.getPublicAddress(), user, null, 0, task.getId(), Public.ListenerRole.ADMIN, new HashMap<Public.Media, String>());
-		
-			/*Account account = new Account(email, password, "0972594950", Account.Role.LISTENER);
-			Listener listener = new Listener(account, "http://localhost:5000", 10);
-			account.setNode(listener);
-			WebDriver driver = null;
-			driver = listener.getDriver();
-			
-			User me = new User ("https://vk.com/holy_kadylo", 12585304, null, "Illya Piven", 150);
-			
-			// everything allowed
-			HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
-			HashMap <Public.Media, String> storage0 = new HashMap<Public.Media, String>();
-			HashMap <Public.Media, String> storage = new HashMap<Public.Media, String>();
-			HashMap <Public.Media, String> storage2 = new HashMap<Public.Media, String>();
-			
-			
-			storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
-
-			Public pub00 = new Public("https://vk.com/thisiswhathappenslarry", me, null, 248, 150574507, Public.ListenerRole.ADMIN, storage00);
-			Public pub0 = new Public ("https://vk.com/kadylosbooks", me, null, 249, 144898340, Public.ListenerRole.STANDALONE, storage0);
-			
-		  try{
-			listener.start(pub00);
-			
-			boolean iterate = true;
-			int i = 0;
-			while (iterate){
-				listener.read();
-				// listener.takeScreenshot(String.valueOf(i));
-				i++;
-				iterate = i > 5000 ? false : true;
-				listener.sleep(5000);
+			System.out.println("-->Public created, logged in, reporting back the readiness to operate");
+			try{
+				rabbitSender.send(NESTOR_RMQ_ADDRESS, "12+" + queueName);
+			} catch (Exception e){
+				System.out.println("-->Exception while reporting active status " + e.toString());
 			}
-			listener.stop();
-			
-			} catch (Exception nse){
-				try{
-					File scrFile = (File)(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
-					FileUtils.copyFile(scrFile, new File("TESTCASEFAIL.png"));
-				} catch (IOException ioe){
-					System.out.println("-->file exception");
-					ioe.printStackTrace();
-				}
-				nse.printStackTrace();
-			} */
-		
-		
-		/* HashMap <Public.Media, String> storage00 = new HashMap<Public.Media, String>();
-		storage00.put(Public.Media.PICTURE, "https://vk.com/album-150574507_245779604");
-		
-		
-		User me = new User ("https://vk.com/holy_kadylo", 12585304, null, "Illya Piven", 150);
-		Public public2use = new Public(publicAddress, me, null, 0, newId, Public.ListenerRole.ADMIN, storage00);
-		WebDriver driver = null;
-		if (role.equals("listener")){
-			Account account = new Account(email, password, "0972594950", Account.Role.LISTENER);
-			Listener listener = new Listener(account, "http://localhost:" + port, newId);
-			account.setNode(listener);
-			driver = listener.getDriver();
-			
-			nodes.add(listener);
+			System.out.println("-->Reported back. Now operating");
 		}
-		if (role.equals("poster")){
-			Account account = new Account(email, password, "0972594950", Account.Role.POSTER);
-			Poster poster = new Poster(account, "http://localhost:" + port, newId);
-			account.setNode(poster);
-			driver = poster.getDriver();
-			
-			nodes.add(poster);
-		} */
-		//(Public pub, Object master, String RMQCookie, int RMQPort){
 		
-		/* private String approle;
-		private String email = "";
-		private String password = "";
-		private String publicAddress = "";
-		private int id = 0;
-		private String RMQ_COOKIE = "";
-		private int seleniumPort = 0;
-		private int RMQPort = 0; */
-		
-		switch(accountRole){
-			case LISTENER:
-				node2Create.start(public2use, (Listener)node2Create, task.getRMQCookie(), task.getRMQPort());
-				(new Thread((Listener)node2Create)).start();
-				nodes.add(node2Create);		
-			break;
-			case POSTER:
-				node2Create.start(public2use, (Poster)node2Create, task.getRMQCookie(), task.getRMQPort());
-				(new Thread((Poster)node2Create)).start();
-				nodes.add(node2Create);	
-			break;
-			default:
-				System.out.println("-->No account role found");
-			break;
-		}
-	}
-	
-	public void stop (String publicId){
-		System.out.println("-->App stops a node " + publicId);
-		System.out.println("-->Attempting to stop Node " + publicId);
-		System.out.println("-->Finding proper Node");
-		int id;
-		try{
-			id = Integer.parseInt(publicId);
-		} catch (NumberFormatException nfe){
-			System.out.println("-->Not parsable publicId while stop");
-			return;
-		}
-		for (Node node : nodes){
-			if (node.getId() == id){
-				node.stop();
-				nodes.remove(node);
-				break;
+		// NESTOR
+		if (args[0].equals("nestor")){
+			System.out.println("-->Linking to RMQ sender");
+			int RMQport = 0;
+			try{
+				RMQport = Integer.parseInt(args[2]);
+			} catch (NumberFormatException nfe){
+				System.out.println("-->Error while parsing RMQ port: " + nfe.toString());
 			}
+			RabbitSender rabbitSender = new RabbitSender(args[3], RMQport);
+			System.out.println("-->Linked to RMQ sender");
+			
+			System.out.println("-->Creating target class of " + args[0]);
+			SimpleNestor nestor = new SimpleNestor();
+			app.setObject(nestor);
+			System.out.println("-->Target class created");
+			
+			System.out.println("-->Linking to RMQ receiver");			
+			RabbitReceiver rabbitReceiver = new RabbitReceiver(app.getObject(), args[1], RMQport, NESTOR_RMQ_ADDRESS, args[3]);
+			System.out.println("-->Linked to RMQ receiver");
 		}
-		System.out.println("-->Node " + publicId + " stopped");
-	}
-	
-	public void reboot (String publicId){
-		System.out.println("-->App a reboot process");
-		int id;
-		try{
-			id = Integer.parseInt(publicId);
-		} catch (NumberFormatException nfe){
-			System.out.println("-->Not parsable publicId while reboot");
-			return;
+		
+		if (!args[0].equals("nestor") && !args[0].equals("poster") && !args[0].equals("listener")){
+			System.out.println("-->No valid role of the application provided, exiting");
+			System.exit(-1);
 		}
-		/* switch (approle){
-			case NODE:
-				System.out.println("-->Attempting to reboot Node " + publicId);
-				System.out.println("-->Finding proper Node");
-				Node node2reboot = null;
-				
-				// finding proper Node
-				for (Node node : nodes){
-					if (node.getId() == id){
-						node2reboot = node;
-						nodes.remove(node);
-						break;
-					}
-				}
-				System.out.println("-->Proper Node found. Stopping it");
-				node2reboot.stop();
-				node2reboot.sleep(10000);
-				System.out.println("-->Node " + publicId + " stopped. Starting it again");
-				Account oldAcc = node2reboot.getCurrentAccount();
-				
-				if (node2reboot instanceof Listener){
-					System.out.println("-->node instanceof listener");
-					Listener listener = new Listener(oldAcc, node2reboot.getSUrl(), node2reboot.getId());
-					oldAcc.setNode(listener);
-					WebDriver driver = null;
-					driver = listener.getDriver();
-				}
-				if (node2reboot instanceof Poster){
-					System.out.println("-->node instanceof poster");
-					Poster poster = new Poster(oldAcc, node2reboot.getSUrl(), node2reboot.getId());
-					oldAcc.setNode(poster);
-					WebDriver driver = null;
-					driver = poster.getDriver();
-				}
-				
-				Public oldPub = node2reboot.getPublic();
-				Public newPub = new Public(oldPub.getAddress(), null, null, 0, oldPub.getId(), oldPub.getRole(), null);
-				node2reboot.start(newPub);
-				nodes.add(node2reboot);
-				System.out.println("-->Node " + publicId + " started again");
-			break;
-			case NESTOR:
-				System.out.println("-->Attempting to reboot Nestor, declining");
-			break;
-			default:
-				System.out.println("-->Default reboot, declining");
-			break;
-		} */
-		System.out.println("-->App ended to reboot");
 	}
 }

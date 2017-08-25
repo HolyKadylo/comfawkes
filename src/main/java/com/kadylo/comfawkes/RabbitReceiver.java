@@ -9,19 +9,21 @@ public class RabbitReceiver {
 	private Object master = null;
 	private String RMQ_COOKIE = "";
 	private int port = 0;
+	private String host = "";
 	private String QUEUE_NAME = "";
 
 	// constructor
-	RabbitReceiver(Object master, String cookie, int port, String QUEUE_NAME){
+	RabbitReceiver(Object master, String cookie, int port, String QUEUE_NAME, String host){
 		this.master = master;
 		RMQ_COOKIE = cookie;
 		this.port = port;
+		this.host = host;
 		this.QUEUE_NAME = QUEUE_NAME;
 	}
 
 	public void startReceive() throws Exception {
 		ConnectionFactory factory = new ConnectionFactory();
-		factory.setHost("localhost");
+		factory.setHost(host);
 		factory.setPort(port);
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
@@ -53,11 +55,12 @@ public class RabbitReceiver {
 	
 	private void handleMessage(String message){
 		
-		System.out.println("-->TODO DELETE: received with queueName " + QUEUE_NAME);
-		
 		// do something: instruction+role+email+password+publicAddress+publicId+port
-		if (master instanceof App){
-			System.out.println("-->Message for app");
+		// created node listener at RMQ address: 10+id+address
+		// created node poster at RMQ address: 11+id+address
+		// node logged in and ready to operate: 12+address
+		if (master instanceof SimpleNestor){
+			System.out.println("-->Message for SimpleNestor");
 		}
 		
 		// post:
@@ -69,36 +72,5 @@ public class RabbitReceiver {
 		if (master instanceof Poster){
 			System.out.println("-->Message for poster");
 		}
-		
-		//RMQCookie+instruction+role+email+password+publicAddress+publicId+port
-		//0 instruction
-		//1 email
-		
-		//0 instruction start/stop/reboot
-		//1 role listener/poster
-		//2 email foo@bar.com / telephoneNo which we treat the same way
-		//3 password abc123
-		//4 publicAddress https://vv.com/xxxx
-		//5 publicId 1234567
-		//6 port 5001
-		if (message.contains(RMQ_COOKIE)){
-			
-			// means it is starting message
-			String[] parts = message.split("+");
-			if (parts[0].equals("reboot")){
-	//			app.reboot(parts[1]);
-			}
-			if (parts[0].equals("start")){
-	//			app.start(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
-			}
-			if (parts[0].equals("stop")){
-	//			app.stop(parts[5]);
-			}
-			return;
-		} else {
-			
-			// handle message to poster or listener further
-		}
 	}
-	
 }

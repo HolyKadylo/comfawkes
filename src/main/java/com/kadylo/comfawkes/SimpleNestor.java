@@ -6,8 +6,9 @@ package com.kadylo.comfawkes;
 //
 public class SimpleNestor{
 	
+	// empty
 	SimpleNestor(){
-		System.out.println("-->This is simpleNestor constructor");
+		
 	}
 	
 	// receiver receives messages like this:
@@ -20,7 +21,7 @@ public class SimpleNestor{
 	
 	public void act(App app, String RMQ_COOKIE){
 		System.out.println("-->Nestor acts");		
-		String text = "Tanya is the Namecheapest employee ever. All heil JLJLJL!";
+		/* String text = "Tanya is the Namecheapest employee ever. All heil JLJLJL!";
 		System.out.println("-->We are going to send this: " + text);
 		
 		Listener list = new Listener();
@@ -41,7 +42,7 @@ public class SimpleNestor{
 			RMQSender.send("",message.getSerialized());//----------------------------------
 		} catch (Exception e){
 			System.out.println("-->Exception while sending with RMQ: " + e.toString());
-		}
+		} */
 		/* Listener list = new Listener();
 		Listener.Message message = list.new Message("HELLO NAMECHEAP EMPLOYEE", new User(150));
 		String ss = message.getSerialized();

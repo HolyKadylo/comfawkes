@@ -27,6 +27,11 @@ public class Poster extends Node implements Runnable{
     // String -- tab handle, Long -- last accessed ms
     private volatile HashMap<String, Long> openTabs;
 	
+	// empty
+	public Poster(){
+		super();
+	}
+	
 	public Poster(Account account, String sURL, int id){
 		super(account, sURL, id);
 		openTabs = new HashMap<String, Long>();

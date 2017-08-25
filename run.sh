@@ -3,17 +3,19 @@
 # initial port 
 # will be binded to container's 4444
 initialSeleniumPort=7101;
+
 # initial port 
 # will be binded to container's 5762 or something
 RMQPort=9101;
+
 # will be conctated with order number _X
 seleniumNodeName="node"
+
 # we need only one RMQ per JVM TODO find out
 RMQServerName="appRabbit"
-seleniumPort=$initialSeleniumPort
+seleniumPort=$initialSeleniumPort # <- there is value
 echo "-->Setting initial node port to $seleniumPort"
 echo "-->Setting initial RMQ port to $RMQPort"
-echo "-->Running in $1 mode"
 
 # reading RMQ cookie file
 echo "-->reading RMQ cookie file"
@@ -25,7 +27,7 @@ echo "-->have read: $RMQcookie"
 # j -- iterator through desired nodes
 i=0
 j=0
-echo "-->parsing taskfile $2"
+echo "-->parsing taskfile $1"
 while read -r line || [[ -n "$line" ]]; do
 	if [ "$i" -eq "0" ]; then
 		mode[j]="$line"
