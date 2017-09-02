@@ -16,7 +16,7 @@ echo "-->Stopping RMQServer"
 echo "-->Stopping apps and nodes"
 nodesCount=0
 i=0
-for ((i=0; i<=$j; i++)); do
+for ((i=0; i<="$1"; i++)); do
 	
 	# launching selenium node
 	./stop-container.sh "$seleniumNodeName""$nodesCount"
