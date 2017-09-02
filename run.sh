@@ -20,6 +20,8 @@ applicationNodeName="app_"
 # we need only one RMQ per JVM TODO find out
 RMQServerName="appRabbit"
 seleniumPort=$initialSeleniumPort # <- there is value
+echo "-->Setting permissions"
+sudo chmod +x *.sh
 echo "-->Setting initial node port to $seleniumPort"
 echo "-->Setting initial RMQ port to $RMQPort"
 
@@ -119,7 +121,7 @@ for ((i=0; i<=$j; i++)); do
 	# preparing to link to selenium nodes
 	if [ "${mode[j]}" != "nestor" ]; then
 		args+=" http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
-		echo "-->args[5] is: http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
+		# echo "-->args[5] is: http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
 	fi
 	
 	# part is constant for nestor and node
