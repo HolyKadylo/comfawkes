@@ -133,8 +133,12 @@ for ((i=0; i<=$j; i++)); do
 	
 	# launching application
 	./stop-container.sh "$applicationNodeName""$nodesCount"
-	./start-openjdk.sh "$applicationNodeName$nodesCount" $args # <-- there is value 
 	
+	if [ "${mode[j]}" != "nestor" ]; then
+		./start-openjdk.sh "$applicationNodeName$nodesCount" $args # <-- there is value 
+	else
+		./start-openjdk.sh $args # <-- there is value
+	fi
 	
 	((nodesCount++))
 	((seleniumPort++))
