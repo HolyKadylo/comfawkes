@@ -1,3 +1,6 @@
+# This script starts Docker nodes on the particular
+# real machine. It is guided with the task file
+
 # $1 -- filename with task
 
 # initial port 
@@ -9,7 +12,10 @@ initialSeleniumPort=7101;
 RMQPort=9101;
 
 # will be conctated with order number _X
-seleniumNodeName="node"
+seleniumNodeName="node_"
+
+# will be conctated with order number _X
+applicationNodeName="app_"
 
 # we need only one RMQ per JVM TODO find out
 RMQServerName="appRabbit"
@@ -65,14 +71,38 @@ while read -r line || [[ -n "$line" ]]; do
 done < "$1"
 echo "-->taskfile parsed with result of $j entity(ies)"
 
-echo "-->forming parameter strings for nodes"
-args=""
+# Starting RMQ server (single per this JVM)
+echo "-->starting RMQ"
+./stop-container.sh "$RMQServerName"
+./start-rmq.sh "$RMQServerName" "$RMQPort" "$RMQcookie"
+echo "-->RMQ $RMQServerName started at port $RMQPort"
+
+	# node
+	# args[0] -- role of the application
+	# args[1] -- email
+	# args[2] -- password
+	# args[3] -- publicAddress
+	# args[4] -- publicId
+	# args[5] -- host & port on host for selenium
+	# args[6] -- RMQ cookie
+	# args[7] -- port on host for RMQ
+	# args[8] -- host for RMQ
+	
+	# nestor
+	# args[0] -- role of the application
+	# args[1] -- RMQ cookie
+	# args[2] -- port on host for RMQ
+	# args[3] -- host for RMQ
+
+
+echo "-->forming parameter strings and launching..."
+nodesCount=0
 for ((i=0; i<=$j; i++)); do
-	if [ "$i" -eq "0" ]; then
-		args+="${mode[i]}"
-	else
-		args+=" ${mode[i]}"
-	fi
+	args=""
+	
+	# part may vary from nestor to node
+	args+="${mode[i]}"
+
 	if [ "${email[i]}" != "" ]; then
 		args+=" ${email[i]}"
 	fi
@@ -85,31 +115,48 @@ for ((i=0; i<=$j; i++)); do
 	if [ "${targetId[i]}" != "" ]; then
 		args+=" ${targetId[i]}"
 	fi
-done
-echo "-->parameter strings for nodes formed: $args"
-
-# Starting RMQ server (single per this JVM)
-echo "-->starting RMQ"
-./stop-container.sh "$RMQServerName"
-./start-rmq.sh "$RMQServerName" "$RMQPort" "$RMQcookie"
-echo "-->RMQ $RMQServerName started at port $RMQPort"
-
-# Starting App
-echo "-->starging app"
-
-# Stopping as much selenium containers as we need to start
-for ((i=1; i<=$j; i++)); do
-	./stop-container.sh "$seleniumNodeName""_$i"
-done
-
-# Starting selenium containers
-for ((i=1; i<=$j; i++)); do
-	./start-node.sh "$seleniumNodeName""_$i" "$seleniumPort"
+	
+	# preparing to link to selenium nodes
+	if [ "${mode[j]}" != "nestor" ]; then
+		args+=" http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
+		echo "-->args[5] is: http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
+	fi
+	
+	# part is constant for nestor and node
+	args+=" $RMQcookie $RMQPort $RMQServerName"
+	
+	# launching selenium node
+	./stop-container.sh "$seleniumNodeName""$nodesCount"
+	./start-node.sh "$seleniumNodeName$nodesCount" "$seleniumPort"
+	
+	# launching application
+	./stop-container.sh "$applicationNodeName""$nodesCount"
+	./start-openjdk.sh $args
+	
+	
+	((nodesCount++))
 	((seleniumPort++))
 done
+echo "-->done: $args"
 
-# actually starting
-java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar "$RMQcookie" "$initialSeleniumPort" "$RMQPort" $args
+
+
+# Starting App
+# echo "-->starging app"
+
+# # Stopping as much selenium containers as we need to start
+# for ((i=1; i<=$j; i++)); do
+	# ./stop-container.sh "$seleniumNodeName""_$i"
+# done
+
+# # Starting selenium containers
+# for ((i=1; i<=$j; i++)); do
+	# ./start-node.sh "$seleniumNodeName""_$i" "$seleniumPort"
+	# ((seleniumPort++))
+# done
+
+# # actually starting
+# java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar $args #<--is
 
 # Stopping RMQ server
 ./stop-container.sh "$RMQServerName"

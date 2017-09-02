@@ -147,6 +147,8 @@ public class App{
 			System.out.println("-->Linking to RMQ receiver");			
 			RabbitReceiver rabbitReceiver = new RabbitReceiver(app.getObject(), args[1], RMQport, NESTOR_RMQ_ADDRESS, args[3]);
 			System.out.println("-->Linked to RMQ receiver");
+			System.out.println("-->SimpleNestor acts");
+			nestor.act();
 		}
 		
 		if (!args[0].equals("nestor") && !args[0].equals("poster") && !args[0].equals("listener")){
