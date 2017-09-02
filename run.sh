@@ -121,7 +121,9 @@ for ((i=0; i<=$j; i++)); do
 	
 	# preparing to link to selenium nodes
 	if [ "${mode[j]}" != "nestor" ]; then
-		args+=" http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
+		# args+=" http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
+		
+		args+=" http://localhost:""$seleniumPort"
 		# echo "-->args[5] is: http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
 	fi
 	
