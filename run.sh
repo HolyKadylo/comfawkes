@@ -139,7 +139,7 @@ for ((i=0; i<=$j; i++)); do
 	((nodesCount++))
 	((seleniumPort++))
 done
-echo "-->done: $args"
+echo "-->done run.sh"
 
 
 
