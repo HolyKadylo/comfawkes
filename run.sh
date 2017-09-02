@@ -133,7 +133,7 @@ for ((i=0; i<=$j; i++)); do
 	
 	# launching application
 	./stop-container.sh "$applicationNodeName""$nodesCount"
-	./start-openjdk.sh $args
+	./start-openjdk.sh $args "$applicationNodeName""$nodesCount"
 	
 	
 	((nodesCount++))
@@ -161,10 +161,10 @@ echo "-->done: $args"
 # java -jar target/comfawkes-1.0-SNAPSHOT-jar-with-dependencies.jar $args #<--is
 
 # Stopping RMQ server
-./stop-container.sh "$RMQServerName"
-# Stopping launched selenium containers
-for ((i=1; i<=$j; i++)); do
-	./stop-container.sh "$seleniumNodeName""_$i"
-done
+# ./stop-container.sh "$RMQServerName"
+# # Stopping launched selenium containers
+# for ((i=1; i<=$j; i++)); do
+	# ./stop-container.sh "$seleniumNodeName""_$i"
+# done
 
 exit 0
