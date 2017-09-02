@@ -121,9 +121,7 @@ for ((i=0; i<=$j; i++)); do
 	
 	# preparing to link to selenium nodes
 	if [ "${mode[j]}" != "nestor" ]; then
-		# args+=" http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
-		
-		args+=" http://localhost:""$seleniumPort"
+		args+=" http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
 		# echo "-->args[5] is: http://""$seleniumNodeName""$nodesCount"":""$seleniumPort"
 	fi
 	
@@ -140,7 +138,7 @@ for ((i=0; i<=$j; i++)); do
 	./stop-container.sh "$applicationNodeName""$nodesCount"
 	
 	if [ "${mode[j]}" != "nestor" ]; then
-		./start-openjdk.sh "$applicationNodeName$nodesCount" $args # <-- there is value 
+		./start-openjdk.sh "$applicationNodeName$nodesCount" $args "$seleniumNodeName$nodesCount"
 	else
 		./start-openjdk.sh $args # <-- there is value
 	fi
