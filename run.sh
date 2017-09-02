@@ -133,7 +133,7 @@ for ((i=0; i<=$j; i++)); do
 	
 	# launching application
 	./stop-container.sh "$applicationNodeName""$nodesCount"
-	./start-openjdk.sh "$args" "$applicationNodeName$nodesCount"
+	./start-openjdk.sh "$applicationNodeName$nodesCount" $args # <-- there is value 
 	
 	
 	((nodesCount++))
