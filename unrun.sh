@@ -18,10 +18,10 @@ nodesCount=0
 i=0
 for ((i=0; i<="$1"; i++)); do
 	
-	# launching selenium node
+	# stopping selenium node
 	./stop-container.sh "$seleniumNodeName""$nodesCount"
 	
-	# launching application
+	# stopping application
 	./stop-container.sh "$applicationNodeName""$nodesCount"
 	((nodesCount++))
 done

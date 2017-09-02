@@ -20,6 +20,7 @@ applicationNodeName="app_"
 # we need only one RMQ per JVM TODO find out
 RMQServerName="appRabbit"
 seleniumPort=$initialSeleniumPort # <- there is value
+timeout=5s
 echo "-->Setting permissions"
 sudo chmod +x *.sh
 echo "-->Setting initial node port to $seleniumPort"
@@ -130,6 +131,8 @@ for ((i=0; i<=$j; i++)); do
 	# launching selenium node
 	./stop-container.sh "$seleniumNodeName""$nodesCount"
 	./start-node.sh "$seleniumNodeName$nodesCount" "$seleniumPort"
+	
+	sleep "$timeout"
 	
 	# launching application
 	./stop-container.sh "$applicationNodeName""$nodesCount"
